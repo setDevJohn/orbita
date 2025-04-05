@@ -27,6 +27,9 @@
     "paths": {
       "@assets/*": ["assets/*"],        
       "@pages/*": ["pages/*"],        
+      "@router/*": ["router/*"],        
+      "@services/*": ["services/*"],        
+      "@utils/*": ["utils/*"],        
     }  
   },
   "include": ["src"]
