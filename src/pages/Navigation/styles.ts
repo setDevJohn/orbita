@@ -18,12 +18,12 @@ export const MenuIcon = styled.div`
 
 export const SideBar = styled.div<{$open: boolean }>`
   position: absolute;
-  z-index: 2;
+  z-index: 9999;
   right: 0;
   top: 0;
   display: flex;
   flex-direction: column;
-  background-color: #12688a;
+  background-color: #252526;
   box-shadow: 0px 0px 10px 4px #0004;
   padding: ${({ $open }) => $open ? '20px 10px' : '0px'};
   transition: all 0.4s ease;
@@ -49,10 +49,10 @@ export const List = styled.ul`
 export const Item = styled.li<{$active?: boolean}>`
   display: flex;
   align-items: center;
-  background-color: ${({ $active }) => $active && '#528da4'};
+  background-color: ${({ $active }) => $active && '#343438'};
   gap: 10px;
   width: 100%;
-  color: #000;
+  color: #fff;
   font-size: 17px;
   border-radius: 5px;
   padding: 5px 15px;
