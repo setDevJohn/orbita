@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -87,87 +87,16 @@ export const MainContent = styled.main`
   width: 100%;
 `;
 
-export const CardList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 15px;
-  padding: 10px 15px;
-  width: 100%;
-`;
 
-export const Card = styled.li<{$details: boolean; $color: string}>`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ $color }) => $color};;
-  border-radius: 10px;
-  transition: all 0.4s ease;
-  padding: 12px;
-  overflow: hidden;
-  height: ${({ $details }) => $details ? '157px': '60px' };
-  width: 100%;
-`;
 
-export const CardHeader = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  width: 100%;
-`;
 
-export const IconCardContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 60%);
-`;
 
-export const TextCard = styled.p<{$column?: boolean; $name?: boolean}>`
-  display: flex;
-  font-size: ${({ $name }) => $name ? '18px' : '15px'};
-  flex-direction: ${({ $column }) => $column && 'column'};
-  gap: 2px;
-  color: #fff;
-`;
 
-export const TextCardSpan = styled.span`
-  font-size: 11px;
-`;
 
-export const InvoiceValue = styled.p`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: #fff;
-  font-size: 20px;
-`;
 
-export const InvoiceSpan = styled.span`
-  font-size: 12px;
-`;
-
-export const CardFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 15px;
-`;
-
-export const RecentExtract = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin: 23px 20px;
-`;
-
-export const ExtractCard = styled.li`
-  width: 100%;
-  height: 65px;
-  border-bottom: 2px solid #888;
-`;
 
 export const Footer = styled.footer`
+  position: relative;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -175,6 +104,50 @@ export const Footer = styled.footer`
   background-color: #1d1d1e;
   padding: 6px 15px;
   width: 100%;
+`;
+
+const fadeIn = keyframes`
+  from {
+    scale: 0.8;
+  };
+  to {
+    scale: 1;
+  }
+`
+
+export const BackgroundFocus = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  background-color: #0009;
+  transform: translateY(-100%);
+  padding: 35px 25px;
+  width: 100%;
+  height: 100svh;
+`;
+
+export const RegisterList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  animation: ${fadeIn} 0.4s ease;
+  min-width: 50%;
+`;
+
+export const RegisterItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 17px;
 `;
 
 export const FooterIconContainer = styled.div`
@@ -191,12 +164,18 @@ export const FooterIconSpan = styled.span`
 `;
 
 export const MenuIcon = styled.div`
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  box-shadow: 0px 0px 15px -2px #0005;
+  box-shadow: 0px 0px 15px -2px #0004;
   transform: translateY(-25px);
-  padding: 12px;
+  padding: 12px 12px 8px 12px;
   border-radius: 5px;
+`;
+
+export const Icon = styled.div<{$open: boolean}>`
+  transition: all 0.4s ease;
+  transform: ${({ $open }) => $open ? 'rotate(45deg)' : 'rotate(0deg)' };
 `;
