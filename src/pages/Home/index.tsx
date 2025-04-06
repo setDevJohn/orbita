@@ -5,7 +5,10 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { BsFillEyeFill } from "react-icons/bs";
-import { AccountItem, AccountList, Card, CardFooter, CardHeader, CardList, Container, CurrentAccount, Footer, IconCardContainer, InvoiceSpan, InvoiceValue, MainContent, MainDetails, Month, MonthContainer, Price, PriceContainer, TextCard, TextCardSpan, ToggleAccount } from "./styles";
+import { FaPlus } from "react-icons/fa6";
+import { PiCalendarFill } from "react-icons/pi";
+import { RiFileList3Fill } from "react-icons/ri";
+import { AccountItem, AccountList, Card, CardFooter, CardHeader, CardList, Container, CurrentAccount, ExtractCard, Footer, FooterIconContainer, FooterIconSpan, IconCardContainer, InvoiceSpan, InvoiceValue, MainContent, MainDetails, MenuIcon, Month, MonthContainer, Price, PriceContainer, RecentExtract, TextCard, TextCardSpan, ToggleAccount } from "./styles";
 
 export function Home () {
   const [monthIndex, setMonthIndex] = useState<number>(0);
@@ -130,8 +133,8 @@ export function Home () {
           </Price>
 
           {showPrice
-            ? <BsFillEyeFill size={24} onClick={() => setShowPrice(false)} />
-            : <RiEyeCloseFill size={24} onClick={() => setShowPrice(true)} />
+            ? <BsFillEyeFill fill="#fff" size={24} onClick={() => setShowPrice(false)} />
+            : <RiEyeCloseFill fill="#fff" size={24} onClick={() => setShowPrice(true)} />
           }
         </PriceContainer>
       </MainDetails>
@@ -181,8 +184,28 @@ export function Home () {
             ))}
           </CardList>
 
+          <RecentExtract>
+            <ExtractCard></ExtractCard>
+            <ExtractCard></ExtractCard>
+            <ExtractCard></ExtractCard>
+          </RecentExtract>
       </MainContent>
-      <Footer></Footer>
+
+      <Footer>
+        <FooterIconContainer>
+          <RiFileList3Fill fill="#fff" size={30}/>
+
+          <FooterIconSpan>Extrato</FooterIconSpan>
+        </FooterIconContainer>
+
+        <MenuIcon><FaPlus size={30}/></MenuIcon>
+
+        <FooterIconContainer>
+          <PiCalendarFill fill="#fff" size={30} /> 
+
+          <FooterIconSpan>Projeção</FooterIconSpan>
+        </FooterIconContainer>
+      </Footer>
     </Container>
   )
 }

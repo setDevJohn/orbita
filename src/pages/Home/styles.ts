@@ -11,7 +11,7 @@ export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
   border-radius: 0  0 20px 20px;
-  background-color: #528da4;
+  background-color: #1d1d1e;
   padding: 15px;
   min-height: 22vh;
   width: 100%;
@@ -75,6 +75,7 @@ export const PriceContainer = styled.div`
 `;
 
 export const Price = styled.p`
+  color: #fff;
   font-size: 28px;
   font-weight: 500;
 `;
@@ -152,10 +153,49 @@ export const CardFooter = styled.div`
   margin-top: 15px;
 `;
 
+export const RecentExtract = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px ;
+`;
+
+export const ExtractCard = styled.li`
+  width: 100%;
+  height: 65px;
+  border-bottom: 2px solid #888;
+`;
+
 export const Footer = styled.footer`
   display: flex;
-  background-color: #528da4;
-  padding: 15px;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 45px;
+  background-color: #1d1d1e;
+  padding: 6px 15px;
   width: 100%;
-  min-height: 10vh;
+`;
+
+export const FooterIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+`;
+
+export const FooterIconSpan = styled.span`
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+export const MenuIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px -2px #0005;
+  transform: translateY(-25px);
+  padding: 12px;
+  border-radius: 5px;
 `;
