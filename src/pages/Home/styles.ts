@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  max-height: 100svh;
   width: 100%;
 `;
 
@@ -157,7 +158,7 @@ export const RecentExtract = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 20px ;
+  margin: 23px 20px;
 `;
 
 export const ExtractCard = styled.li`

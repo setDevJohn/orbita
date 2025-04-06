@@ -188,6 +188,9 @@ export function Home () {
             <ExtractCard></ExtractCard>
             <ExtractCard></ExtractCard>
             <ExtractCard></ExtractCard>
+            <ExtractCard></ExtractCard>
+            <ExtractCard></ExtractCard>
+            <ExtractCard></ExtractCard>
           </RecentExtract>
       </MainContent>
 
