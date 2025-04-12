@@ -92,13 +92,21 @@ export function Home () {
     setCurrentPage(page)
   }
 
+  function handleMenuRegister() {
+    if (currentPage !== 'home') {
+      setCurrentPage('home')
+    } else {
+      setMenuRegister(prev => !prev)
+    }
+  }
+
   return (
     <Container>
       <MainDetails>
         <MonthContainer>
-          <IoMdArrowDropleft size={26} onClick={handlePrevMonth}/>
+          <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
           <Month>{months[monthIndex]}</Month>
-          <IoMdArrowDropright size={26} onClick={handleNextMonth}/>
+          <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
         </MonthContainer>
 
         <ToggleAccount>
@@ -124,15 +132,15 @@ export function Home () {
         <PriceContainer>
           <Price>
             {'R$ '}
-            {showPrice 
+            {showPrice
               ? accountList.find(({id}) => id === selectedAccountId)?.value 
               : '.....'
             }
           </Price>
 
           {showPrice
-            ? <RiEyeCloseFill size={24} onClick={() => setShowPrice(false)} />
-            : <BsFillEyeFill size={24} onClick={() => setShowPrice(true)} />
+            ? <RiEyeCloseFill size={22} onClick={() => setShowPrice(false)} />
+            : <BsFillEyeFill size={22} onClick={() => setShowPrice(true)} />
           }
         </PriceContainer>
       </MainDetails>
@@ -156,32 +164,24 @@ export function Home () {
         )}
 
         <FooterIconContainer onClick={() => handleChangePage('extract')}>
-          <RiFileList3Fill size={30}/>
-
+          <RiFileList3Fill size={28}/>
           <FooterIconSpan>Extrato</FooterIconSpan>
         </FooterIconContainer>
 
         <MenuIcon
           $open={menuRegister}
-          onClick={() => {
-            if (currentPage !== 'home') {
-              setCurrentPage('home')
-            } else {
-              setMenuRegister(prev => !prev)}
-            }
-          }
+          onClick={handleMenuRegister}
         >
           <Icon $open={menuRegister}>
             { currentPage !== 'home' 
-              ? <TiHome size={30} fill="#000" />
-              : <FaPlus size={30} fill="#000" />
+              ? <TiHome size={28} fill="#000" />
+              : <FaPlus size={28} fill="#000" />
             }
           </Icon>
         </MenuIcon>
 
         <FooterIconContainer onClick={() => handleChangePage('projection')}>
-          <PiCalendarFill size={30} /> 
-
+          <PiCalendarFill size={28} /> 
           <FooterIconSpan>Projeção</FooterIconSpan>
         </FooterIconContainer>
       </Footer>

@@ -36,7 +36,7 @@ export function NaviGation () {
     <Container>
       <MenuIcon>
         <BiMenuAltRight 
-          size={35}
+          size={32}
           fill="#fff"
           onClick={() => setSideBar(true)}
         />
