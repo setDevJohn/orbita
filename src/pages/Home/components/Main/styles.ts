@@ -56,44 +56,10 @@ export const CardFooter = styled.div`
   margin-top: 15px;
 `;
 
-export const ExtractDate = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-`;
-
 export const Line = styled.div`
   width: 100%;
   height: 2px;
   background-color: #888;
-`;
-
-export const ExtractItemContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 0 4px;
-  margin-bottom: 2px;
-`;
-
-export const ExtractDesc = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const ExtractList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-`;
-
-export const ExtractItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 `;
 
 export const InvoiceValue = styled.p`

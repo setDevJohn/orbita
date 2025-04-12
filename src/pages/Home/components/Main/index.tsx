@@ -1,9 +1,29 @@
 import { useState } from "react";
-import { Card, CardFooter, CardHeader, CardList, ExtractDate, ExtractDesc, ExtractItem, ExtractItemContent, ExtractList,  IconCardContainer, InvoiceSpan, InvoiceValue, Line, RecentExtract, TextCard, TextCardSpan, Title } from "./styles";
-import { CiInboxIn, CiInboxOut } from "react-icons/ci";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardList,
+  IconCardContainer,
+  InvoiceSpan,
+  InvoiceValue,
+  Line,
+  TextCard,
+  TextCardSpan,
+  Title
+} from "./styles";
+import {
+  ExtractDate,
+  ExtractDesc,
+  ExtractItem,
+  ExtractItemContent,
+  ExtractList,
+  RecentExtract
+} from "../Extract/styles";
 
-export function HomeComponent() {
+export function MainComponent() {
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
 
   function handleDetailsCard(id: number) {
@@ -175,8 +195,8 @@ export function HomeComponent() {
               {list.map((item, index) => (
                 <ExtractItemContent key={`item-${i}-${index}`}>
                   {item.type === 'out' 
-                    ? <CiInboxOut size={30} fill="#f00" /> 
-                    : <CiInboxIn size={30} fill="#0f0" />
+                    ? <FaArrowTrendDown size={18} fill="#f00" /> 
+                    : <FaArrowTrendUp size={18} fill="#0f0" />
                   }
                   <ExtractDesc>
                     <span>{item.name}</span>
