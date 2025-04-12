@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { SearchFilter } from "components/Filters/Search";
-import { DateFilter } from "components/Filters/Date";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { SearchFilter, DateFilter } from "components/Inputs"; 
 import { FaArrowTrendDown } from "react-icons/fa6";
 import { 
   ButtonContainer,
