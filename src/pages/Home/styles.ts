@@ -52,7 +52,7 @@ export const AccountList = styled.ul<{$open: boolean}>`
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  background-color: aliceblue;
+  background-color: ${({ theme }) => theme.color3};
   border-radius: 4px;
   width: 140px;
   padding: ${({ $open }) => $open ? '5px' : '0px'};
@@ -131,15 +131,19 @@ export const RegisterList = styled.ul`
   border-radius: 4px;
   padding: 10px;
   animation: ${fadeIn} 0.4s ease;
-  min-width: 50%;
+  width: 60%;
 `;
 
 export const RegisterItem = styled.li`
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 7px;
   color: #000;
   font-size: 14px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 7px -2px #0004;
+  min-width: 100%;
 `;
 
 export const FooterIconContainer = styled.div`
@@ -160,7 +164,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d0d0d0;
+  background-color: #fff;
   box-shadow: 0px 0px 15px -2px #0004;
   transform: translateY(-18px);
   padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
