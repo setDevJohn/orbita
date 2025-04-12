@@ -12,7 +12,7 @@ export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
   border-radius: 0  0 20px 20px;
-  background-color: #1d1d1e;
+  background-color: ${({ theme }) => theme.primaryColor};
   padding: 15px;
   min-height: 22vh;
   width: 100%;
@@ -147,6 +147,7 @@ export const RegisterItem = styled.li`
   display: flex;
   align-items: center;
   gap: 7px;
+  color: #000;
   font-size: 17px;
 `;
 

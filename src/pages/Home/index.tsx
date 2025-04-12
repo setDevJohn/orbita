@@ -87,9 +87,9 @@ export function Home () {
     <Container>
       <MainDetails>
         <MonthContainer>
-          <IoMdArrowDropleft fill="#fff" size={26} onClick={handlePrevMonth}/>
+          <IoMdArrowDropleft size={26} onClick={handlePrevMonth}/>
           <Month>{months[monthIndex]}</Month>
-          <IoMdArrowDropright fill="#fff" size={26} onClick={handleNextMonth}/>
+          <IoMdArrowDropright size={26} onClick={handleNextMonth}/>
         </MonthContainer>
 
         <ToggleAccount>
@@ -122,8 +122,8 @@ export function Home () {
           </Price>
 
           {showPrice
-            ? <RiEyeCloseFill fill="#fff" size={24} onClick={() => setShowPrice(false)} />
-            : <BsFillEyeFill fill="#fff" size={24} onClick={() => setShowPrice(true)} />
+            ? <RiEyeCloseFill size={24} onClick={() => setShowPrice(false)} />
+            : <BsFillEyeFill size={24} onClick={() => setShowPrice(true)} />
           }
         </PriceContainer>
       </MainDetails>
@@ -147,7 +147,7 @@ export function Home () {
         )}
 
         <FooterIconContainer onClick={() => handleChangePage('extract')}>
-          <RiFileList3Fill fill="#fff" size={30}/>
+          <RiFileList3Fill size={30}/>
 
           <FooterIconSpan>Extrato</FooterIconSpan>
         </FooterIconContainer>
@@ -163,14 +163,14 @@ export function Home () {
         >
           <Icon $open={menuRegister}>
             { currentPage !== 'home' 
-              ? <TiHome size={30}/>
-              : <FaPlus size={30}/>
+              ? <TiHome size={30} fill="#000" />
+              : <FaPlus size={30} fill="#000" />
             }
           </Icon>
         </MenuIcon>
 
         <FooterIconContainer onClick={() => handleChangePage('projection')}>
-          <PiCalendarFill fill="#fff" size={30} /> 
+          <PiCalendarFill size={30} /> 
 
           <FooterIconSpan>Projeção</FooterIconSpan>
         </FooterIconContainer>
