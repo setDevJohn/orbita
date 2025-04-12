@@ -5,14 +5,13 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { BsFillEyeFill } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
 import { PiCalendarFill } from "react-icons/pi";
 import { RiFileList3Fill } from "react-icons/ri";
-import { CiInboxOut } from "react-icons/ci";
-import { CiInboxIn } from "react-icons/ci";
 import { BsCreditCard } from "react-icons/bs";
+import { TiHome } from "react-icons/ti";
+import { FaArrowTrendDown, FaArrowTrendUp, FaPlus } from "react-icons/fa6";
 
-import { ExtractComponent, HomeComponent, ProjectionComponent } from "./components";
+import { ExtractComponent, MainComponent, ProjectionComponent } from "./components";
 
 import { AccountItem, AccountList, BackgroundFocus, Container, CurrentAccount, Footer, FooterIconContainer, FooterIconSpan, Icon,  MainContent, MainDetails, MenuIcon, Month, MonthContainer, Price, PriceContainer, RegisterItem, RegisterList, ToggleAccount } from "./styles";
 
@@ -68,15 +67,20 @@ export function Home () {
   }
 
   const registerMenuItems = [
-    { name: 'Receitas', path: '', icon: <CiInboxIn size={30} fill="#0f0" /> },
-    { name: 'Despesas', path: '', icon: <CiInboxOut size={30} fill="#f00" /> },
+    { name: 'Receitas', path: '', icon: <FaArrowTrendUp size={23} fill="#0f0" /> },
+    { name: 'Despesas', path: '', icon: <FaArrowTrendDown size={23} fill="#f00" /> },
     { name: 'Despesas no crédito', path: '', icon: <BsCreditCard size={23} fill="#f00" /> },
   ]
 
   const selectedComponent = {
-    home: <HomeComponent />,
+    home: <MainComponent />,
     extract: <ExtractComponent/>,
     projection: <ProjectionComponent/>
+  }
+
+  function handleChangePage(page: "home" | "extract" | "projection") {
+    setMenuRegister(false)
+    setCurrentPage(page)
   }
 
   return (
@@ -142,19 +146,30 @@ export function Home () {
           </BackgroundFocus>
         )}
 
-        <FooterIconContainer onClick={() => setCurrentPage('extract')}>
+        <FooterIconContainer onClick={() => handleChangePage('extract')}>
           <RiFileList3Fill fill="#fff" size={30}/>
 
           <FooterIconSpan>Extrato</FooterIconSpan>
         </FooterIconContainer>
 
-        <MenuIcon onClick={() => setMenuRegister(prev => !prev)}>
+        <MenuIcon 
+          onClick={() => {
+            if (currentPage !== 'home') {
+              setCurrentPage('home')
+            } else {
+              setMenuRegister(prev => !prev)}
+            }
+          }
+        >
           <Icon $open={menuRegister}>
-            <FaPlus size={30}/>
+            { currentPage !== 'home' 
+              ? <TiHome size={30}/>
+              : <FaPlus size={30}/>
+            }
           </Icon>
         </MenuIcon>
 
-        <FooterIconContainer onClick={() => setCurrentPage('projection')}>
+        <FooterIconContainer onClick={() => handleChangePage('projection')}>
           <PiCalendarFill fill="#fff" size={30} /> 
 
           <FooterIconSpan>Projeção</FooterIconSpan>
