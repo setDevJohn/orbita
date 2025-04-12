@@ -4,9 +4,9 @@ import { ThemeProvider } from 'styled-components';
 interface ITheme {
   contrastColor: string
   textColor: string
-  primaryColor: string
-  secondaryColor: string
-  tertiaryColor: string
+  color1: string
+  color2: string
+  color3: string
   primaryFont: string
   secondaryFont: string
 }
@@ -15,18 +15,19 @@ const themeColor = {
   dark : {
     contrastColor: '#2AD883',
     textColor: '#FFFFFF',
-    primaryColor: '#1d1d1e',
-    secondaryColor: '#252526',
-    tertiaryColor: '#404047',
-    primaryFont: '"Poppins", serif',
-    secondaryFont:  '"DM Mono", serif',
+    color1: '#1d1d1e',
+    color2: '#252526',
+    color3: '#404047',
+    color4: '#535358',
+    primaryFont: '"Inter", sans-serif',
+    secondaryFont: '"Poppins", sans-serif',
   },
   light: {
     contrastColor: '#0073E6',
     textColor: '#1A1A1A',
-    primaryColor: '#E0E0E0',
-    secondaryColor: '#CFCFCF',
-    tertiaryColor: '#CFCFCF',
+    color1: '#E0E0E0',
+    color2: '#CFCFCF',
+    color3: '#CFCFCF',
     primaryFont: '"Poppins", serif',
     secondaryFont:  '"DM Mono", serif',
   },

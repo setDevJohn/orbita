@@ -12,9 +12,8 @@ export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
   border-radius: 0  0 20px 20px;
-  background-color: ${({ theme }) => theme.primaryColor};
-  padding: 15px;
-  min-height: 22vh;
+  background-color: ${({ theme }) => theme.color1};
+  padding: 10px;
   width: 100%;
 `;
 
@@ -87,14 +86,6 @@ export const MainContent = styled.main`
   width: 100%;
 `;
 
-
-
-
-
-
-
-
-
 export const Footer = styled.footer`
   position: relative;
   display: flex;
@@ -102,7 +93,7 @@ export const Footer = styled.footer`
   align-items: center;
   gap: 45px;
   background-color: #1d1d1e;
-  padding: 6px 15px;
+  padding: 4px 15px;
   width: 100%;
 `;
 
@@ -164,16 +155,16 @@ export const FooterIconSpan = styled.span`
   font-weight: 400;
 `;
 
-export const MenuIcon = styled.div`
+export const MenuIcon = styled.div<{$open: boolean}>`
   z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: #d0d0d0;
   box-shadow: 0px 0px 15px -2px #0004;
-  transform: translateY(-25px);
-  padding: 12px 12px 8px 12px;
-  border-radius: 5px;
+  transform: translateY(-18px);
+  padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
+  border-radius: 25%;
 `;
 
 export const Icon = styled.div<{$open: boolean}>`

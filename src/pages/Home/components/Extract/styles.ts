@@ -4,7 +4,10 @@ export const ExtractDate = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #888;
   font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
 `;
 
 export const Line = styled.div`
@@ -41,12 +44,6 @@ export const ExtractItem = styled.li`
   width: 100%;
 `;
 
-export const Title = styled.h2`
-  margin: 20px 20px 0 20px;
-  font-size: 22px;
-  font-weight: 400;
-`;
-
 export const FilterContainer = styled.div`
   display: flex;
   align-items: center;
@@ -68,11 +65,12 @@ export const ButtonFilter = styled.button<{$select?: boolean}>`
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color4};
+  color: #fff;
   font-size: 14px;
   border: none;
   border-radius: 5px;
-  outline: ${({ $select }) => $select ? 'solid 1px #1d1d1e9e' : 'none'};
+  outline: ${({ $select }) => $select ? 'solid 1px #1d1d1e' : 'none'};
   box-shadow: 1px 2px 7px -2px #0004;
   padding: 3px 7px;
   min-width: 80px;

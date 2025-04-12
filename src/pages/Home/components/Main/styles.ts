@@ -11,30 +11,34 @@ export const CardList = styled.ul`
 `;
 
 export const Card = styled.li<{$details: boolean; $color: string}>`
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: ${({ $color }) => $color};;
   border-radius: 10px;
+  box-shadow: 1px 2px 7px -2px #0004;
   transition: all 0.4s ease;
   padding: 12px;
   overflow: hidden;
-  height: ${({ $details }) => $details ? '157px': '60px' };
+  height: ${({ $details }) => $details ? '157px': '58px' };
   width: 100%;
 `;
 
 export const CardHeader = styled.div`
-  position: relative;
   display: flex;
   justify-content: space-between;
   margin-bottom: 14px;
   width: 100%;
 `;
 
-export const IconCardContainer = styled.div`
+export const IconCardContainer = styled.div<{$details: boolean;}>`
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   left: 50%;
-  transform: translate(-50%, 60%);
+  transition: all 0.5s ease;
+  transform: ${({ $details }) => (
+    `translate(-50%, 60%) ${$details ? 'rotate(-180deg)' : ''}`
+  )};
 `;
 
 export const TextCard = styled.p<{$column?: boolean; $name?: boolean}>`
@@ -72,12 +76,6 @@ export const InvoiceValue = styled.p`
 
 export const InvoiceSpan = styled.span`
   font-size: 12px;
-`;
-
-export const Title = styled.h2`
-  margin: 20px 20px 0 20px;
-  font-size: 22px;
-  font-weight: 400;
 `;
 
 export const RecentExtract = styled.div`

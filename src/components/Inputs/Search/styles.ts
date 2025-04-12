@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const SearchInput = styled.input`
   display: block;
+  background-color: ${({ theme }) => theme.color2};
+  color: #fff;
   font-size: 15px;
   outline: none;
   border-radius: 5px;    

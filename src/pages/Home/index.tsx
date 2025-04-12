@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdArrowDropleft } from "react-icons/io";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -24,11 +24,20 @@ export function Home () {
   const [menuRegister, setMenuRegister] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const date = new Date()
     const currentMonth = date.getMonth()
     setMonthIndex(currentMonth)
   }, []);
+
+  useEffect(() => {
+    console.log(contentRef.current)
+    if (contentRef.current) {
+      contentRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentPage]);
 
   const months = [
     'Jan',
@@ -128,7 +137,7 @@ export function Home () {
         </PriceContainer>
       </MainDetails>
       
-      <MainContent>
+      <MainContent ref={contentRef}>
         {selectedComponent[currentPage]}
       </MainContent>
 
@@ -152,7 +161,8 @@ export function Home () {
           <FooterIconSpan>Extrato</FooterIconSpan>
         </FooterIconContainer>
 
-        <MenuIcon 
+        <MenuIcon
+          $open={menuRegister}
           onClick={() => {
             if (currentPage !== 'home') {
               setCurrentPage('home')

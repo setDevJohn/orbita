@@ -9,10 +9,8 @@ import {
   IconCardContainer,
   InvoiceSpan,
   InvoiceValue,
-  Line,
   TextCard,
   TextCardSpan,
-  Title
 } from "./styles";
 import {
   ExtractDate,
@@ -20,8 +18,10 @@ import {
   ExtractItem,
   ExtractItemContent,
   ExtractList,
+  Line,
   RecentExtract
 } from "../Extract/styles";
+import { Title } from "styles/main";
 
 export function MainComponent() {
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
@@ -143,7 +143,7 @@ export function MainComponent() {
     <>
       <CardList>
         {cardList.map(card => (
-          <Card 
+          <Card
             key={card.id}
             $color={card.color}
             $details={cardIdInDetails === card.id}
@@ -154,13 +154,6 @@ export function MainComponent() {
               <TextCard $column>
                 <TextCardSpan>limite disponível</TextCardSpan> {`R$ ${card.limit}`}
               </TextCard>
-
-              { cardIdInDetails !== card.id && (
-                  <IconCardContainer>
-                    <IoMdArrowDropdown size={28} style={{margin: 'auto'}}/>
-                  </IconCardContainer>
-                )
-              }
             </CardHeader>
 
             <InvoiceValue>
@@ -181,6 +174,10 @@ export function MainComponent() {
                 <TextCardSpan>vencimento</TextCardSpan>
               </TextCard>
             </CardFooter>
+
+            <IconCardContainer $details={cardIdInDetails === card.id}>
+              <IoMdArrowDropdown size={28} style={{margin: 'auto'}}/>
+            </IconCardContainer>
           </Card>
         ))}
       </CardList>

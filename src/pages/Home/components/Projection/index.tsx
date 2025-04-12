@@ -1,5 +1,7 @@
+import { Title } from "styles/main";
+
 export function ProjectionComponent () {
   return (
-    <>Projection</>
+    <Title>Projeções</Title>
   )
 }

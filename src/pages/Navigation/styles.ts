@@ -4,7 +4,7 @@ export const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.tertiaryColor};
+  background-color: ${({ theme }) => theme.color3};
   height: 100svh;
   width: 100%;
 `;
@@ -23,7 +23,7 @@ export const SideBar = styled.div<{$open: boolean }>`
   top: 0;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.secondaryColor};
+  background-color: ${({ theme }) => theme.color2};
   box-shadow: 0px 0px 10px 4px #0004;
   padding: ${({ $open }) => $open ? '20px 10px' : '0px'};
   transition: all 0.4s ease;
@@ -49,7 +49,7 @@ export const List = styled.ul`
 export const Item = styled.li<{$active?: boolean}>`
   display: flex;
   align-items: center;
-  background-color: ${({ $active, theme }) => $active && theme.tertiaryColor};
+  background-color: ${({ $active, theme }) => $active && theme.color3};
   gap: 10px;
   width: 100%;
   color: #fff;

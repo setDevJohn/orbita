@@ -13,8 +13,8 @@ import {
   FilterContainer,  
   Line,
   RecentExtract,
-  Title
 } from "./styles";
+import { Title } from "styles/main";
 
 export function ExtractComponent() {
   const [typeListFilter, setTypeListFilter] = useState<string>('');
@@ -117,7 +117,7 @@ export function ExtractComponent() {
           onClick={() => handleChangeTypeList('revenue')}
         >
           <FaArrowTrendUp size={22} fill="#0f0" />
-          Receita
+          R$ 50,49
         </ButtonFilter>
 
         <ButtonFilter 
@@ -126,7 +126,7 @@ export function ExtractComponent() {
           onClick={() => handleChangeTypeList('expense')}
         >
           <FaArrowTrendDown size={22} fill="#f00" />
-          Despesa
+          R$ 50,49
         </ButtonFilter>
       </ButtonContainer>
 

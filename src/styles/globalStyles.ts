@@ -8,9 +8,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Inter', sans-serif;
     background-color: #f9f9f9;
     color: ${({ theme }) => theme.textColor};
+  }
+  
+  html {
+    font-family: ${({ theme }) => theme.primaryFont};
   }
 
   a {
