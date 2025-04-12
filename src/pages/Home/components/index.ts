@@ -1,5 +1,5 @@
 import { ExtractComponent } from "./Extract";
-import { HomeComponent } from "./Home";
+import { MainComponent } from "./Main";
 import { ProjectionComponent } from "./Projection";
 
-export { ExtractComponent, ProjectionComponent, HomeComponent }
+export { ExtractComponent, ProjectionComponent, MainComponent }
