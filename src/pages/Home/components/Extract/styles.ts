@@ -20,7 +20,7 @@ export const ExtractItemContent = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 13px;
+  font-size: 14px;
   padding: 0 4px;
   margin-bottom: 2px;
 `;
@@ -67,7 +67,7 @@ export const ButtonFilter = styled.button<{$select?: boolean}>`
   gap: 4px;
   background-color: ${({ theme }) => theme.color4};
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   outline: ${({ $select }) => $select ? 'solid 1px #1d1d1e' : 'none'};

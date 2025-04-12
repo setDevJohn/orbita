@@ -53,7 +53,7 @@ export const Item = styled.li<{$active?: boolean}>`
   gap: 10px;
   width: 100%;
   color: #fff;
-  font-size: 17px;
+  font-size: 14px;
   border-radius: 5px;
   padding: 5px 15px;
 `;
