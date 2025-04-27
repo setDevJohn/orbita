@@ -43,14 +43,14 @@ export const IconCardContainer = styled.div<{$details: boolean;}>`
 
 export const TextCard = styled.p<{$column?: boolean; $name?: boolean}>`
   display: flex;
-  font-size: ${({ $name }) => $name ? '16px' : '14px'};
+  font-size: ${({ $name, theme }) => $name ? theme.normalText : theme.smallText};
   flex-direction: ${({ $column }) => $column && 'column'};
   gap: 2px;
   color: #fff;
 `;
 
 export const TextCardSpan = styled.span`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.smallSpan};
 `;
 
 export const CardFooter = styled.div`
@@ -71,11 +71,11 @@ export const InvoiceValue = styled.p`
   flex-direction: column;
   gap: 2px;
   color: #fff;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.smallText};
 `;
 
 export const InvoiceSpan = styled.span`
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.smallSpan};
 `;
 
 export const RecentExtract = styled.div`

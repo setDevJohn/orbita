@@ -1,12 +1,12 @@
-import { ThemeColorProvider } from "context/theme";
+import { ThemeStyleProvider } from "context/theme";
 import { AppRoutes } from "router";
 import { GlobalStyle } from "styles/globalStyles";
 
 export function App () {
   return (
-    <ThemeColorProvider>
+    <ThemeStyleProvider>
       <AppRoutes />
       <GlobalStyle />
-    </ThemeColorProvider>
+    </ThemeStyleProvider>
   );
 }

@@ -24,7 +24,7 @@ export const MonthContainer = styled.div`
 
 export const Month = styled.div`
   color: #fff;
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.normalSpan};
   text-align: center;
   width: 40px;
 `;
@@ -38,7 +38,7 @@ export const CurrentAccount = styled.div`
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.normalText};
   margin: 30px 0 0 15px;
   width: 130px;
 `;
@@ -76,7 +76,7 @@ export const PriceContainer = styled.div`
 
 export const Price = styled.p`
   color: #fff;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.subtitle};
   font-weight: 500;
 `;
 
@@ -140,7 +140,7 @@ export const RegisterItem = styled.li`
   align-items: center;
   gap: 7px;
   color: #000;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.smallText};
   border-radius: 4px;
   box-shadow: 2px 2px 7px -2px #0004;
   min-width: 100%;
@@ -155,7 +155,7 @@ export const FooterIconContainer = styled.div`
 
 export const FooterIconSpan = styled.span`
   color: #fff;
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.smallSpan};
   font-weight: 400;
 `;
 

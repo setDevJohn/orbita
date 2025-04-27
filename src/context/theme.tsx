@@ -1,14 +1,32 @@
 import { createContext, ReactNode, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-interface ITheme {
+export interface ITheme {
   contrastColor: string
   textColor: string
   color1: string
   color2: string
   color3: string
+  color4: string
   primaryFont: string
   secondaryFont: string
+  title: string,
+  subtitle: string,
+  normalText: string,
+  smallText: string,
+  normalSpan: string,
+  smallSpan: string
+}
+
+const commonAttr = {
+  primaryFont: '"Inter", sans-serif',
+  secondaryFont: '"Poppins", sans-serif',
+  title: '24px',
+  subtitle: '20px',
+  normalText: '16px',
+  smallText: '14px',
+  normalSpan: '13px',
+  smallSpan: '12px',
 }
 
 const themeColor = {
@@ -19,8 +37,7 @@ const themeColor = {
     color2: '#252526',
     color3: '#404047',
     color4: '#535358',
-    primaryFont: '"Inter", sans-serif',
-    secondaryFont: '"Poppins", sans-serif',
+    ...commonAttr
   },
   light: {
     contrastColor: '#0073E6',
@@ -28,8 +45,8 @@ const themeColor = {
     color1: '#E0E0E0',
     color2: '#CFCFCF',
     color3: '#CFCFCF',
-    primaryFont: '"Poppins", serif',
-    secondaryFont:  '"DM Mono", serif',
+    color4: '#535358',
+    ...commonAttr
   },
 };
 
@@ -43,7 +60,8 @@ const ThemeContext = createContext<{
 
 type ThemeProviderProps = { children: ReactNode }
 
-const ThemeColorProvider = ({ children } : ThemeProviderProps) => {
+// Achar novo nome 
+const ThemeStyleProvider = ({ children } : ThemeProviderProps) => {
 
   const [theme, setTheme] = useState<ITheme>(themeColor.dark);
 
@@ -62,4 +80,4 @@ const ThemeColorProvider = ({ children } : ThemeProviderProps) => {
   );
 };
 
-export { ThemeContext, ThemeColorProvider };
+export { ThemeContext, ThemeStyleProvider };

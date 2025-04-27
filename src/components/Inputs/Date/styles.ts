@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DateInput = styled.input`
   display: block;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.normalText};
   background-color: ${({ theme }) => theme.color2};
   color: #fff;
   outline: none;
