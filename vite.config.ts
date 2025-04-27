@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,9 +9,11 @@ export default defineConfig({
     alias: {
       '@pages': '/src/pages',
       '@assets': '/src/assets',
+      '@context': '/src/context',
+      '@components': '/src/components',
       '@router': '/src/router',
       '@services': '/src/services',
       '@utils': '/src/utils',
     }
   }
-})
+});
