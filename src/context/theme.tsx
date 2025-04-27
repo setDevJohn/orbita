@@ -27,7 +27,7 @@ const commonAttr = {
   smallText: '14px',
   normalSpan: '13px',
   smallSpan: '12px',
-}
+};
 
 const themeColor = {
   dark : {
@@ -53,10 +53,10 @@ const themeColor = {
 const ThemeContext = createContext<{
   theme: ITheme;
   handleChangeTheme: () => void
-}>({
-  theme: themeColor.dark,
-  handleChangeTheme: () => {}
-});
+    }>({
+      theme: themeColor.dark,
+      handleChangeTheme: () => {}
+    });
 
 type ThemeProviderProps = { children: ReactNode }
 

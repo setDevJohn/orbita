@@ -63,6 +63,14 @@ export default tseslint.config(
           },
         },
       ],
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          max: 1, // no máximo 1 linha vazia consecutiva
+          maxEOF: 0, // nenhuma linha vazia no final do arquivo
+          maxBOF: 0, // nenhuma linha vazia no início do arquivo
+        },
+      ],
     },
   }
 );

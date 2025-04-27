@@ -104,7 +104,7 @@ const fadeIn = keyframes`
   to {
     scale: 1;
   }
-`
+`;
 
 export const BackgroundFocus = styled.div`
   position: absolute;

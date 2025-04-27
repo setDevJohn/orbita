@@ -1,26 +1,27 @@
-import { useEffect, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { BiMenuAltRight } from "react-icons/bi";
-import { RiCloseLargeFill } from "react-icons/ri";
-import { FaUser } from "react-icons/fa";
-import { BsFillCreditCardFill } from "react-icons/bs";
-import { BsBank2 } from "react-icons/bs";
-import { MdCategory } from "react-icons/md";
-import { IoHome } from "react-icons/io5";
-import { IoNotifications } from "react-icons/io5";
-import { Container, FooterSideBar, IconContainer, Item, List, MenuIcon, SideBar } from "./styles";
+import { useEffect, useState } from 'react';
+import { BiMenuAltRight } from 'react-icons/bi';
+import { BsFillCreditCardFill } from 'react-icons/bs';
+import { BsBank2 } from 'react-icons/bs';
+import { FaUser } from 'react-icons/fa';
+import { IoHome } from 'react-icons/io5';
+import { IoNotifications } from 'react-icons/io5';
+import { MdCategory } from 'react-icons/md';
+import { RiCloseLargeFill } from 'react-icons/ri';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+
+import { Container, FooterSideBar, IconContainer, Item, List, MenuIcon, SideBar } from './styles';
 
 
 export function NaviGation () {
   const [sideBar, setSideBar] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('');
 
-  const location = useLocation()
+  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const pathName = location.pathname
-    setSelected(pathName)
+    const pathName = location.pathname;
+    setSelected(pathName);
   }, [location]);
 
   const list = [
@@ -30,7 +31,7 @@ export function NaviGation () {
     {  path: '/cartoes', label: 'Cartões', icons: <BsFillCreditCardFill size={22}/> },
     {  path: '/categorias', label: 'Categorias', icons: <MdCategory size={26}/> },
     {  path: '/notificacoes', label: 'Notificações', icons: <IoNotifications size={26}/> },
-  ]
+  ];
 
   return (
     <Container>
@@ -52,13 +53,13 @@ export function NaviGation () {
         </IconContainer>
 
         <List>
-          {list.map(({icons, path, label}, i) => (
+          {list.map(({ icons, path, label }, i) => (
             <Item  
               key={i}
               $active={selected === path}
               onClick={() => {
-                setSelected(path)
-                navigate(path)
+                setSelected(path);
+                navigate(path);
               }}
             >
               {icons} {label}
@@ -74,5 +75,5 @@ export function NaviGation () {
 
       <Outlet/>
     </Container>
-  )
+  );
 }

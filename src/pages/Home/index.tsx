@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { IoMdArrowDropleft } from "react-icons/io";
-import { IoMdArrowDropright } from "react-icons/io";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { IoMdArrowDropup } from "react-icons/io";
-import { RiEyeCloseFill } from "react-icons/ri";
-import { BsFillEyeFill } from "react-icons/bs";
-import { PiCalendarFill } from "react-icons/pi";
-import { RiFileList3Fill } from "react-icons/ri";
-import { BsCreditCard } from "react-icons/bs";
-import { TiHome } from "react-icons/ti";
-import { FaArrowTrendDown, FaArrowTrendUp, FaPlus } from "react-icons/fa6";
+import { useEffect, useRef, useState } from 'react';
+import { BsFillEyeFill } from 'react-icons/bs';
+import { BsCreditCard } from 'react-icons/bs';
+import { FaArrowTrendDown, FaArrowTrendUp, FaPlus } from 'react-icons/fa6';
+import { IoMdArrowDropleft } from 'react-icons/io';
+import { IoMdArrowDropright } from 'react-icons/io';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { IoMdArrowDropup } from 'react-icons/io';
+import { PiCalendarFill } from 'react-icons/pi';
+import { RiEyeCloseFill } from 'react-icons/ri';
+import { RiFileList3Fill } from 'react-icons/ri';
+import { TiHome } from 'react-icons/ti';
 
-import { ExtractComponent, MainComponent, ProjectionComponent } from "./components";
-
-import { AccountItem, AccountList, BackgroundFocus, Container, CurrentAccount, Footer, FooterIconContainer, FooterIconSpan, Icon,  MainContent, MainDetails, MenuIcon, Month, MonthContainer, Price, PriceContainer, RegisterItem, RegisterList, ToggleAccount } from "./styles";
+import { ExtractComponent, MainComponent, ProjectionComponent } from './components';
+import { AccountItem, AccountList, BackgroundFocus, Container, CurrentAccount, Footer, FooterIconContainer, FooterIconSpan, Icon,  MainContent, MainDetails, MenuIcon, Month, MonthContainer, Price, PriceContainer, RegisterItem, RegisterList, ToggleAccount } from './styles';
 
 export function Home () {
   const [monthIndex, setMonthIndex] = useState<number>(0);
@@ -27,13 +26,12 @@ export function Home () {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const date = new Date()
-    const currentMonth = date.getMonth()
-    setMonthIndex(currentMonth)
+    const date = new Date();
+    const currentMonth = date.getMonth();
+    setMonthIndex(currentMonth);
   }, []);
 
   useEffect(() => {
-    console.log(contentRef.current)
     if (contentRef.current) {
       contentRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -52,51 +50,51 @@ export function Home () {
     'Out',
     'Nov',
     'Dez',
-  ]
+  ];
 
   const accountList = [
     { id: 1, name: 'Principal', value: '500,00'  },
     { id: 2, name: 'Poupança', value: '400,00'  },
     { id: 3, name: 'Investimentos', value: '300,99'  },
-  ]
+  ];
 
   function handlePrevMonth () {
-    if (!monthIndex) return setMonthIndex(11)
-    setMonthIndex(prev => prev - 1)
+    if (!monthIndex) { return setMonthIndex(11); }
+    setMonthIndex(prev => prev - 1);
   }
 
   function handleNextMonth () {
-    if (monthIndex === 11) return setMonthIndex(0)
-    setMonthIndex(prev => prev + 1) 
+    if (monthIndex === 11) { return setMonthIndex(0); }
+    setMonthIndex(prev => prev + 1); 
   }
 
   function handleSelectAccount (id: number) {
-    setAccontToggle(false)
-    setSelectedAccountId(id)
+    setAccontToggle(false);
+    setSelectedAccountId(id);
   }
 
   const registerMenuItems = [
     { name: 'Receitas', path: '', icon: <FaArrowTrendUp size={23} fill="#0f0" /> },
     { name: 'Despesas', path: '', icon: <FaArrowTrendDown size={23} fill="#f00" /> },
     { name: 'Despesas no crédito', path: '', icon: <BsCreditCard size={23} fill="#f00" /> },
-  ]
+  ];
 
   const selectedComponent = {
     home: <MainComponent />,
     extract: <ExtractComponent/>,
     projection: <ProjectionComponent/>
-  }
+  };
 
-  function handleChangePage(page: "home" | "extract" | "projection") {
-    setMenuRegister(false)
-    setCurrentPage(page)
+  function handleChangePage(page: 'home' | 'extract' | 'projection') {
+    setMenuRegister(false);
+    setCurrentPage(page);
   }
 
   function handleMenuRegister() {
     if (currentPage !== 'home') {
-      setCurrentPage('home')
+      setCurrentPage('home');
     } else {
-      setMenuRegister(prev => !prev)
+      setMenuRegister(prev => !prev);
     }
   }
 
@@ -111,7 +109,7 @@ export function Home () {
 
         <ToggleAccount>
           <CurrentAccount>
-            {accountList.find(({id}) => id === selectedAccountId)?.name}
+            {accountList.find(({ id }) => id === selectedAccountId)?.name}
             { accontToggle
               ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
               : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
@@ -120,8 +118,8 @@ export function Home () {
 
           <AccountList $open={accontToggle}>
             {accountList
-              .filter(({id}) => (id !== selectedAccountId))
-              .map(({id, name}, i ) => (
+              .filter(({ id }) => (id !== selectedAccountId))
+              .map(({ id, name }, i ) => (
                 <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
                   {name}
                 </AccountItem>
@@ -133,7 +131,7 @@ export function Home () {
           <Price>
             {'R$ '}
             {showPrice
-              ? accountList.find(({id}) => id === selectedAccountId)?.value 
+              ? accountList.find(({ id }) => id === selectedAccountId)?.value 
               : '.....'
             }
           </Price>
@@ -186,5 +184,5 @@ export function Home () {
         </FooterIconContainer>
       </Footer>
     </Container>
-  )
+  );
 }
