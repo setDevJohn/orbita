@@ -1,104 +1,22 @@
-import { useState } from "react";
-import { FaArrowTrendUp } from "react-icons/fa6";
-import { SearchFilter, DateFilter } from "components/Inputs"; 
-import { FaArrowTrendDown } from "react-icons/fa6";
+import { ExtractList } from 'components/Extract/List';
+import { SearchFilter, DateFilter } from 'components/Inputs'; 
+import { useState } from 'react';
+import { FaArrowTrendUp } from 'react-icons/fa6';
+import { FaArrowTrendDown } from 'react-icons/fa6';
+import { Title } from 'styles/main';
+
+import { extractDateList } from './list';
 import { 
-  ButtonContainer,
   ButtonFilter,
-  ExtractDate,
-  ExtractDesc,
-  ExtractItem,
-  ExtractItemContent,
-  ExtractList,  
-  FilterContainer,  
-  Line,
-  RecentExtract,
-} from "./styles";
-import { Title } from "styles/main";
+  FilterContainer,
+  ButtonContainer,
+} from './styles';
 
 export function ExtractComponent() {
   const [typeListFilter, setTypeListFilter] = useState<string>('');
 
-  const extractDateList = [
-    { 
-      date: '01/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '02/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '03/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '04/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '05/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-  ]
-
   function handleChangeTypeList(type: string) {
-    setTypeListFilter(prev => prev === type ? '' : type)
+    setTypeListFilter(prev => prev === type ? '' : type);
   }
 
   return (
@@ -106,7 +24,7 @@ export function ExtractComponent() {
       <Title>Extrato</Title>
 
       <FilterContainer>
-        <SearchFilter />
+        <SearchFilter />  
         <DateFilter />
       </FilterContainer>
 
@@ -130,27 +48,7 @@ export function ExtractComponent() {
         </ButtonFilter>
       </ButtonContainer>
 
-      <RecentExtract>
-        {extractDateList.map(({date, list}, i) => (
-          <ExtractList key={i}>
-            <ExtractItem>
-              <ExtractDate> <Line /> {date} </ExtractDate>
-              {list.map((item, index) => (
-                <ExtractItemContent key={`item-${i}-${index}`}>
-                  {item.type === 'out' 
-                    ? <FaArrowTrendDown size={18} fill="#f00" /> 
-                    : <FaArrowTrendUp size={18} fill="#0f0" />
-                  }
-                  <ExtractDesc>
-                    <span>{item.name}</span>
-                    <span>{item.price}</span>
-                  </ExtractDesc>
-                </ExtractItemContent>
-              ))}
-            </ExtractItem>
-          </ExtractList>
-        ))}
-      </RecentExtract>
+      <ExtractList list={extractDateList} />
     </>
-  )
+  );
 }

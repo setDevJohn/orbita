@@ -1,6 +1,9 @@
-import { useState } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import { ExtractList } from '@components/Extract/List';
+import { useState } from 'react';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { Title } from 'styles/main';
+
+import { extractDateList } from './extractDateList';
 import {
   Card,
   CardFooter,
@@ -11,24 +14,14 @@ import {
   InvoiceValue,
   TextCard,
   TextCardSpan,
-} from "./styles";
-import {
-  ExtractDate,
-  ExtractDesc,
-  ExtractItem,
-  ExtractItemContent,
-  ExtractList,
-  Line,
-  RecentExtract
-} from "../Extract/styles";
-import { Title } from "styles/main";
+} from './styles';
 
 export function MainComponent() {
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
 
   function handleDetailsCard(id: number) {
-    if (cardIdInDetails === id) return setCardIdInDetails(null) 
-    setCardIdInDetails(id)
+    if (cardIdInDetails === id) { return setCardIdInDetails(null); } 
+    setCardIdInDetails(id);
   }
 
   const cardList = [
@@ -59,85 +52,7 @@ export function MainComponent() {
       closing: '20',
       dueDate: '25',
     },
-  ]
-
-  const extractDateList = [
-    { 
-      date: '01/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '02/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '03/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '04/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-    { 
-      date: '05/04',
-      list: [
-        {
-          name: 'Mesada',
-          type: 'in',
-          price: 'R$ 25,99'
-        },
-        {
-          name: 'Pizzaria',
-          type: 'out',
-          price: 'R$ 45,90'
-        }
-      ]
-    },
-  ]
+  ];
 
   return (
     <>
@@ -176,7 +91,7 @@ export function MainComponent() {
             </CardFooter>
 
             <IconCardContainer $details={cardIdInDetails === card.id}>
-              <IoMdArrowDropdown size={28} style={{margin: 'auto'}}/>
+              <IoMdArrowDropdown size={28} style={{ margin: 'auto' }}/>
             </IconCardContainer>
           </Card>
         ))}
@@ -184,27 +99,7 @@ export function MainComponent() {
 
       <Title>Últimas transações</Title>
 
-      <RecentExtract>
-        {extractDateList.map(({date, list}, i) => (
-          <ExtractList key={i}>
-            <ExtractItem>
-              <ExtractDate> <Line /> {date} </ExtractDate>
-              {list.map((item, index) => (
-                <ExtractItemContent key={`item-${i}-${index}`}>
-                  {item.type === 'out' 
-                    ? <FaArrowTrendDown size={18} fill="#f00" /> 
-                    : <FaArrowTrendUp size={18} fill="#0f0" />
-                  }
-                  <ExtractDesc>
-                    <span>{item.name}</span>
-                    <span>{item.price}</span>
-                  </ExtractDesc>
-                </ExtractItemContent>
-              ))}
-            </ExtractItem>
-          </ExtractList>
-        ))}
-      </RecentExtract>
+      <ExtractList list={extractDateList}/>
     </>
-  )
+  );
 }
