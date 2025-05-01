@@ -1,14 +1,19 @@
-import styled from 'styled-components';
+import styled, { css, CSSObject } from 'styled-components';
 
 interface IButtonsStyled {
   $type?: 'cancel' | 'confirm';
+  $custonStyle?: CSSObject
 }
 
 export const ButtonStyled = styled.button<IButtonsStyled>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   background-color: ${({ theme, $type }) =>  (
     $type === 'cancel' ? '#af1f1f' : $type === 'confirm' ? '#129e12' : theme.color2
   )};
-  color: #d0cece;
+  color: ${({ theme }) => theme.textColor};
   text-align: center;
   font-size: ${({ theme }) => theme.normalText};
   border: none;
@@ -18,6 +23,8 @@ export const ButtonStyled = styled.button<IButtonsStyled>`
   min-width: 110px;
   cursor: pointer;
   transition: transform 0.4s ease;
+  
+  ${({ $custonStyle }) => css`${$custonStyle}`};
 
   &:hover {
     transform: translateY(-1px);
