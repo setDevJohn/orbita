@@ -6,8 +6,8 @@ export const Footer = styled.footer`
   justify-content: space-evenly;
   align-items: center;
   gap: 45px;
-  background-color: #1d1d1e;
-  padding: 4px 15px;
+  background-color: ${({ theme }) => theme.color1};
+  padding: 5px 15px;
   width: 100%;
 `;
 
@@ -41,24 +41,13 @@ export const RegisterList = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color3};
   border-radius: 4px;
-  padding: 10px;
+  padding: 15px 20px;
   animation: ${fadeIn} 0.4s ease;
-  width: 60%;
 `;
 
 export const RegisterItem = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  color: #000;
-  font-size: ${({ theme }) => theme.smallText};
-  border-radius: 4px;
-  box-shadow: 2px 2px 7px -2px #0004;
-  min-width: 100%;
-  cursor: pointer;
 `;
 
 export const FooterIconContainer = styled.div`
@@ -70,7 +59,7 @@ export const FooterIconContainer = styled.div`
 `;
 
 export const FooterIconSpan = styled.span`
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.smallSpan};
   font-weight: 400;
 `;
@@ -80,8 +69,8 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  box-shadow: 0px 0px 15px -2px #0004;
+  background-color: ${({ theme }) => theme.textColor};
+  box-shadow: 0px 0px 10px 4px #0004;
   transform: translateY(-18px);
   padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
   border-radius: 25%;

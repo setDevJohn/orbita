@@ -1,3 +1,4 @@
+import { BasicButton } from '@components/Buttons';
 import { HomeContext } from '@context/Home';
 import { useContext } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
@@ -50,8 +51,7 @@ export function HomeFooter () {
                   setMenuRegister(false);
                 }}
               >
-                <span> {icon} </span>
-                <span> {name} </span>
+                <BasicButton text={name} icon={icon}/>
               </RegisterItem>
             ))}
           </RegisterList>
@@ -69,14 +69,14 @@ export function HomeFooter () {
       >
         <Icon $open={menuRegister}>
           { currentPage !== 'home' 
-            ? <TiHome size={28} fill="#000" />
-            : <FaPlus size={28} fill="#000" />
+            ? <TiHome size={30} fill="#000" />
+            : <FaPlus size={30} fill="#000" />
           }
         </Icon>
       </MenuIcon>
 
       <FooterIconContainer onClick={() => handleChangePage('projection')}>
-        <PiCalendarFill size={28} /> 
+        <PiCalendarFill size={30} /> 
         <FooterIconSpan>Projeção</FooterIconSpan>
       </FooterIconContainer>
     </Footer>
