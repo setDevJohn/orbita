@@ -51,7 +51,7 @@ export function NaviGation () {
           />
         </IconContainer>
 
-        {/* Limpar context na navegação */}
+        {/* TODO: Limpar context na navegação */}
         <List>
           {list.map(({ icons, path, label }, i) => (
             <Item  
