@@ -22,6 +22,7 @@ export const Card = styled.li<{$details: boolean; $color: string}>`
   overflow: hidden;
   height: ${({ $details }) => $details ? '157px': '58px' };
   width: 100%;
+  cursor: pointer;
 `;
 
 export const CardHeader = styled.div`

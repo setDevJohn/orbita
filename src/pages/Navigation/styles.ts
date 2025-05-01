@@ -14,6 +14,7 @@ export const MenuIcon = styled.div`
   right: 15px;
   top: 15px;
   z-index: 1;
+  cursor: pointer;
 `;
 
 export const SideBar = styled.div<{$open: boolean }>`
@@ -37,6 +38,7 @@ export const IconContainer = styled.div`
   justify-content: end;
   margin-bottom: 25px;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const List = styled.ul`
@@ -56,6 +58,7 @@ export const Item = styled.li<{$active?: boolean}>`
   font-size: ${({ theme }) => theme.smallText};
   border-radius: 5px;
   padding: 5px 15px;
+  cursor: pointer;
 `;
 
 export const FooterSideBar = styled.ul`
@@ -68,4 +71,3 @@ export const FooterSideBar = styled.ul`
     justify-content: end;
   }
 `;
-
