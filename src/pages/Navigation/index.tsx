@@ -11,7 +11,6 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Container, FooterSideBar, IconContainer, Item, List, MenuIcon, SideBar } from './styles';
 
-
 export function NaviGation () {
   const [sideBar, setSideBar] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('');
@@ -52,6 +51,7 @@ export function NaviGation () {
           />
         </IconContainer>
 
+        {/* Limpar context na navegação */}
         <List>
           {list.map(({ icons, path, label }, i) => (
             <Item  
