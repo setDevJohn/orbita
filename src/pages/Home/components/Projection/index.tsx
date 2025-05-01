@@ -1,5 +1,5 @@
 import { ExtractList } from '@components/Extract/List';
-import { DateFilter, SearchFilter } from '@components/Inputs';
+import { DateFilter, SearchFilter } from '@components/Filters';
 import { Title } from 'styles/main';
 
 import { StatisticButtons } from '../StatisticButtons';
