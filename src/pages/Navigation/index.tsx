@@ -24,7 +24,7 @@ export function NaviGation () {
   }, [location]);
 
   const list = [
-    {  path: '/', label: 'Início', icons: <IoHome size={22}/> },
+    {  path: '/inicio', label: 'Início', icons: <IoHome size={22}/> },
     {  path: '/perfil', label: 'Perfil', icons: <FaUser size={22}/> },
     {  path: '/contas', label: 'Contas', icons: <BsBank2 size={24}/> },
     {  path: '/cartoes', label: 'Cartões', icons: <BsFillCreditCardFill size={22}/> },
@@ -56,10 +56,11 @@ export function NaviGation () {
           {list.map(({ icons, path, label }, i) => (
             <Item  
               key={i}
-              $active={selected === path}
+              $active={selected.includes(path)}
               onClick={() => {
                 setSelected(path);
                 navigate(path);
+                setSideBar(false);
               }}
             >
               {icons} {label}
