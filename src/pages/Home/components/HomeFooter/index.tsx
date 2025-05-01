@@ -5,6 +5,7 @@ import { FaArrowTrendDown, FaArrowTrendUp, FaPlus } from 'react-icons/fa6';
 import { PiCalendarFill } from 'react-icons/pi';
 import { RiFileList3Fill } from 'react-icons/ri';
 import { TiHome } from 'react-icons/ti';
+import { useNavigate } from 'react-router-dom';
 
 import { BackgroundFocus, Footer, FooterIconContainer, FooterIconSpan, Icon, MenuIcon, RegisterItem, RegisterList } from './styles';
 export function HomeFooter () {
@@ -15,10 +16,12 @@ export function HomeFooter () {
     setCurrentPage
   } = useContext(HomeContext);
 
+  const navigate = useNavigate();
+
   const registerMenuItems = [
-    { name: 'Receitas', path: '', icon: <FaArrowTrendUp size={23} fill="#0f0" /> },
-    { name: 'Despesas', path: '', icon: <FaArrowTrendDown size={23} fill="#f00" /> },
-    { name: 'Despesas no crédito', path: '', icon: <BsCreditCard size={23} fill="#f00" /> },
+    { name: 'Receitas', path: '/inicio/registro/receita', icon: <FaArrowTrendUp size={23} fill="#0f0" /> },
+    { name: 'Despesas', path: '/inicio/registro/despesa', icon: <FaArrowTrendDown size={23} fill="#f00" /> },
+    { name: 'Despesas no crédito', path: '/inicio/registro/despesa-credito', icon: <BsCreditCard size={23} fill="#f00" /> },
   ];
 
   function handleChangePage(page: 'home' | 'extract' | 'projection') {
@@ -39,10 +42,16 @@ export function HomeFooter () {
       {menuRegister && (
         <BackgroundFocus>
           <RegisterList>
-            {registerMenuItems.map((item, i) => (
-              <RegisterItem key={i}>
-                <span> {item.icon} </span>
-                <span> {item.name} </span>
+            {registerMenuItems.map(({ icon, name, path }, i) => (
+              <RegisterItem 
+                key={i}
+                onClick={() => {
+                  navigate(path);
+                  setMenuRegister(false);
+                }}
+              >
+                <span> {icon} </span>
+                <span> {name} </span>
               </RegisterItem>
             ))}
           </RegisterList>

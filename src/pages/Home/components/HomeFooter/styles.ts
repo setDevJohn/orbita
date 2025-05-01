@@ -58,6 +58,7 @@ export const RegisterItem = styled.li`
   border-radius: 4px;
   box-shadow: 2px 2px 7px -2px #0004;
   min-width: 100%;
+  cursor: pointer;
 `;
 
 export const FooterIconContainer = styled.div`
@@ -65,6 +66,7 @@ export const FooterIconContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  cursor: pointer;
 `;
 
 export const FooterIconSpan = styled.span`
@@ -83,6 +85,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   transform: translateY(-18px);
   padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
   border-radius: 25%;
+  cursor: pointer;
 `;
 
 export const Icon = styled.div<{$open: boolean}>`
