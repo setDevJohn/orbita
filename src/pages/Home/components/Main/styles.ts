@@ -16,7 +16,7 @@ export const Card = styled.li<{$details: boolean; $color: string}>`
   flex-direction: column;
   background-color: ${({ $color }) => $color};;
   border-radius: 10px;
-  box-shadow: 1px 2px 7px -2px #0004;
+  box-shadow: 2px 2px 7px -2px #0004;
   transition: all 0.4s ease;
   padding: 12px;
   overflow: hidden;
@@ -47,7 +47,7 @@ export const TextCard = styled.p<{$column?: boolean; $name?: boolean}>`
   font-size: ${({ $name, theme }) => $name ? theme.normalText : theme.smallText};
   flex-direction: ${({ $column }) => $column && 'column'};
   gap: 2px;
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 export const TextCardSpan = styled.span`
@@ -61,17 +61,11 @@ export const CardFooter = styled.div`
   margin-top: 15px;
 `;
 
-export const Line = styled.div`
-  width: 100%;
-  height: 2px;
-  background-color: #888;
-`;
-
 export const InvoiceValue = styled.p`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.smallText};
 `;
 

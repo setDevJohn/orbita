@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Price = styled.p`
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.subtitle};
   font-weight: 500;
 `;
 
 export const Month = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalSpan};
   text-align: center;
   width: 40px;
@@ -66,7 +66,7 @@ export const CurrentAccount = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
   margin: 30px 0 0 15px;
   width: 130px;

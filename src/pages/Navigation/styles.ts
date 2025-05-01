@@ -54,7 +54,7 @@ export const Item = styled.li<{$active?: boolean}>`
   background-color: ${({ $active, theme }) => $active && theme.color3};
   gap: 10px;
   width: 100%;
-  color: #fff;
+  color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.smallText};
   border-radius: 5px;
   padding: 5px 15px;
