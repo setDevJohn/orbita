@@ -1,7 +1,23 @@
-import { DateInput } from "./styles";
+import 'react-datepicker/dist/react-datepicker.css';
+import { ptBR } from 'date-fns/locale';
+import DatePicker from 'react-datepicker';
+import './styles.css';
 
-export function DateFilter() {
+interface IDateInput {
+  startDate: Date | null
+  handleChange: (date: Date | null) => void;
+  placeholder: string;
+}
+
+export function DateInput({ startDate, handleChange, placeholder }: IDateInput) {
   return (
-    <DateInput type="date" placeholder="Clear"/>
-  )
+    <DatePicker
+      className="custom-date-picker"
+      selected={startDate}
+      onChange={(date) => handleChange(date)}
+      placeholderText={placeholder}
+      dateFormat="dd/MM/yyyy"
+      locale={ptBR}
+    />
+  );
 }

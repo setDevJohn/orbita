@@ -1,0 +1,16 @@
+.custom-date-picker {
+  background-color: #0001;
+  color: #cecdcd;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px -1px #0009;
+  margin-top: 10px;
+  padding: 10px 15px;
+  width: 100%;
+}
+
+.custom-date-picker::placeholder {
+  color: #cecdcd; 
+}

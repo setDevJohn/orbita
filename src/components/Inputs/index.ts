@@ -1,4 +1,5 @@
-import { DateFilter } from "./Date";
-import { SearchFilter } from "./Search";
+import { DateInput } from './Date';
+import { SelectInput } from './Select';
+import { TextInputWithLabel } from './TextWithLabel';
 
-export { DateFilter, SearchFilter }
+export { TextInputWithLabel, SelectInput, DateInput };
