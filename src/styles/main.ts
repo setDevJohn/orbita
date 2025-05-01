@@ -6,3 +6,8 @@ export const Title = styled.h2`
   font-weight: 400;
   font-family: ${({ theme }) => theme.secondaryFont};
 `;
+
+export const Text = styled.p`
+  font-size: ${({ theme }) => theme.normalText};
+  color: ${({ theme }) => theme.textColor};
+`;
