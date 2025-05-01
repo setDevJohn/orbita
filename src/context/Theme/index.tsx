@@ -10,6 +10,7 @@ export interface ITheme {
   color4: string
   primaryFont: string
   secondaryFont: string
+  bigTitle: string
   title: string,
   subtitle: string,
   normalText: string,
@@ -21,6 +22,7 @@ export interface ITheme {
 const commonAttr = {
   primaryFont: '"Inter", sans-serif',
   secondaryFont: '"Poppins", sans-serif',
+  bigTitle: '28px',
   title: '24px',
   subtitle: '20px',
   normalText: '16px',
@@ -32,7 +34,7 @@ const commonAttr = {
 const themeColor = {
   dark : {
     contrastColor: '#2AD883',
-    textColor: '#FFFFFF',
+    textColor: '#cecdcd',
     color1: '#1d1d1e',
     color2: '#252526',
     color3: '#404047',
