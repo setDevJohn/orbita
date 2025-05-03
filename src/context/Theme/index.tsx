@@ -37,7 +37,7 @@ const themeColor = {
     textColor: '#cecdcd',
     color1: '#1d1d1e',
     color2: '#252526',
-    color3: '#404047',
+    color3: '#3C3C42',
     color4: '#535358',
     ...commonAttr
   },

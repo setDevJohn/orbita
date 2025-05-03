@@ -11,7 +11,7 @@ export const Label = styled.label`
 `;
 
 export const TextInput = styled.input`
-  background-color: #0001;
+  background-color: ${({ theme }) => theme.color3};
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
   outline: none;
