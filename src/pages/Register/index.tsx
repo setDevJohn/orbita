@@ -1,13 +1,15 @@
-import { BasicButton, ToggleButton } from '@components/Buttons';
+import { BasicButton } from '@components/Buttons';
 import { DateInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
+import { Mode } from '@components/Inputs/Date';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Text } from 'styles/main';
 
-import { Content, Footer, InputContainer, Price, PriceContainer, ToggleContainer } from './styles';
+import { ToggleDropdown } from './components/ToggleDropdown';
+import { dateButtonList } from './dateButtonList';
+import { Content, DateButton, DateButtonContainer, Footer, InputContainer, Price, PriceContainer } from './styles';
 
 interface IForm {
   description: string;
@@ -16,6 +18,9 @@ interface IForm {
   category: string;
   date: Date | null;
 }
+
+type TDateRange = [Date | null, Date | null];
+type TChangeFormValue = string | Date | null | TDateRange;
 
 export function Register() {
   const formValue = {
@@ -27,11 +32,10 @@ export function Register() {
   };
 
   const [form, setForm] = useState<IForm>(formValue);
-  const [toggleRecurrence, setToggleRecurrence] = useState<boolean>(false);
-  const [toggleMovement, setToggleMovement] = useState<boolean>(false);
+  const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
+  const [recurrenceDateRange, setRecurrenceDateRange] = useState<TDateRange>([null, null]);
 
   const { type } = useParams();
-
   const navigate = useNavigate();
 
   if (!type || !['receita', 'despesa', 'despesa-credito'].includes(type)) { return null; }
@@ -39,22 +43,32 @@ export function Register() {
   const pageConfig = {
     receita: {
       title: 'Receitas',
-      icon: <FaArrowTrendUp size={30} fill="#0f0" style={{ marginRight: ' auto' }}/>
+      icon: <FaArrowTrendUp size={30} fill="#0f0"/>
     },
     despesa: {
       title: 'Despesas',
-      icon: <FaArrowTrendDown size={30} fill="#f00" style={{ marginRight: ' auto' }}/>
+      icon: <FaArrowTrendDown size={30} fill="#f00"/>
     },
     'despesa-credito': {
       title: 'Despesas Crédito',
-      icon: <BsCreditCard size={30} fill="#f00" style={{ marginRight: ' auto' }}/>
+      icon: <BsCreditCard size={30} fill="#f00"/>
     }
   }[type];
 
   if (!pageConfig) { return null; }
 
-  function handleChangeForm ( name: string, value: string | Date | null) {
+  function handleChangeForm ( name: string, value: TChangeFormValue) {
     setForm(prev => ({ ...prev, [name]: value }));    
+  }
+
+  function handleSelectDateMode (dateMode: Mode) {
+    setActiveButtonDate(dateMode);
+    setRecurrenceDateRange([null, null]);
+  }
+
+  function clearRecurrenceStorage () {
+    setActiveButtonDate('day');
+    setRecurrenceDateRange([null, null]);
   }
 
   return (
@@ -96,31 +110,41 @@ export function Register() {
             options={[]}
           />
             
-          <DateInput 
+          <DateInput
             startDate={form.date}
-            handleChange={(date) => handleChangeForm('date', date)}
+            handleChange={(date) => handleChangeForm('date', (date as Date))}
             placeholder='Selecione uma data'
           />
 
-          <ToggleContainer>
-            <Text>Recorrência</Text>
+          <ToggleDropdown 
+            text='Recorrência' 
+            clearToggleStorage={clearRecurrenceStorage}
+          >
+            <DateButtonContainer>
+              {dateButtonList.map((item) => (
+                <DateButton
+                  key={item.value}
+                  $active={item.value === activeButtonDate}
+                  onClick={() => handleSelectDateMode(item.value)}
+                >
+                  {item.name}
+                </DateButton>
+              ))}
+            </DateButtonContainer>
 
-            {/* Ao fechar o toggle, limpar seleçoes referentes a recorrência */}
-            <ToggleButton 
-              checked={toggleRecurrence}
-              handleClick={() => setToggleRecurrence(prev => !prev)}
+            <DateInput 
+              startDate={recurrenceDateRange[0]}
+              endDate={recurrenceDateRange[1]}
+              handleChange={(date) => setRecurrenceDateRange(date as TDateRange)} 
+              placeholder='Periodo'
+              mode={activeButtonDate}
+              isRange
             />
-          </ToggleContainer>
+          </ToggleDropdown>
 
-          <ToggleContainer>
-            <Text>Movimentação entre contas</Text>
-
-            {/* Ao fechar o toggle, limpar seleçoes referentes a movimentação */}
-            <ToggleButton 
-              checked={toggleMovement}
-              handleClick={() => setToggleMovement(prev => !prev)}
-            />
-          </ToggleContainer>
+          <ToggleDropdown text='Transferência entre contas'>
+            <div></div>
+          </ToggleDropdown>
         </InputContainer>
       </Content>
       

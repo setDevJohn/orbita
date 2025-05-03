@@ -11,6 +11,7 @@ export const Content = styled.div`
 
 export const PriceContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 30px;
   width: 100%;
@@ -41,18 +42,29 @@ export const InputContainer = styled.div`
   overflow: auto;
 `;
 
+export const DateButtonContainer = styled.div`
+  display: flex;
+  gap: 5px;
+  border: ${({ theme }) => theme.color1} solid 2px;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+`;
+
+export const DateButton = styled.div<{$active: boolean}>`
+  flex: 1;
+  text-align: center;
+  background-color: ${({ theme, $active }) => $active ? theme.contrastColor : theme.color3};
+  color: ${({ $active, theme }) => $active ? '#000' :theme.textColor};
+  border-radius: 4px;
+  padding: 4px 2px;
+  cursor: pointer;
+`;
+
 export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
   background-color: ${({ theme }) => theme.color1};
   padding: 15px 20px;
-  width: 100%;
-`;
-
-export const ToggleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px;
   width: 100%;
 `;
