@@ -1,9 +1,11 @@
 import { BasicButton } from '@components/Buttons';
 import { DateInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
 import { Mode } from '@components/Inputs/Date';
+import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { categoriesApi } from '@services/categories';
 import { mask } from '@utils/mask';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -39,10 +41,31 @@ export function Register() {
   };
 
   const [form, setForm] = useState<IForm>(formValue);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [categoriesOptions, setCategoriesOptions] = useState<IOption[]>([]);
   const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
 
   const { type } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fecthCategories() {
+      try {
+        setLoading(true);
+        const response = await categoriesApi.get();
+
+        setCategoriesOptions(response.map(category => (
+          { label: category.name, value: category.id.toString() }
+        )));
+      } catch (err) {
+        console.error((err as Error).message);
+        // toastError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fecthCategories();
+  }, []);
 
   if (!type || !['receita', 'despesa', 'despesa-credito'].includes(type)) { return null; }
 
