@@ -2,6 +2,7 @@ import { BasicButton } from '@components/Buttons';
 import { DateInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
 import { Mode } from '@components/Inputs/Date';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { mask } from '@utils/mask';
 import { useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
@@ -11,29 +12,34 @@ import { ToggleDropdown } from './components/ToggleDropdown';
 import { dateButtonList } from './dateButtonList';
 import { Content, DateButton, DateButtonContainer, Footer, InputContainer, Price, PriceContainer } from './styles';
 
+type TDateRange = [Date | null, Date | null];
+type TChangeFormValue = string | Date | null | TDateRange;
+
 interface IForm {
   description: string;
   price: string;
   account: string;
+  card: string;
   category: string;
   date: Date | null;
+  recurrenceDateRange: TDateRange;
+  transferAccount: string;
 }
 
-type TDateRange = [Date | null, Date | null];
-type TChangeFormValue = string | Date | null | TDateRange;
-
 export function Register() {
-  const formValue = {
+  const formValue: IForm = {
     description: '',
     price: '',
     account: '',
+    card: '',
     category: '',
-    date: null
+    date: null,
+    recurrenceDateRange: [null, null],
+    transferAccount: '',
   };
 
   const [form, setForm] = useState<IForm>(formValue);
   const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
-  const [recurrenceDateRange, setRecurrenceDateRange] = useState<TDateRange>([null, null]);
 
   const { type } = useParams();
   const navigate = useNavigate();
@@ -63,12 +69,12 @@ export function Register() {
 
   function handleSelectDateMode (dateMode: Mode) {
     setActiveButtonDate(dateMode);
-    setRecurrenceDateRange([null, null]);
+    setForm(prev => ({ ...prev, recurrenceDateRange: [null, null] }));
   }
 
   function clearRecurrenceStorage () {
     setActiveButtonDate('day');
-    setRecurrenceDateRange([null, null]);
+    setForm(prev => ({ ...prev, recurrenceDateRange: [null, null] }));
   }
 
   return (
@@ -77,7 +83,7 @@ export function Register() {
         <PriceContainer>
           <Price 
             type='text'
-            value={`R$ ${form.price || '0,00'}`}
+            value={mask.currency(form.price)}
             onChange={({ target :{ value } }) => handleChangeForm('price', value)}
           />
 
@@ -92,14 +98,25 @@ export function Register() {
             handleChange={handleChangeForm}
           />
 
-          <SelectInput
-            label='Conta'
-            name='account'
-            value={form.account}
-            placeholder='Selecione uma conta'
-            handleChange={handleChangeForm}
-            options={[]}
-          />
+          {pageConfig.title === 'Despesas Crédito' ? (
+            <SelectInput
+              label='Cartão'
+              name='card'
+              value={form.card}
+              placeholder='Selecione um cartão'
+              handleChange={handleChangeForm}
+              options={[]}
+            />
+          ) : (
+            <SelectInput
+              label='Conta'
+              name='account'
+              value={form.account}
+              placeholder='Selecione uma conta'
+              handleChange={handleChangeForm}
+              options={[]}
+            />
+          )}
 
           <SelectInput
             label='Categoria'
@@ -112,7 +129,7 @@ export function Register() {
             
           <DateInput
             startDate={form.date}
-            handleChange={(date) => handleChangeForm('date', (date as Date))}
+            handleChange={(date) => handleChangeForm('date', date as Date)}
             placeholder='Selecione uma data'
           />
 
@@ -133,18 +150,29 @@ export function Register() {
             </DateButtonContainer>
 
             <DateInput 
-              startDate={recurrenceDateRange[0]}
-              endDate={recurrenceDateRange[1]}
-              handleChange={(date) => setRecurrenceDateRange(date as TDateRange)} 
+              startDate={form.recurrenceDateRange[0]}
+              endDate={form.recurrenceDateRange[1]}
+              handleChange={(date) => ( 
+                handleChangeForm('recurrenceDateRange', date as TDateRange)
+              )} 
               placeholder='Periodo'
               mode={activeButtonDate}
               isRange
             />
           </ToggleDropdown>
-
-          <ToggleDropdown text='Transferência entre contas'>
-            <div></div>
-          </ToggleDropdown>
+          
+          {pageConfig.title !== 'Receitas' && (
+            <ToggleDropdown text='Transferência entre contas' noAlign>
+              <SelectInput
+                label='Conta'
+                name='transferAccount'
+                value={form.transferAccount}
+                placeholder='Selecione uma conta'
+                handleChange={handleChangeForm}
+                options={[]}
+              />
+            </ToggleDropdown>
+          )}
         </InputContainer>
       </Content>
       

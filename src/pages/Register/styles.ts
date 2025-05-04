@@ -13,6 +13,7 @@ export const PriceContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   margin-bottom: 30px;
   width: 100%;
 `;
@@ -25,9 +26,7 @@ export const Price = styled.input`
   outline: none;
   border-bottom: ${({ theme }) => `2px solid ${theme.color1}`};
   padding-left: 15px;
-  margin-left: 12px;
-  margin-right: 15px;
-  width: 45%;
+  max-width: 200px; 
 `;
 
 export const InputContainer = styled.div`

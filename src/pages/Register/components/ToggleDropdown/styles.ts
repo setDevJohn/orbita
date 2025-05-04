@@ -24,9 +24,9 @@ export const Dropdown = styled.div<{$open: boolean }>`
   width: 100%;
 `;
 
-export const DropContainer = styled.div`
+export const DropContainer = styled.div<{$noAlign: boolean}>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ $noAlign }) => $noAlign ? 'unset' : 'center'};
   margin: 18px 8px;
 `;

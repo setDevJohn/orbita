@@ -8,14 +8,16 @@ interface IToggleDropdown {
   text: string;
   children: ReactNode;
   clearToggleStorage?: () => void;
+  noAlign?: boolean;
 }
 
 export function ToggleDropdown({ 
   text,
   children,
-  clearToggleStorage
+  clearToggleStorage,
+  noAlign = false,
 }: IToggleDropdown) {
-  const [toggleStatus, setToggleStatus] = useState<boolean>(true);
+  const [toggleStatus, setToggleStatus] = useState<boolean>(false);
 
   function handleToggle () {
     setToggleStatus(prev => !prev);
@@ -34,7 +36,7 @@ export function ToggleDropdown({
       </ToggleContainer>
 
       <Dropdown $open={toggleStatus}>
-        <DropContainer>
+        <DropContainer $noAlign={noAlign}>
           { children }
         </DropContainer>
       </Dropdown>
