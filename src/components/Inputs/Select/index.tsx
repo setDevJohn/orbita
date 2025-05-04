@@ -1,10 +1,15 @@
 import { InputContainer, Label, Option, SelectStyled } from './styles';
 
+export interface IOption {
+  label: string;
+  value: string;
+}
+
 interface ISelectInput {
   name: string;
   label: string;
   value: string;
-  options: { label: string, value: string }[];
+  options: IOption[];
   handleChange: (name: string, value: string) => void;
   placeholder?: string;
 }
