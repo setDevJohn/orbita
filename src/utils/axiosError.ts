@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-export function handleAxiosError (error: unknown): string {
+function axiosMessage (error: unknown): string {
   if (axios.isAxiosError(error) && !error.response) {
     switch (error.code) {
       case 'ERR_NETWORK':
@@ -15,4 +15,16 @@ export function handleAxiosError (error: unknown): string {
   }
 
   return 'Erro desconhecido. Por favor, tente novamente.';
+}
+
+export function handlerAxiosError (error: unknown): never {
+  if (error instanceof AxiosError) {
+    if (error.response) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error(axiosMessage(error.message));
+    }
+  } else {
+    throw new Error('Erro desconhecido. Por favor, tente novamente.');
+  }
 }
