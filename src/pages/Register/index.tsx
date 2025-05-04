@@ -3,6 +3,7 @@ import { DateInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
 import { Mode } from '@components/Inputs/Date';
 import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { accountsApi } from '@services/accounts';
 import { categoriesApi } from '@services/categories';
 import { mask } from '@utils/mask';
 import { useEffect, useState } from 'react';
@@ -28,6 +29,11 @@ interface IForm {
   transferAccount: string;
 }
 
+interface IOptions {
+  accounts: IOption[];
+  categories: IOption[];
+}
+
 export function Register() {
   const formValue: IForm = {
     description: '',
@@ -40,9 +46,14 @@ export function Register() {
     transferAccount: '',
   };
 
+  const optionsValue: IOptions = {
+    accounts: [],
+    categories: [],
+  };
+
   const [form, setForm] = useState<IForm>(formValue);
   const [loading, setLoading] = useState<boolean>(false);
-  const [categoriesOptions, setCategoriesOptions] = useState<IOption[]>([]);
+  const [options, setOptions] = useState<IOptions>(optionsValue);
   const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
 
   const { type } = useParams();
@@ -52,11 +63,19 @@ export function Register() {
     async function fecthCategories() {
       try {
         setLoading(true);
-        const response = await categoriesApi.get();
 
-        setCategoriesOptions(response.map(category => (
-          { label: category.name, value: category.id.toString() }
-        )));
+        const accountsResponse = await accountsApi.get();
+        const categoriesResponse = await categoriesApi.get();
+
+        setOptions({
+          accounts: accountsResponse.map(account => (
+            { label: account.name, value: account.id.toString() }
+          )),
+          categories: categoriesResponse.map(category => (
+            { label: category.name, value: category.id.toString() }
+          ))
+        });
+
       } catch (err) {
         console.error((err as Error).message);
         // toastError((err as Error).message);
@@ -137,7 +156,7 @@ export function Register() {
               value={form.account}
               placeholder='Selecione uma conta'
               handleChange={handleChangeForm}
-              options={[]}
+              options={options.accounts}
             />
           )}
 
@@ -147,7 +166,7 @@ export function Register() {
             value={form.category}
             placeholder='Selecione uma categoria'
             handleChange={handleChangeForm}
-            options={[]}
+            options={options.categories}
           />
             
           <DateInput
