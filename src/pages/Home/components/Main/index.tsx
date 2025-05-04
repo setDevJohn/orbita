@@ -1,5 +1,7 @@
 import { ExtractList } from '@components/Extract/List';
-import { useState } from 'react';
+import { cardsApi } from '@services/cards';
+import { ICardsResponse } from '@services/cards/interface';
+import { useEffect, useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Title } from 'styles/main';
 
@@ -17,6 +19,8 @@ import {
 } from './styles';
 
 export function MainComponent() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [cardList, setCardList] = useState<ICardsResponse[]>([]);
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
 
   function handleDetailsCard(id: number) {
@@ -24,7 +28,23 @@ export function MainComponent() {
     setCardIdInDetails(id);
   }
 
-  const cardList = [
+  useEffect(() => {
+    async function fetchCards() {
+      try {
+        setLoading(true);
+        const response = await cardsApi.get();
+        setCardList(response);
+      } catch (err) {
+        console.error((err as Error).message);
+        // toastError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCards();
+  }, []);
+
+  const temporaryCardList = [
     { 
       id: 1,
       name: 'nuBank',
@@ -57,7 +77,7 @@ export function MainComponent() {
   return (
     <>
       <CardList>
-        {cardList.map(card => (
+        {temporaryCardList.map(card => (
           <Card
             key={card.id}
             $color={card.color}
