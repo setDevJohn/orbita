@@ -119,6 +119,35 @@ export function Register() {
     setForm(prev => ({ ...prev, recurrenceDateRange: [null, null] }));
   }
 
+  function handleSubmit () {
+    // if (!form.price) { return toastError('Valor é obrigatório.'); }
+    // if (!form.description) { return toastError('Descrição é obrigatória.'); }
+    // if (!form.date) { return toastError('Data da transação é obrigatória.'); }
+    // if (pageConfig.title === 'Despesas Crédito' && !form.card) { 
+    //   return toastError('Cartão é obrigatório.');
+    // }
+    // if (pageConfig.title !== 'Despesas Crédito' && !form.account) { 
+    //   return toastError('Conta é obrigatório.');
+    // }
+    
+    const payload = {
+      name: form.description,
+      type: pageConfig!.title === 'Receitas' ? 'income' : 'expense',
+      amount: mask.currencyToDecimal(form.price),
+      transactionDate: form.date?.toJSON(),
+      source: form.account ? 'account' : 'card',
+      categoryId: Number(form.category) || null,
+      ...(form.card && { cardId: Number(form.card) }),
+      ...(form.account && { accountId: Number(form.account) }),
+      ...(form.transferAccount && { transferAccountId: Number(form.transferAccount) }),
+      ...(form.recurrenceDateRange.every(date => !!date) && { 
+        recurrenceDateRange: form.recurrenceDateRange.map(date => date?.toJSON())
+      }),
+    };
+
+    console.log(payload);
+  }
+
   return (
     <LayoutContainer title={pageConfig.title}>
       <Content>
@@ -211,7 +240,7 @@ export function Register() {
                 value={form.transferAccount}
                 placeholder='Selecione uma conta'
                 handleChange={handleChangeForm}
-                options={[]}
+                options={options.accounts.filter(account => account.value !== form.account)}
               />
             </ToggleDropdown>
           )}
@@ -225,7 +254,7 @@ export function Register() {
           action={() => navigate('/inicio')}
         />
 
-        <BasicButton text='Confirmar' type='confirm'/>
+        <BasicButton text='Confirmar' type='confirm' action={handleSubmit}/>
       </Footer>
     </LayoutContainer>
   );
