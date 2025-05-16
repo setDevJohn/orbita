@@ -18,6 +18,7 @@ export const MainDetails = styled.section`
   flex-direction: column;
   border-radius: 0  0 20px 20px;
   background: ${({ theme }) => theme.linearGradient};
+  box-shadow: 0 4px 6px 2px #0004;
   padding: 10px;
   width: 100%;
 `;
