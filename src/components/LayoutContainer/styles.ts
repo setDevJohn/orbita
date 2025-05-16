@@ -9,7 +9,7 @@ export const Container = styled.main`
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.color1};
+  background: ${({ theme }) => theme.linearGradient};
   font-size: ${({ theme }) => theme.subtitle};
   padding: 10px 20px;
   border-radius: 0 0 10px 10px;

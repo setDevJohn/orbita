@@ -6,8 +6,8 @@ export const Footer = styled.footer`
   justify-content: space-evenly;
   align-items: center;
   gap: 45px;
-  background-color: ${({ theme }) => theme.color1};
-  padding: 5px 15px;
+  background: ${({ theme }) => theme.linearGradient};
+  padding: 10px 15px;
   width: 100%;
 `;
 
@@ -41,7 +41,7 @@ export const RegisterList = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: ${({ theme }) => theme.color3};
+  background-color: ${({ theme }) => theme.mainBackground};
   border-radius: 4px;
   padding: 15px 20px;
   animation: ${fadeIn} 0.4s ease;
@@ -71,7 +71,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   align-items: center;
   background-color: ${({ theme }) => theme.textColor};
   box-shadow: 0px 0px 10px 4px #0004;
-  transform: translateY(-18px);
+  transform: translateY(-20px);
   padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
   border-radius: 25%;
   cursor: pointer;

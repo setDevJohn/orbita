@@ -1,4 +1,8 @@
-import { InputContainer, Label, TextInput } from './styles';
+import { InputLabel } from 'styles/main';
+
+import { DefaultInput } from '../Default';
+
+import { InputContainer } from './styles';
 
 interface ITextWithLabel {
   name: string;
@@ -11,15 +15,14 @@ interface ITextWithLabel {
 export function TextInputWithLabel({ name, value, label, handleChange, placeholder }: ITextWithLabel) {
   return (
     <InputContainer>
-      <Label htmlFor={name}>{label}</Label>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
 
-      <TextInput 
-        id={name}
-        type='text'
+      <DefaultInput 
         name={name}
+        type='text'
         value={value}
+        handleChange={handleChange}
         placeholder={placeholder}
-        onChange={({ target :{ value, name } }) => handleChange(name, value)}
       />
     </InputContainer>
   );

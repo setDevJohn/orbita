@@ -17,7 +17,7 @@ export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
   border-radius: 0  0 20px 20px;
-  background-color: ${({ theme }) => theme.color1};
+  background: ${({ theme }) => theme.linearGradient};
   padding: 10px;
   width: 100%;
 `;
@@ -36,7 +36,7 @@ export const AccountList = styled.ul<{$open: boolean}>`
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  background-color: ${({ theme }) => theme.color3};
+  background-color: ${({ theme }) => theme.mainBackground};
   border-radius: 4px;
   width: 140px;
   padding: ${({ $open }) => $open ? '5px' : '0px'};

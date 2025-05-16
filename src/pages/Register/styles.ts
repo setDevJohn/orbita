@@ -24,7 +24,7 @@ export const Price = styled.input`
   font-size: ${({ theme }) => theme.bigTitle};
   border: none;
   outline: none;
-  border-bottom: ${({ theme }) => `2px solid ${theme.color1}`};
+  border-bottom: ${({ theme }) => `2px solid ${theme.contrastColor}`};
   padding-left: 15px;
   max-width: 200px; 
 `;
@@ -34,7 +34,8 @@ export const InputContainer = styled.div`
   flex-direction: column;
   flex: 1;
   gap: 15px;
-  border: ${({ theme }) => theme.color1} solid 2px;
+  border: ${({ theme }) => `${theme.darkBackground} solid 1px`};
+  box-shadow: 1px 1px 7px -1px #0009;
   border-radius: 5px;
   padding: 15px;
   width: 100%;
@@ -44,16 +45,16 @@ export const InputContainer = styled.div`
 export const DateButtonContainer = styled.div`
   display: flex;
   gap: 5px;
-  border: ${({ theme }) => theme.color1} solid 2px;
   border-radius: 4px;
-  overflow: hidden;
+  margin-bottom: 10px;
   width: 100%;
+  overflow: hidden;
 `;
 
 export const DateButton = styled.div<{$active: boolean}>`
   flex: 1;
   text-align: center;
-  background-color: ${({ theme, $active }) => $active ? theme.contrastColor : theme.color3};
+  background-color: ${({ theme, $active }) => $active ? theme.contrastColor : theme.darkBackground};
   color: ${({ $active, theme }) => $active ? '#000' :theme.textColor};
   border-radius: 4px;
   padding: 4px 2px;
@@ -63,7 +64,7 @@ export const DateButton = styled.div<{$active: boolean}>`
 export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
-  background-color: ${({ theme }) => theme.color1};
+  background: ${({ theme }) => theme.linearGradient};
   padding: 15px 20px;
   width: 100%;
 `;

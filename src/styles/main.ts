@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Title = styled.h2`
-  margin: 20px 20px 0 20px;
+  margin: 20px;
   font-size: ${({ theme }) => theme.subtitle};
   font-weight: 400;
   font-family: ${({ theme }) => theme.secondaryFont};
@@ -10,4 +10,8 @@ export const Title = styled.h2`
 export const Text = styled.p`
   font-size: ${({ theme }) => theme.normalText};
   color: ${({ theme }) => theme.textColor};
+`;
+
+export const InputLabel = styled.label`
+  font-size: ${({ theme }) => theme.normalText};
 `;

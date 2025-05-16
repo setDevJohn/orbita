@@ -24,12 +24,12 @@ export function NaviGation () {
   }, [location]);
 
   const list = [
-    {  path: '/inicio', label: 'Início', icons: <IoHome size={22}/> },
-    {  path: '/perfil', label: 'Perfil', icons: <FaUser size={22}/> },
-    {  path: '/contas', label: 'Contas', icons: <BsBank2 size={24}/> },
-    {  path: '/cartoes', label: 'Cartões', icons: <BsFillCreditCardFill size={22}/> },
-    {  path: '/categorias', label: 'Categorias', icons: <MdCategory size={26}/> },
-    {  path: '/notificacoes', label: 'Notificações', icons: <IoNotifications size={26}/> },
+    {  path: '/inicio', label: 'Início', icon: (active: boolean) => <IoHome size={22} fill={active ? '#000' : '#fff'}/> },
+    {  path: '/perfil', label: 'Perfil', icon: (active: boolean) => <FaUser size={22} fill={active ? '#000' : '#fff'}/> },
+    {  path: '/contas', label: 'Contas', icon: (active: boolean) => <BsBank2 size={24} fill={active ? '#000' : '#fff'}/> },
+    {  path: '/cartoes', label: 'Cartões', icon: (active: boolean) => <BsFillCreditCardFill size={22} fill={active ? '#000' : '#fff'}/> },
+    {  path: '/categorias', label: 'Categorias', icon: (active: boolean) => <MdCategory size={26} fill={active ? '#000' : '#fff'}/> },
+    {  path: '/notificacoes', label: 'Notificações', icon: (active: boolean) => <IoNotifications size={26} fill={active ? '#000' : '#fff'}/> },
   ];
 
   return (
@@ -53,7 +53,7 @@ export function NaviGation () {
 
         {/* TODO: Limpar context na navegação */}
         <List>
-          {list.map(({ icons, path, label }, i) => (
+          {list.map(({ icon, path, label }, i) => (
             <Item  
               key={i}
               $active={selected.includes(path)}
@@ -63,7 +63,7 @@ export function NaviGation () {
                 setSideBar(false);
               }}
             >
-              {icons} {label}
+              {icon(selected.includes(path))} {label}
             </Item>
           ))}
         </List>

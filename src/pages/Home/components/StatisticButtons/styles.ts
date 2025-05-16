@@ -5,13 +5,12 @@ export const ButtonFilter = styled.button<{$select?: boolean}>`
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background-color: ${({ theme }) => theme.color4};
+  background-color: ${({ theme }) => theme.darkBackground};
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
   border: none;
   border-radius: 5px;
-  outline: ${({ $select, theme }) => $select ? `solid 1px ${theme.color1}` : 'none'};
-  box-shadow: 2px 2px 7px -2px #0004;
+  box-shadow: ${({ $select, theme }) => `2px 2px 7px -1px ${$select ? theme.contrastColor : '#0004'} `};
   padding: 3px 7px;
   min-width: 80px;
 `;
@@ -21,5 +20,5 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   width: 100%;
   gap: 22px;
-  margin-bottom: 15px;
+  margin: 15px 0 30px 0;
 `;
