@@ -1,4 +1,4 @@
-import { Container, Content, Header } from './styles';
+import { Container, Content, Header, Title } from './styles';
 
 interface ILayoutContainer {
   children: React.ReactNode;
@@ -8,7 +8,10 @@ interface ILayoutContainer {
 export function LayoutContainer({ children, title }: ILayoutContainer) {
   return (
     <Container>
-      <Header> {title} </Header>
+      <Header> 
+        <Title> {title} </Title>
+      </Header>
+      
       <Content> {children} </Content>
     </Container>
   );

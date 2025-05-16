@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Title = styled.h2`
+export const Title = styled.h1`
   margin: 20px;
   font-size: ${({ theme }) => theme.subtitle};
   font-weight: 400;
