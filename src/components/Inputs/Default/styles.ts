@@ -1,16 +1,6 @@
 import styled from 'styled-components';
 
-export const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
-
-export const Label = styled.label`
-  font-size: ${({ theme }) => theme.normalText};
-`;
-
-export const SelectStyled = styled.select`
+export const TextInput = styled.input`
   background-color: ${({ theme }) => theme.darkBackground};
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
@@ -19,7 +9,8 @@ export const SelectStyled = styled.select`
   border-radius: 4px;
   box-shadow: 1px 1px 7px -1px #0009;
   padding: 10px 15px;
-`;
 
-export const Option = styled.option`
+  &::placeholder {
+    color: #a29f9f;
+  }
 `;

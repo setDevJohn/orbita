@@ -4,8 +4,8 @@ export const ExtractDate = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: ${({ theme }) => theme.color1};
-  font-size: ${({ theme }) => theme.normalSpan};
+  color: ${({ theme }) => theme.contrastColor};
+  font-size: ${({ theme }) => theme.smallText};
   font-weight: 600;
   margin-bottom: 5px;
 `;
@@ -13,14 +13,14 @@ export const ExtractDate = styled.div`
 export const Line = styled.div`
   width: 100%;
   height: 2px;
-  background-color: ${({ theme }) => theme.color1};
+  background: ${({ theme }) => theme.contrastColor};
 `;
 
 export const ExtractItemContent = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: ${({ theme }) => theme.smallText};
+  font-size: ${({ theme }) => theme.normalText};
   padding: 0 4px;
   margin-bottom: 2px;
 `;

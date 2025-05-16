@@ -92,8 +92,8 @@ export function AccountDetails () {
         </Price>
     
         {showPrice
-          ? <RiEyeCloseFill size={22} onClick={() => setShowPrice(false)} />
-          : <BsFillEyeFill size={22} onClick={() => setShowPrice(true)} />
+          ? <BsFillEyeFill size={22} onClick={() => setShowPrice(false)} />
+          : <RiEyeCloseFill size={22} onClick={() => setShowPrice(true)} />
         }
       </PriceContainer>
     </MainDetails>

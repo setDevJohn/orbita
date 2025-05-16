@@ -174,7 +174,6 @@ export function Register() {
               label='Cartão'
               name='card'
               value={form.card}
-              placeholder='Selecione um cartão'
               handleChange={handleChangeForm}
               options={[]}
             />
@@ -183,7 +182,6 @@ export function Register() {
               label='Conta'
               name='account'
               value={form.account}
-              placeholder='Selecione uma conta'
               handleChange={handleChangeForm}
               options={options.accounts}
             />
@@ -193,15 +191,14 @@ export function Register() {
             label='Categoria'
             name='category'
             value={form.category}
-            placeholder='Selecione uma categoria'
             handleChange={handleChangeForm}
             options={options.categories}
           />
             
           <DateInput
+            label='Date do registro'
             startDate={form.date}
             handleChange={(date) => handleChangeForm('date', date as Date)}
-            placeholder='Selecione uma data'
           />
 
           <ToggleDropdown 
@@ -238,7 +235,6 @@ export function Register() {
                 label='Conta'
                 name='transferAccount'
                 value={form.transferAccount}
-                placeholder='Selecione uma conta'
                 handleChange={handleChangeForm}
                 options={options.accounts.filter(account => account.value !== form.account)}
               />

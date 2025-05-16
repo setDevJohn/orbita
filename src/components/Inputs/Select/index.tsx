@@ -1,4 +1,6 @@
-import { InputContainer, Label, Option, SelectStyled } from './styles';
+import { InputLabel } from 'styles/main';
+
+import { InputContainer, Option, SelectStyled } from './styles';
 
 export interface IOption {
   label: string;
@@ -24,7 +26,7 @@ export function SelectInput({
 }: ISelectInput ){
   return (
     <InputContainer>
-      <Label htmlFor={name}>{label}</Label>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
 
       <SelectStyled
         name={name} 

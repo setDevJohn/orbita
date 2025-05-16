@@ -9,14 +9,3 @@ export const InputContainer = styled.div`
 export const Label = styled.label`
   font-size: ${({ theme }) => theme.normalText};
 `;
-
-export const TextInput = styled.input`
-  background-color: ${({ theme }) => theme.color3};
-  color: ${({ theme }) => theme.textColor};
-  font-size: ${({ theme }) => theme.normalText};
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 2px 2px 8px -1px #0009;
-  padding: 10px 15px;
-`;
