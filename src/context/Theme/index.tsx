@@ -35,7 +35,7 @@ const themeColor = {
   dark : {
     contrastColor: '#1de9b6',
     textColor: '#cecdcd',
-    linearGradient: 'linear-gradient(45deg, #05050d, #165868)',
+    linearGradient: 'linear-gradient(35deg, #05050d, #165868)',
     mainBackground: '#22303c ',
     lightBackground: '#103D4A',
     darkBackground: '#0A212C',
