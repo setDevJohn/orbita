@@ -26,7 +26,7 @@ export function DateInput({
   placeholder,
   isRange = false,
   mode = 'day',
-  label = ''
+  label
 }: IDateInput) {
   const showPickerProps = {
     showWeekNumbers: mode === 'week',
@@ -45,7 +45,7 @@ export function DateInput({
 
   return (
     <DateContainer>
-      <InputLabel>{label}</InputLabel>
+      {label && <InputLabel>{label}</InputLabel> }
 
       <DatePicker
         {...({
