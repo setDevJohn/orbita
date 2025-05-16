@@ -5,6 +5,8 @@ import { BsBank2 } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { IoHome } from 'react-icons/io5';
 import { IoNotifications } from 'react-icons/io5';
+import { LuLogOut } from 'react-icons/lu';
+import { LuSettings } from 'react-icons/lu';
 import { MdCategory } from 'react-icons/md';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -69,8 +71,25 @@ export function NaviGation () {
         </List>
 
         <FooterSideBar>
-          <Item> Configurações </Item>
-          <Item> Sair </Item>
+          <Item
+            onClick={() => {
+              setSelected('/configuracoes');
+              navigate('/configuracoes');
+              setSideBar(false);
+            }}
+          >
+            Configurações
+            <LuSettings size={25}/>
+          </Item>
+
+          <Item
+            onClick={() => {
+              window.alert('Sair da conta');
+            }}
+          >
+            Sair
+            <LuLogOut size={24}/>
+          </Item>
         </FooterSideBar>
       </SideBar>
 
