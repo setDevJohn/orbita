@@ -29,12 +29,13 @@ export function ProjectionComponent () {
           placeholder='Descrição'
           value={filters.description}
           handleChange={handleChange}
+          width='80%'
         />
       
         <DateInput
           startDate={filters.date}
           handleChange={(date) => handleChange('date', date as Date)}
-          placeholder='dd/mm/aaaa'
+          placeholder='dd / mm / aaaa'
         />
       </FilterContainer>
     

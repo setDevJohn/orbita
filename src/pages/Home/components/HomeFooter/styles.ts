@@ -7,7 +7,7 @@ export const Footer = styled.footer`
   align-items: center;
   gap: 45px;
   background: ${({ theme }) => theme.linearGradient};
-  padding: 10px 15px;
+  padding: 7px 15px;
   width: 100%;
 `;
 
@@ -71,7 +71,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   align-items: center;
   background-color: ${({ theme }) => theme.textColor};
   box-shadow: 0px 0px 10px 4px #0004;
-  transform: translateY(-20px);
+  transform: translateY(-22px);
   padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
   border-radius: 25%;
   cursor: pointer;

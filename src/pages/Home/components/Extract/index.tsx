@@ -30,6 +30,7 @@ export function ExtractComponent() {
           placeholder='Descrição'
           value={filters.description}
           handleChange={handleChange}
+          width='80%'
         />
 
         <DateInput

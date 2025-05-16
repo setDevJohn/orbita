@@ -25,7 +25,7 @@ export const SideBar = styled.div<{$open: boolean }>`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.mainBackground};
-  box-shadow: 0px 0px 10px 4px #0004;
+  box-shadow: ${({ $open }) => $open && ' 0px 0px 10px 4px #0004'};
   padding: ${({ $open }) => $open ? '20px 10px' : '0px'};
   transition: all 0.4s ease;
   overflow: hidden;
