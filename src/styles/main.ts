@@ -12,6 +12,7 @@ export const Text = styled.p`
   color: ${({ theme }) => theme.textColor};
 `;
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.label<{$minWidth?: string}>`
   font-size: ${({ theme }) => theme.normalText};
+  min-width: ${({ $minWidth }) => $minWidth ? $minWidth : '120px'};
 `;

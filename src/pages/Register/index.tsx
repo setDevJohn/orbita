@@ -1,5 +1,5 @@
 import { BasicButton } from '@components/Buttons';
-import { DateInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
+import { DateInput, DefaultInput, SelectInput, TextInputWithLabel } from '@components/Inputs';
 import { Mode } from '@components/Inputs/Date';
 import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ToggleDropdown } from './components/ToggleDropdown';
 import { dateButtonList } from './dateButtonList';
-import { Content, DateButton, DateButtonContainer, Footer, InputContainer, Price, PriceContainer } from './styles';
+import { Content, DateButton, DateButtonContainer, Footer, InputContainer, Price, PriceContainer, Separator } from './styles';
 
 type TDateRange = [Date | null, Date | null];
 type TChangeFormValue = string | Date | null | TDateRange;
@@ -152,14 +152,17 @@ export function Register() {
     <LayoutContainer title={pageConfig.title}>
       <Content>
         <PriceContainer>
-          <Price 
+          <DefaultInput 
             type='text'
+            name='price'
+            width='60%'
+            size='28'
             value={mask.currency(form.price)}
-            onChange={({ target :{ value } }) => handleChangeForm('price', value)}
+            handleChange={handleChangeForm}
           />
-
-          {pageConfig.icon}
         </PriceContainer>
+
+        <Separator />
 
         <InputContainer>
           <TextInputWithLabel
@@ -196,7 +199,7 @@ export function Register() {
           />
             
           <DateInput
-            label='Date do registro'
+            label='Data do registro'
             startDate={form.date}
             handleChange={(date) => handleChangeForm('date', date as Date)}
           />
@@ -204,6 +207,7 @@ export function Register() {
           <ToggleDropdown 
             text='Recorrência' 
             clearToggleStorage={clearRecurrenceStorage}
+            customStyle={{ marginTop: '25px' }}
           >
             <DateButtonContainer>
               {dateButtonList.map((item) => (
@@ -223,7 +227,7 @@ export function Register() {
               handleChange={(date) => ( 
                 handleChangeForm('recurrenceDateRange', date as TDateRange)
               )} 
-              placeholder='Periodo'
+              placeholder='Selecione um periodo'
               mode={activeButtonDate}
               isRange
             />
@@ -233,6 +237,7 @@ export function Register() {
             <ToggleDropdown text='Transferência entre contas' noAlign>
               <SelectInput
                 label='Conta'
+                minWidth='80px'
                 name='transferAccount'
                 value={form.transferAccount}
                 handleChange={handleChangeForm}

@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 interface ITextInput {
   $width?: string;
+  $size?: string;
 }
 
 export const TextInput = styled.input<ITextInput>`
-  background-color: ${({ theme }) => theme.darkBackground};
+  background-color: ${({ theme }) => theme.lightBackground};
   color: ${({ theme }) => theme.textColor};
-  font-size: ${({ theme }) => theme.normalText};
+  font-size: ${({ theme, $size }) => $size ? `${$size}px` : theme.normalText };
   outline: none;
   border: none;
   border-radius: 4px;

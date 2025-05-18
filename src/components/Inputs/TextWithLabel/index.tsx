@@ -10,17 +10,26 @@ interface ITextWithLabel {
   value: string;
   handleChange: (name: string, value: string) => void;
   placeholder?: string;
+  labelInColumn?: boolean
 }
 
-export function TextInputWithLabel({ name, value, label, handleChange, placeholder }: ITextWithLabel) {
+export function TextInputWithLabel({ 
+  name,
+  value, 
+  label,
+  handleChange, 
+  placeholder,
+  labelInColumn
+}: ITextWithLabel) {
   return (
-    <InputContainer>
+    <InputContainer $labelInColumn={labelInColumn}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
 
       <DefaultInput 
         name={name}
         type='text'
         value={value}
+        width={'100%'}
         handleChange={handleChange}
         placeholder={placeholder}
       />

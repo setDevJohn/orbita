@@ -37,7 +37,7 @@ const themeColor = {
     textColor: '#cecdcd',
     linearGradient: 'linear-gradient(35deg, #05050d, #165868)',
     mainBackground: '#22303c ',
-    lightBackground: '#103D4A',
+    lightBackground: '#394b54',
     darkBackground: '#0A212C',
     ...commonAttr
   },

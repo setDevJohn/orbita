@@ -1,5 +1,5 @@
 .custom-date-picker {
-  background-color: #0A212C;
+  background-color: #394b54;
   color: #cecdcd;
   font-size: 16px;
   text-align: center;
@@ -12,6 +12,10 @@
 }
 
 .custom-date-picker::placeholder {
-    color: #a29f9f;
+  color: #a29f9f;
   text-align: start;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }

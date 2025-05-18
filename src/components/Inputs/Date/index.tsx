@@ -17,6 +17,7 @@ interface IDateInput {
   isRange?: boolean;
   mode?: Mode;
   label?: string
+  labelInColumn?: boolean
 }
 
 export function DateInput({
@@ -26,7 +27,8 @@ export function DateInput({
   placeholder,
   isRange = false,
   mode = 'day',
-  label
+  label,
+  labelInColumn,
 }: IDateInput) {
   const showPickerProps = {
     showWeekNumbers: mode === 'week',
@@ -44,7 +46,7 @@ export function DateInput({
           : 'dd/MM/yyyy';
 
   return (
-    <DateContainer>
+    <DateContainer $labelInColumn={labelInColumn}>
       {label && <InputLabel>{label}</InputLabel> }
 
       <DatePicker

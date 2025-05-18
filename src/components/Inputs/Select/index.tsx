@@ -13,7 +13,10 @@ interface ISelectInput {
   value: string;
   options: IOption[];
   handleChange: (name: string, value: string) => void;
+  minWidth?: string;
   placeholder?: string;
+  labelInColumn?: boolean;
+  darkBackground?: boolean;
 }
 
 export function SelectInput({ 
@@ -22,16 +25,20 @@ export function SelectInput({
   value,
   options,
   handleChange,
-  placeholder
+  minWidth,
+  placeholder,
+  labelInColumn,
+  darkBackground,
 }: ISelectInput ){
   return (
-    <InputContainer>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
+    <InputContainer $labelInColumn={labelInColumn}>
+      <InputLabel $minWidth={minWidth} htmlFor={name}>{label}</InputLabel>
 
-      <SelectStyled
+      <SelectStyled 
         name={name} 
         value={value || ''}
         onChange={({ target :{ value, name } }) => handleChange(name, value)}
+        $darkBackground={darkBackground}
       >
         {placeholder && <Option value="">{placeholder}</Option>}
 

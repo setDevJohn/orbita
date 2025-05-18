@@ -1,17 +1,20 @@
-import styled from 'styled-components';
+import styled, {  CSSObject } from 'styled-components';
 
-export const ToggleDropdownContainer = styled.div`
+export const ToggleDropdownContainer = styled.div<{$customStyle?: CSSObject}>`
   display: flex;
   flex-direction: column;
   gap: 5px;
   width: 100%;
+
+  ${({ $customStyle }) => $customStyle && $customStyle}
 `;
 
 export const ToggleContainer = styled.div`
   display: flex;
+  gap: 10px;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 5px 10px;
   width: 100%;
 `;
 
@@ -29,4 +32,10 @@ export const DropContainer = styled.div<{$noAlign: boolean}>`
   flex-direction: column;
   align-items: ${({ $noAlign }) => $noAlign ? 'unset' : 'center'};
   margin: 18px 8px;
+`;
+
+export const Separator = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: ${({ theme }) => theme.darkBackground};
 `;

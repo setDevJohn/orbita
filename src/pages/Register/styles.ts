@@ -12,32 +12,23 @@ export const Content = styled.div`
 export const PriceContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
   width: 100%;
 `;
 
-export const Price = styled.input`
-  background-color: transparent;
-  color: ${({ theme }) => theme.textColor};
-  font-size: ${({ theme }) => theme.bigTitle};
-  border: none;
-  outline: none;
-  border-bottom: ${({ theme }) => `2px solid ${theme.contrastColor}`};
-  padding-left: 15px;
-  max-width: 200px; 
+export const Separator = styled.div`
+  width: 95%;
+  height: 2px;
+  box-shadow: 1px 1px 7px -1px #0009;
+  background-color: ${({ theme }) => theme.darkBackground};
+  margin: 30px auto;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 15px;
-  border: ${({ theme }) => `${theme.darkBackground} solid 1px`};
-  box-shadow: 1px 1px 7px -1px #0009;
-  border-radius: 5px;
-  padding: 15px;
+  gap: 20px;
+  padding: 0 7px;
   width: 100%;
   overflow: auto;
 `;

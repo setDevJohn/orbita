@@ -1,14 +1,16 @@
 import { ToggleButton } from '@components/Buttons';
 import { ReactNode, useState } from 'react';
+import { CSSObject } from 'styled-components';
 import { Text } from 'styles/main';
 
-import { DropContainer, Dropdown, ToggleContainer, ToggleDropdownContainer } from './styles';
+import { DropContainer, Dropdown, Separator, ToggleContainer, ToggleDropdownContainer } from './styles';
 
 interface IToggleDropdown {
   text: string;
   children: ReactNode;
   clearToggleStorage?: () => void;
   noAlign?: boolean;
+  customStyle?: CSSObject;
 }
 
 export function ToggleDropdown({ 
@@ -16,6 +18,7 @@ export function ToggleDropdown({
   children,
   clearToggleStorage,
   noAlign = false,
+  customStyle
 }: IToggleDropdown) {
   const [toggleStatus, setToggleStatus] = useState<boolean>(false);
 
@@ -25,7 +28,7 @@ export function ToggleDropdown({
   }
 
   return (
-    <ToggleDropdownContainer>
+    <ToggleDropdownContainer $customStyle={customStyle}>
       <ToggleContainer>
         <Text>{ text }</Text>
     
@@ -40,6 +43,8 @@ export function ToggleDropdown({
           { children }
         </DropContainer>
       </Dropdown>
+
+      <Separator />
     </ToggleDropdownContainer>
   );
 }
