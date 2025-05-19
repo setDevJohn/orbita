@@ -8,11 +8,13 @@ export interface ITheme {
   mainBackground: string
   lightBackground: string
   darkBackground: string
+  buttonColor: string
   primaryFont: string
   secondaryFont: string
   bigTitle: string
   title: string,
   subtitle: string,
+  bigText: string,
   normalText: string,
   smallText: string,
   normalSpan: string,
@@ -25,6 +27,7 @@ const commonAttr = {
   bigTitle: '28px',
   title: '24px',
   subtitle: '20px',
+  bigText: '18px',
   normalText: '16px',
   smallText: '14px',
   normalSpan: '13px',
@@ -39,6 +42,7 @@ const themeColor = {
     mainBackground: '#22303c ',
     lightBackground: '#394b54',
     darkBackground: '#0A212C',
+    buttonColor: '#0C3A46',
     ...commonAttr
   },
   light: {
@@ -48,6 +52,7 @@ const themeColor = {
     mainBackground: '#CFCFCF',
     lightBackground: '#CFCFCF',
     darkBackground: '#535358',
+    buttonColor: '#CFCFCF',
     ...commonAttr
   },
 };
