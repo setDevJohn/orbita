@@ -13,7 +13,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ToggleDropdown } from './components/ToggleDropdown';
 import { dateButtonList } from './dateButtonList';
-import { Content, DateButton, DateButtonContainer, Footer, InputContainer, Price, PriceContainer, Separator } from './styles';
+import { 
+  Content, 
+  DateButton, 
+  DateButtonContainer, 
+  Footer, 
+  InputContainer, 
+  PriceContainer, 
+  Separator 
+} from './styles';
 
 type TDateRange = [Date | null, Date | null];
 type TChangeFormValue = string | Date | null | TDateRange;
