@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
   padding: 30px 15px 15px 15px;
   width: 100%;
   overflow: auto;
@@ -55,7 +54,6 @@ export const DateButton = styled.div<{$active: boolean}>`
 export const Footer = styled.footer`
   display: flex;
   justify-content: space-around;
-  background: ${({ theme }) => theme.linearGradient};
-  padding: 15px 20px;
+  padding: 20px;
   width: 100%;
 `;

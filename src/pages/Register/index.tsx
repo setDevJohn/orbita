@@ -169,6 +169,7 @@ export function Register() {
             value={form.description}
             label='Descrição'
             name='description'
+            placeholder='Transação xyz'
             handleChange={handleChangeForm}
           />
 
@@ -177,6 +178,7 @@ export function Register() {
               label='Cartão'
               name='card'
               value={form.card}
+              placeholder='Selecione um catão'
               handleChange={handleChangeForm}
               options={[]}
             />
@@ -185,6 +187,7 @@ export function Register() {
               label='Conta'
               name='account'
               value={form.account}
+              placeholder='Selecione uma conta'
               handleChange={handleChangeForm}
               options={options.accounts}
             />
@@ -194,6 +197,7 @@ export function Register() {
             label='Categoria'
             name='category'
             value={form.category}
+            placeholder='Selecione uma categoria'
             handleChange={handleChangeForm}
             options={options.categories}
           />
@@ -201,6 +205,7 @@ export function Register() {
           <DateInput
             label='Data do registro'
             startDate={form.date}
+            placeholder='dd / mm / aaaa'
             handleChange={(date) => handleChangeForm('date', date as Date)}
           />
 
@@ -240,6 +245,7 @@ export function Register() {
                 minWidth='80px'
                 name='transferAccount'
                 value={form.transferAccount}
+                placeholder='Selecione uma conta'
                 handleChange={handleChangeForm}
                 options={options.accounts.filter(account => account.value !== form.account)}
               />
