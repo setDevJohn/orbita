@@ -23,6 +23,9 @@ export function MainComponent() {
   const [cardList, setCardList] = useState<ICardsResponse[]>([]);
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
 
+  console.log(loading);
+  console.log(cardList);
+   
   function handleDetailsCard(id: number) {
     if (cardIdInDetails === id) { return setCardIdInDetails(null); } 
     setCardIdInDetails(id);

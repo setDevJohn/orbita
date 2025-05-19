@@ -64,6 +64,8 @@ export function Register() {
   const [options, setOptions] = useState<IOptions>(optionsValue);
   const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
 
+  console.log(loading);
+
   const { type } = useParams();
   const navigate = useNavigate();
 
