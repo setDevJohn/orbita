@@ -15,7 +15,7 @@ const date = (value: string) => {
 
   value = value.replace(/[^\d/]/g, '');
 
-  return value.slice(0, 11);
+  return value.slice(0, 10);
 };
 
 export const mask = {
