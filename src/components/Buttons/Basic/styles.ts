@@ -11,17 +11,19 @@ export const ButtonStyled = styled.button<IButtonsStyled>`
   align-items: center;
   gap: 5px;
   background-color: ${({ theme, $type }) =>  (
-    $type === 'cancel' ? '#b43426' : $type === 'confirm' ? '#288573' : theme.darkBackground
+    $type === 'cancel' ? '#b43426' : $type === 'confirm' ? '#288573' : theme.buttonColor
   )};
   color: ${({ theme }) => theme.textColor};
   text-align: center;
-  font-size: ${({ theme }) => theme.normalText};
+  font-family: ${({ theme }) => theme.secondaryFont};
+  font-size: ${({ theme }) => theme.bigText};
+  font-weight: 500;
   border: none;
   border-radius: 5px;
   box-shadow: 1px 1px 7px -1px #0004;
-  padding: 8px 15px;
-  min-width: 110px;
+  padding: 8px 20px;
   cursor: pointer;
+  min-width: 110px;
   transition: transform 0.4s ease;
   
   ${({ $custonStyle }) => css`${$custonStyle}`};
