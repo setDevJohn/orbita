@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'react-datepicker/dist/react-datepicker.css';
 import { mask } from '@utils/mask';
 import { ptBR } from 'date-fns/locale';
