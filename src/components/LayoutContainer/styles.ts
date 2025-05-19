@@ -27,8 +27,9 @@ export const Title = styled.h1`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
-  padding-top: 15px;
+  padding-top: 30px;
   width: 100%;
   overflow: auto;
 `;
