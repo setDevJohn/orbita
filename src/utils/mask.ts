@@ -10,7 +10,16 @@ const currencyToDecimal = (value: string) => {
   return Number(value) / 100;
 };
 
+const date = (value: string) => {
+  value = value.replace(/ /g, '/');
+
+  value = value.replace(/[^\d/]/g, '');
+
+  return value.slice(0, 11);
+};
+
 export const mask = {
   currency,
-  currencyToDecimal
+  currencyToDecimal,
+  date,
 };
