@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'react-datepicker/dist/react-datepicker.css';
+import { mask } from '@utils/mask';
 import { ptBR } from 'date-fns/locale';
+import { FormEvent } from 'react';
 import DatePicker from 'react-datepicker';
 import './styles.css';
 import { InputLabel } from 'styles/main';
@@ -54,6 +55,10 @@ export function DateInput({
           className: 'custom-date-picker',
           selected: startDate,
           onChange: handleChange,
+          onChangeRaw: (e: FormEvent<HTMLInputElement>) => {
+            const input = e.target as HTMLInputElement;
+            input.value = mask.date(input.value);
+          },
           startDate: isRange ? startDate : undefined,
           endDate: isRange ? endDate : undefined,
           selectsRange: isRange ? true : undefined,
