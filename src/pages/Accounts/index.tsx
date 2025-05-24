@@ -65,7 +65,7 @@ export function Accounts() {
         fields={fieldsForm}
       />
 
-      {loading && <LoadingPage />}
+      {!loading && <LoadingPage />}
     </LayoutContainer>
   );
 }

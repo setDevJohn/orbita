@@ -2,6 +2,7 @@ import { CardList } from '@components/CardList';
 import { ExtractList } from '@components/Extract/List';
 import { cardsApi } from '@services/cards';
 import { ICardsResponse } from '@services/cards/interface';
+import { toastError } from '@utils/toast';
 import { useEffect, useState } from 'react';
 import { Title } from 'styles/main';
 
@@ -21,8 +22,7 @@ export function MainComponent() {
         const response = await cardsApi.get();
         setCardList(response);
       } catch (err) {
-        console.error((err as Error).message);
-        // toastError((err as Error).message);
+        toastError((err as Error).message);
       } finally {
         setLoading(false);
       }

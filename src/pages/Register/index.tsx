@@ -6,6 +6,7 @@ import { LayoutContainer } from '@components/LayoutContainer';
 import { accountsApi } from '@services/accounts';
 import { categoriesApi } from '@services/categories';
 import { mask } from '@utils/mask';
+import { toastError } from '@utils/toast';
 import { useEffect, useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
@@ -87,8 +88,7 @@ export function Register() {
         });
 
       } catch (err) {
-        console.error((err as Error).message);
-        // toastError((err as Error).message);
+        toastError((err as Error).message);
       } finally {
         setLoading(false);
       }
