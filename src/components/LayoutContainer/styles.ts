@@ -24,12 +24,16 @@ export const Title = styled.h1`
   font-weight: 400;
 `;
 
+export const Overflow = styled.div`
+  flex: 1;
+  width: 100%;
+  padding: 20px;
+  overflow: auto;
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  padding-top: 30px;
   width: 100%;
-  overflow: auto;
 `;
