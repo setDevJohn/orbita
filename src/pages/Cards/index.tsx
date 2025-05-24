@@ -28,6 +28,7 @@ export function Cards() {
     const fetchData = async () => {
       try {
         setLoading(true);
+        setCardList([]);
       } catch (err) {
         toastError((err as Error).message);
       } finally {
