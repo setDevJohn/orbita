@@ -4,12 +4,6 @@ const currency = (value: string) => {
   return `R$ ${(+value / 100).toFixed(2).replace('.', ',')}`;
 };
 
-const currencyToDecimal = (value: string) => {
-  value = value.replace(/\D/g, '');
-
-  return Number(value) / 100;
-};
-
 const date = (value: string) => {
   value = value.replace(/ /g, '/');
 
@@ -20,6 +14,5 @@ const date = (value: string) => {
 
 export const mask = {
   currency,
-  currencyToDecimal,
   date,
 };
