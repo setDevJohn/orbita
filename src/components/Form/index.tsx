@@ -3,7 +3,7 @@ import { SelectInput, TextInputWithLabel } from '@components/Inputs';
 
 import { FormContainer, FormStyled, FormTitle } from './styles';
 
-type InoputProps = {
+export type FieldsProps = {
   type: 'default' | 'select' | 'date';
   name: string;
   value: string;
@@ -16,11 +16,11 @@ type InoputProps = {
 
 interface IForm {
   onSubmit: () => void;
-  inputs: InoputProps[];
+  fields: FieldsProps[];
   title?: string;
 }
 
-export function Form({ title, onSubmit, inputs }: IForm) {
+export function Form({ title, onSubmit, fields }: IForm) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export function Form({ title, onSubmit, inputs }: IForm) {
       {title && <FormTitle>{title}</FormTitle>}
       
       <FormStyled onSubmit={handleSubmit}>
-        {inputs.map((input, i) => {
+        {fields.map((input, i) => {
           if (input.type === 'default') {
             return (
               <TextInputWithLabel
