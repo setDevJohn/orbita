@@ -33,9 +33,3 @@ export const DropContainer = styled.div<{$noAlign: boolean}>`
   align-items: ${({ $noAlign }) => $noAlign ? 'unset' : 'center'};
   margin: 18px 8px;
 `;
-
-export const Separator = styled.div`
-  width: 100%;
-  height: 2px;
-  background-color: ${({ theme }) => theme.darkBackground};
-`;

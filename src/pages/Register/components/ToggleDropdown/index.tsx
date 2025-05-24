@@ -1,9 +1,9 @@
 import { ToggleButton } from '@components/Buttons';
 import { ReactNode, useState } from 'react';
 import { CSSObject } from 'styled-components';
-import { Text } from 'styles/main';
+import { Separator, Text } from 'styles/main';
 
-import { DropContainer, Dropdown, Separator, ToggleContainer, ToggleDropdownContainer } from './styles';
+import { DropContainer, Dropdown, ToggleContainer, ToggleDropdownContainer } from './styles';
 
 interface IToggleDropdown {
   text: string;
