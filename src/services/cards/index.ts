@@ -1,12 +1,12 @@
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { ICardsResponse } from './interface';
+import { CardFormPayload, ICardsResponse } from './interface';
 
-async function create () {
+async function create (data: CardFormPayload) {
   try {
-    const { data } = await api.post('/cards');
-    return data.resource;
+    const { data: response } = await api.post('/cards', data);
+    return response.resource;
   } catch (err) {
     handlerAxiosError(err);
   }
