@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { Container, Content, Header, Overflow, Title } from './styles';
 
 interface ILayoutContainer {
@@ -5,16 +7,17 @@ interface ILayoutContainer {
   title?: string;
 }
 
-export function LayoutContainer({ children, title }: ILayoutContainer) {
-  return (
-    <Container>
-      <Header> 
-        <Title> {title} </Title>
-      </Header>
-      
-      <Overflow>
-        <Content> {children} </Content>
-      </Overflow>
-    </Container>
-  );
-}
+export const LayoutContainer = forwardRef<HTMLDivElement, ILayoutContainer>(
+  ({ children, title }, ref) => {
+    return (
+      <Container>
+        <Header>
+          <Title> {title} </Title>
+        </Header>
+        <Overflow ref={ref}>
+          <Content> {children} </Content>
+        </Overflow>
+      </Container>
+    );
+  }
+);
