@@ -14,6 +14,7 @@ export const Card = styled.li<{$details: boolean; $color: string}>`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: ${({ $color }) => $color};;
   border-radius: 10px;
   box-shadow: 2px 2px 7px -2px #0004;
@@ -23,6 +24,11 @@ export const Card = styled.li<{$details: boolean; $color: string}>`
   height: ${({ $details }) => $details ? '157px': '58px' };
   width: 100%;
   cursor: pointer;
+
+  &:hover > div.edit-background {
+    /* height: ${({ $details }) => $details && '100%'}; */
+    height: 100%;
+  }
 `;
 
 export const CardHeader = styled.div`
@@ -78,4 +84,19 @@ export const RecentExtract = styled.div`
   flex-direction: column;
   gap: 15px;
   margin: 10px 20px 23px 20px;
+`;
+
+export const EditBackgroundFocus = styled.div<{$open: boolean}>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0004;
+  transition: all 0.4s ease;
+  opacity: ${({ $open }) => $open ? '1' : '0'};
+  pointer-events: ${({ $open }) => $open ? 'all' : 'none'};
+  width: 100%;
+  height: 100%;
 `;

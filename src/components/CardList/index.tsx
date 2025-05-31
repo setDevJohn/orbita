@@ -1,4 +1,7 @@
+import { CardRaw } from '@services/cards/interface';
+import { mask } from '@utils/mask';
 import { useState } from 'react';
+import { FaEdit } from 'react-icons/fa';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 import { 
@@ -6,89 +9,81 @@ import {
   CardFooter, 
   CardHeader,
   CardListContainer,
+  EditBackgroundFocus,
   IconCardContainer, 
-  InvoiceSpan,
-  InvoiceValue,
+  // InvoiceSpan,
+  // InvoiceValue',
   TextCard,
   TextCardSpan
 } from './styles';
 
-export const CardList = () => {
+interface ICardList {
+  cardList: CardRaw[];
+  editMode?: boolean;
+  editFunction?: (card: CardRaw) => void
+}
+
+export const CardList = ({ cardList, editMode, editFunction }: ICardList) => {
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
-
-  const temporaryCardList = [
-    { 
-      id: 1,
-      name: 'nuBank',
-      limit: '1000,00',
-      invoice: '1500,00',
-      color: '#820AD1',
-      closing: '26',
-      dueDate: '30',
-    },
-    { 
-      id: 2,
-      name: 'C6',
-      limit: '1200,00',
-      invoice: '1000,00',
-      color: '#121212',
-      closing: '24',
-      dueDate: '28',
-    },
-    { 
-      id: 3,
-      name: 'Mercado Pago',
-      limit: '2000,00',
-      invoice: '890,50',
-      color: '#009EE3',
-      closing: '20',
-      dueDate: '25',
-    },
-  ];
-
+  
   function handleDetailsCard(id: number) {
     if (cardIdInDetails === id) { return setCardIdInDetails(null); } 
     setCardIdInDetails(id);
   }
 
+  { /* TODO: Calcular cores de cartõtes  */ }
+  { /* TODO: Calcular cores de contrastes  */ }
   return (
     <CardListContainer>
-      {temporaryCardList.map(card => (
+      {cardList.map(card => (
         <Card
           key={card.id}
-          $color={card.color}
+          $color={'#394b54'}
           $details={cardIdInDetails === card.id}
           onClick={() => handleDetailsCard(card.id)}
         >
           <CardHeader>
             <TextCard $name>{card.name}</TextCard>
             <TextCard $column>
-              <TextCardSpan>limite disponível</TextCardSpan> {`R$ ${card.limit}`}
+              <TextCardSpan>limite disponível</TextCardSpan> 
+              {mask.brlCurrency(card.creditLimit.toString())}
             </TextCard>
           </CardHeader>
 
-          <InvoiceValue>
+          {/* TODO: Adicionar campo para fatura */}
+          {/* <InvoiceValue>
             {`R$ ${card.invoice}`}
             <InvoiceSpan>
                 fatura aberta
             </InvoiceSpan>
-          </InvoiceValue>
+          </InvoiceValue> */}
 
           <CardFooter>
             <TextCard $column>
-              {`dia ${card.closing}`}
               <TextCardSpan>fechamento</TextCardSpan>
+              {`dia ${card.closingDay.toString().padStart(2, '0')}`}
             </TextCard>
 
             <TextCard $column>
-              {`dia ${card.dueDate}`}
               <TextCardSpan>vencimento</TextCardSpan>
+              {`dia ${card.dueDay.toString().padStart(2, '0')}`}
             </TextCard>
           </CardFooter>
 
           <IconCardContainer $details={cardIdInDetails === card.id}>
             <IoMdArrowDropdown size={28} style={{ margin: 'auto' }}/>
           </IconCardContainer>
+
+          <EditBackgroundFocus $open={cardIdInDetails === card.id && !!editMode}>
+            <FaEdit size={30} onClick={(e) => {
+              e.stopPropagation();
+
+              if (editFunction) { 
+                editFunction(card);
+                setCardIdInDetails(null);
+              }
+            }}/>
+          </EditBackgroundFocus>
         </Card>
       ))}
     </CardListContainer>
