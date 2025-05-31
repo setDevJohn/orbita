@@ -1,18 +1,18 @@
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { ICategoriesResponse } from './interface';
+import { CategoriesListResponse, CategoryFormPayload } from './interface';
 
-async function create () {
+async function create ({ name } : CategoryFormPayload) {
   try {
-    const { data } = await api.post('/categories');
+    const { data } = await api.post('/categories', { name });
     return data.resource;
   } catch (err) {
     handlerAxiosError(err);
   }
 }
 
-async function get (): Promise<ICategoriesResponse[]> {
+async function get (): Promise<CategoriesListResponse> {
   try {
     const { data } = await api.get('/categories');
     return data.resource;
