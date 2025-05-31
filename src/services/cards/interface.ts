@@ -1,4 +1,4 @@
-interface CardRaw {
+export interface CardRaw {
   id: number;
   name: string;
   creditLimit: number;
@@ -8,10 +8,4 @@ interface CardRaw {
 
 export type CardFormPayload = Omit<CardRaw, 'id'>
 
-export interface ICardsResponse {
-  id: number;
-  name: string;
-  creditLimit: number ;
-  closingDay: number;
-  dueday: number; 
-}
+export type UpdateCardPayload = CardRaw;

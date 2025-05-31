@@ -1,7 +1,7 @@
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { CardFormPayload, ICardsResponse } from './interface';
+import { CardFormPayload, CardRaw, UpdateCardPayload } from './interface';
 
 async function create (data: CardFormPayload) {
   try {
@@ -12,7 +12,16 @@ async function create (data: CardFormPayload) {
   }
 }
 
-async function get (): Promise<ICardsResponse[]> {
+async function update (data: UpdateCardPayload) {
+  try {
+    const { data: response } = await api.patch('/cards', data);
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function get (): Promise<CardRaw[]> {
   try {
     const { data } = await api.get('/cards');
     return data.resource;
@@ -23,5 +32,6 @@ async function get (): Promise<ICardsResponse[]> {
 
 export const cardsApi = {
   create,
+  update,
   get,
 };
