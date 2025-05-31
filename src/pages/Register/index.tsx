@@ -5,6 +5,7 @@ import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { accountsApi } from '@services/accounts';
 import { categoriesApi } from '@services/categories';
+import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastError } from '@utils/toast';
 import { useEffect, useState } from 'react';
@@ -143,7 +144,7 @@ export function Register() {
     const payload = {
       name: form.description,
       type: pageConfig!.title === 'Receitas' ? 'income' : 'expense',
-      amount: mask.currencyToDecimal(form.price),
+      amount: format.currencyToDecimal(form.price),
       transactionDate: form.date?.toJSON(),
       source: form.account ? 'account' : 'card',
       categoryId: Number(form.category) || null,
