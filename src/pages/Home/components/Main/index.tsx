@@ -1,7 +1,7 @@
 import { CardList } from '@components/CardList';
 import { ExtractList } from '@components/Extract/List';
 import { cardsApi } from '@services/cards';
-import { ICardsResponse } from '@services/cards/interface';
+import { CardRaw } from '@services/cards/interface';
 import { toastError } from '@utils/toast';
 import { useEffect, useState } from 'react';
 import { Title } from 'styles/main';
@@ -10,7 +10,7 @@ import { extractDateList } from './extractDateList';
 
 export function MainComponent() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [cardList, setCardList] = useState<ICardsResponse[]>([]);
+  const [cardList, setCardList] = useState<CardRaw[]>([]);
 
   console.log(loading);
   console.log(cardList);
@@ -32,7 +32,7 @@ export function MainComponent() {
 
   return (
     <>
-      <CardList />
+      <CardList cardList={[]} />
 
       <Title>Últimas transações</Title>
 
