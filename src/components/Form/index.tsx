@@ -1,7 +1,7 @@
 import { BasicButton } from '@components/Buttons';
 import { SelectInput, TextInputWithLabel } from '@components/Inputs';
 
-import { FormContainer, FormStyled, FormTitle } from './styles';
+import { ButtonsContainer, FormContainer, FormStyled, FormTitle } from './styles';
 
 export type FieldsProps = {
   type: 'default' | 'select' | 'date';
@@ -18,19 +18,20 @@ interface IForm {
   onSubmit: () => void;
   fields: FieldsProps[];
   title?: string;
+  cancelFunction?: () => void;
 }
 
-export function Form({ title, onSubmit, fields }: IForm) {
+export function Form({ onSubmit, fields, title, cancelFunction }: IForm) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
   };
 
-  return (
+  return ( 
     <FormContainer>
       {title && <FormTitle>{title}</FormTitle>}
-      
+
       <FormStyled onSubmit={handleSubmit}>
         {fields.map((input, i) => {
           if (input.type === 'default') {
@@ -63,8 +64,22 @@ export function Form({ title, onSubmit, fields }: IForm) {
           }
         })}
 
-        <BasicButton text='Salvar' custonStyle={{ width: '80%', margin: '0 auto' }} />
+        <ButtonsContainer>
+          { cancelFunction && (
+            <BasicButton 
+              type="cancel"
+              text="Cancelar"
+              action={cancelFunction}
+              custonStyle={{ width: '70%' }}
+            />
+          )}
+            
+          <BasicButton
+            text="Salvar"
+            custonStyle={{ width: '70%' }}
+          />
+        </ButtonsContainer>
       </FormStyled>
     </FormContainer>
-  );  
+  );
 }

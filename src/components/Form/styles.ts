@@ -26,3 +26,11 @@ export const FormTitle = styled.h2`
   font-weight: 400;
   margin-bottom: 10px;
 `;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+`;
