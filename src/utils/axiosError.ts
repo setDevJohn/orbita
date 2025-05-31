@@ -19,7 +19,7 @@ function axiosMessage (error: unknown): string {
 
 export function handlerAxiosError (error: unknown): never {
   if (error instanceof AxiosError) {
-    if (error.response) {
+    if (error.response?.data?.message) {
       throw new Error(error.response.data.message);
     } else {
       throw new Error(axiosMessage(error.message));
