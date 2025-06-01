@@ -88,7 +88,6 @@ export function Cards() {
 
         await cardsApi.update({ ...payload, id: form.id });
         toastSuccess('Cartão atualizado com sucesso.');
-        setEditMode(false);
       } else {
         await cardsApi.create(payload);
         toastSuccess('Cartão cadastrado com sucesso.');

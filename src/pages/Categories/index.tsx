@@ -2,6 +2,7 @@ import { BasicButton } from '@components/Buttons';
 import { FieldsProps, Form } from '@components/Form';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
+import { ConfirmationModal } from '@components/Modals';
 import { categoriesApi } from '@services/categories';
 import { CategoryRaw } from '@services/categories/interface';
 import { toastError, toastSuccess, toastWarn } from '@utils/toast';
@@ -22,6 +23,11 @@ export function Categories() {
   const [reloadList, setReloadList] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [removeModal, setRemoveModal] = useState(false);
+  const [categoryToRemove, setCategoryToRemove] = useState<{
+    id: number; 
+    name: string
+  } | null>(null);
   const [categories, setCategories] = useState<CategoryRaw[]>([]);
   const [form, setForm] = useState<IForm>({
     name: '',
@@ -93,6 +99,25 @@ export function Categories() {
     setEditMode(true);
   };
 
+  const handleRemove = async () => {
+    try {
+      setLoading(true);
+
+      if (!categoryToRemove?.id) {
+        return toastError('Erro ao remover a categoria.');
+      }
+
+      await categoriesApi.remove(categoryToRemove.id);
+      reloadComponent();
+      setRemoveModal(false);
+      toastSuccess('Categoria removida com sucesso');
+    } catch (err) {
+      toastError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fieldsForm: FieldsProps[] = [
     {
       type: 'default',
@@ -147,15 +172,31 @@ export function Categories() {
                 custonStyle={{ minWidth: 'unset' }}
                 action={() => handleEdit({ id, name })}
               />
+
               <BasicButton
                 type='cancel'
                 icon={<IoTrashOutline size={20} fill="#fff" />}
                 custonStyle={{ minWidth: 'unset' }}
+                action={() => {
+                  setCategoryToRemove({ id, name });
+                  setRemoveModal(true);
+                }}
               />
             </ButtonsContainer>
           </CategoryCard>
         ))}
       </CategoriesList>
+
+      {removeModal && (
+        <ConfirmationModal 
+          cancelAction={() => setRemoveModal(false)}
+          confirmAction={handleRemove}
+          text={`
+            Deseja realmente excluir essa categoria?
+            (${categoryToRemove?.name})
+          `}
+        />
+      )}
 
       {loading && <LoadingPage />}
     </LayoutContainer>

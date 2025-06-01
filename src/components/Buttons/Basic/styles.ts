@@ -11,7 +11,7 @@ export const ButtonStyled = styled.button<IButtonsStyled>`
   align-items: center;
   gap: 5px;
   background-color: ${({ theme, $type }) =>  (
-    $type === 'cancel' ? '#b43426' : $type === 'confirm' ? '#288573' : theme.buttonColor
+    $type === 'cancel' ? '#8b2d23' : $type === 'confirm' ? '#288573' : theme.buttonColor
   )};
   color: ${({ theme }) => theme.textColor};
   text-align: center;

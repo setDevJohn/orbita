@@ -21,6 +21,15 @@ async function update (data : CategoryFormPayload) {
   }
 }
 
+async function remove (categoryId: number) {
+  try {
+    await api.delete(`/categories/${categoryId}`);
+  } catch (err) {
+    console.log(err);
+    handlerAxiosError(err);
+  }
+}
+
 async function get (): Promise<CategoriesListResponse> {
   try {
     const { data } = await api.get('/categories');
@@ -33,5 +42,6 @@ async function get (): Promise<CategoriesListResponse> {
 export const categoriesApi = {
   create,
   update,
+  remove,
   get,
 };
