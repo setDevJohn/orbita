@@ -3,6 +3,7 @@ import { CardList } from '@components/CardList';
 import { FieldsProps, Form } from '@components/Form';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
+import { ConfirmationModal } from '@components/Modals';
 import { cardsApi } from '@services/cards';
 import { CardRaw } from '@services/cards/interface';
 import { format } from '@utils/format';
@@ -25,6 +26,11 @@ export function Cards() {
   const [reloadList, setReloadList] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  const [removeModal, setRemoveModal] = useState(false);
+  const [cardToRemove, setCardToRemove] = useState<{
+    id: number;
+    name: string;
+  } | null>(null);
   const [form, setForm] = useState<IForm>({
     name: '',
     creditLimit: '',
@@ -102,7 +108,7 @@ export function Cards() {
     }
   };
 
-  const handleEdit = (card: CardRaw) => {
+  const editFunction = (card: CardRaw) => {
     setForm({
       id: card.id,
       name: card.name,
@@ -113,6 +119,28 @@ export function Cards() {
     setEditMode(true);
     setOpenForm(true);
     contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const removeFunction = (card: CardRaw) => {
+    setCardToRemove({ id: card.id, name: card.name });
+    setRemoveModal(true);
+  };
+
+  const handleRemove = async () => {
+    if (!cardToRemove?.id) { return toastError('Erro ao remover o cartão.'); }
+
+    try {
+      setLoading(false);
+      
+      await cardsApi.remove(cardToRemove.id);
+      reloadComponent();
+      setRemoveModal(false);
+      toastSuccess('Cartão removido com sucesso.');
+    } catch (err) {
+      toastError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fieldsForm: FieldsProps[] = [
@@ -188,8 +216,20 @@ export function Cards() {
       <CardList 
         editMode 
         cardList={cardList}
-        editFunction={handleEdit}
+        editFunction={editFunction}
+        removeFunction={removeFunction}
       />
+
+      {removeModal && (
+        <ConfirmationModal
+          cancelAction={() => setRemoveModal(false)}
+          confirmAction={handleRemove}
+          text={`
+            Deseja realmente excluir esse cartão?
+            (${cardToRemove?.name})
+          `}
+        />
+      )}
 
       {loading && <LoadingPage />}
     </LayoutContainer>

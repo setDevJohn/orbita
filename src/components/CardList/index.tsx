@@ -3,6 +3,7 @@ import { mask } from '@utils/mask';
 import { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { IoTrashOutline } from 'react-icons/io5';
 
 import { 
   Card, 
@@ -21,9 +22,15 @@ interface ICardList {
   cardList: CardRaw[];
   editMode?: boolean;
   editFunction?: (card: CardRaw) => void
+  removeFunction?: (card: CardRaw) => void
 }
 
-export const CardList = ({ cardList, editMode, editFunction }: ICardList) => {
+export const CardList = ({ 
+  cardList,
+  editMode,
+  editFunction,
+  removeFunction
+}: ICardList) => {
   const [cardIdInDetails, setCardIdInDetails] = useState<number | null>(null);
   
   function handleDetailsCard(id: number) {
@@ -75,14 +82,21 @@ export const CardList = ({ cardList, editMode, editFunction }: ICardList) => {
           </IconCardContainer>
 
           <EditBackgroundFocus $open={cardIdInDetails === card.id && !!editMode}>
-            <FaEdit size={30} onClick={(e) => {
-              e.stopPropagation();
-
-              if (editFunction) { 
+            {editFunction && (
+              <FaEdit size={30} onClick={(e) => {
+                e.stopPropagation();
                 editFunction(card);
                 setCardIdInDetails(null);
-              }
-            }}/>
+              }}/>
+            )}
+
+            {removeFunction && (
+              <IoTrashOutline size={30} onClick={(e) => {
+                e.stopPropagation();
+                removeFunction(card);
+                setCardIdInDetails(null);
+              }}/>
+            )}
           </EditBackgroundFocus>
         </Card>
       ))}

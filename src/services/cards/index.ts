@@ -21,6 +21,14 @@ async function update (data: UpdateCardPayload) {
   }
 }
 
+async function remove (cardId: number) {
+  try {
+    await api.delete(`/cards/${cardId}`);
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 async function get (): Promise<CardRaw[]> {
   try {
     const { data } = await api.get('/cards');
@@ -33,5 +41,6 @@ async function get (): Promise<CardRaw[]> {
 export const cardsApi = {
   create,
   update,
+  remove,
   get,
 };

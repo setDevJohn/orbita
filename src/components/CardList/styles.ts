@@ -93,6 +93,7 @@ export const EditBackgroundFocus = styled.div<{$open: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   background-color: #0004;
   transition: all 0.4s ease;
   opacity: ${({ $open }) => $open ? '1' : '0'};
