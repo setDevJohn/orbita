@@ -23,3 +23,16 @@ export const Separator = styled.div<{$margin?: number}>`
   margin: ${({ $margin }) => $margin && `${$margin}px 0`};
   background-color: ${({ theme }) => theme.darkBackground};
 `;
+
+export const BackgroundFocus = styled.div`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0009;
+  width: 100%;
+  height: 100svh;
+`;

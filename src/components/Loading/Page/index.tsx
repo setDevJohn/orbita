@@ -1,6 +1,7 @@
 import { FaDollarSign } from 'react-icons/fa';
+import { BackgroundFocus } from 'styles/main';
 
-import { BackgroundFocus, GrowingIcon } from './styles';
+import { GrowingIcon } from './styles';
 
 export const LoadingPage = () => (
   <BackgroundFocus>

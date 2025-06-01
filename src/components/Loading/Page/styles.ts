@@ -15,19 +15,6 @@ const growFade = keyframes`
   }
 `;
 
-export const BackgroundFocus = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0009;
-  width: 100%;
-  height: 100svh;
-`;
-
 export const GrowingIcon = styled.div`
   font-size: 70px;
   color: ${({ theme }) => theme.contrastColor};
