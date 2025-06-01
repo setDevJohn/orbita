@@ -30,7 +30,6 @@ export default tseslint.config(
       semi: ["error", "always"], // Sempre usar ponto e vírgula
       "block-spacing": ["error", "always"], // Espaço em branco dentro de blocos
       "object-curly-spacing": ["error", "always"], // Espaço dentro de chaves
-      "no-console": ["warn"], // Avisar ao usar console.log
       curly: ["error", "all"], // Exigir chaves para todas as declarações de controle
       "no-alert": "error", // Proibir o uso de alertas
       eqeqeq: ["error", "always"], // Usar estritamente `===` e `!==`
