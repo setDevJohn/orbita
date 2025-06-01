@@ -3,10 +3,19 @@ import { handlerAxiosError } from '@utils/axiosError';
 
 import { CategoriesListResponse, CategoryFormPayload } from './interface';
 
-async function create ({ name } : CategoryFormPayload) {
+async function create (data : CategoryFormPayload) {
   try {
-    const { data } = await api.post('/categories', { name });
-    return data.resource;
+    const { data: response } = await api.post('/categories', data);
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function update (data : CategoryFormPayload) {
+  try {
+    const { data: response } = await api.patch('/categories', data);
+    return response.resource;
   } catch (err) {
     handlerAxiosError(err);
   }
@@ -23,5 +32,6 @@ async function get (): Promise<CategoriesListResponse> {
 
 export const categoriesApi = {
   create,
+  update,
   get,
 };

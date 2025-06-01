@@ -3,7 +3,7 @@ import { CSSObject } from 'styled-components';
 
 import { ButtonStyled } from './styles';
 interface IBasicButton {
-  text: string
+  text?: string
   action?: () => void
   type?: 'cancel' | 'confirm'
   icon?: JSX.Element
