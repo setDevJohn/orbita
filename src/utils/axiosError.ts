@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 function axiosMessage (error: unknown): string {
-  if (axios.isAxiosError(error) && !error.response) {
+  if (axios.isAxiosError(error)) {
     switch (error.code) {
       case 'ERR_NETWORK':
         return 'Não foi possível conectar ao servidor.';
@@ -22,7 +22,7 @@ export function handlerAxiosError (error: unknown): never {
     if (error.response?.data?.message) {
       throw new Error(error.response.data.message);
     } else {
-      throw new Error(axiosMessage(error.message));
+      throw new Error(axiosMessage(error));
     }
   } else {
     throw new Error('Erro desconhecido. Por favor, tente novamente.');
