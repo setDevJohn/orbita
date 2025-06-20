@@ -158,7 +158,7 @@ export function Categories() {
       <Separator $margin={20}/>
       
       <Title $margin='20px 0 0 0'>
-        {!categories.length ? 'Nenhuma categoria cadastrado' : 'Categorias cadastradas'}
+        {!categories.length ? 'Nenhuma categoria cadastrada' : 'Categorias cadastradas'}
       </Title>
 
       <CategoriesList>
