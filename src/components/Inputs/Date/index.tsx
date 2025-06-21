@@ -57,8 +57,11 @@ export function DateInput({
           selected: startDate,
           onChange: handleChange,
           onChangeRaw: (e: FormEvent<HTMLInputElement>) => {
-            const input = e.target as HTMLInputElement;
-            input.value = mask.date(input.value);
+            const target = e.target as HTMLElement;
+            if (target.tagName.toLowerCase() === 'input') {
+              const input = target as HTMLInputElement;
+              input.value = mask.date(input.value);
+            }
           },
           startDate: isRange ? startDate : undefined,
           endDate: isRange ? endDate : undefined,
