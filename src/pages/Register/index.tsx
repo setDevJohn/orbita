@@ -3,11 +3,14 @@ import { DateInput, DefaultInput, SelectInput, TextInputWithLabel } from '@compo
 import { Mode } from '@components/Inputs/Date';
 import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { LoadingPage } from '@components/Loading';
 import { accountsApi } from '@services/accounts';
 import { categoriesApi } from '@services/categories';
+import { transactionsApi } from '@services/transactions';
+import { TransactionsFormPayload } from '@services/transactions/interfaces';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastError } from '@utils/toast';
+import { toastError, toastSuccess } from '@utils/toast';
 import { useEffect, useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
@@ -65,8 +68,6 @@ export function Register() {
   const [loading, setLoading] = useState<boolean>(false);
   const [options, setOptions] = useState<IOptions>(optionsValue);
   const [activeButtonDate, setActiveButtonDate] = useState<Mode>('day');
-
-  console.log(loading);
 
   const { type } = useParams();
   const navigate = useNavigate();
@@ -130,37 +131,52 @@ export function Register() {
     setForm(prev => ({ ...prev, recurrenceDateRange: [null, null] }));
   }
 
-  function handleSubmit () {
-    // if (!form.price) { return toastError('Valor é obrigatório.'); }
-    // if (!form.description) { return toastError('Descrição é obrigatória.'); }
-    // if (!form.date) { return toastError('Data da transação é obrigatória.'); }
-    // if (pageConfig.title === 'Despesas Crédito' && !form.card) { 
-    //   return toastError('Cartão é obrigatório.');
-    // }
-    // if (pageConfig.title !== 'Despesas Crédito' && !form.account) { 
-    //   return toastError('Conta é obrigatório.');
-    // }
+  async function handleSubmit () {
+    if (!form.price) { return toastError('Valor é obrigatório.'); }
+    if (!form.description) { return toastError('Descrição é obrigatória.'); }
+    if (!form.date) { return toastError('Data da transação é obrigatória.'); }
+    if (pageConfig?.title === 'Despesas Crédito' && !form.card) { 
+      return toastError('Cartão é obrigatório.');
+    }
+    if (pageConfig?.title !== 'Despesas Crédito' && !form.account) { 
+      return toastError('Conta é obrigatório.');
+    }
     
-    const payload = {
+    const payload: TransactionsFormPayload = {
       name: form.description,
       type: pageConfig!.title === 'Receitas' ? 'income' : 'expense',
       amount: format.currencyToDecimal(form.price),
       transactionDate: form.date?.toJSON(),
       source: form.account ? 'account' : 'card',
-      categoryId: Number(form.category) || null,
+      categoryId: Number(form.category),
       ...(form.card && { cardId: Number(form.card) }),
       ...(form.account && { accountId: Number(form.account) }),
       ...(form.transferAccount && { transferAccountId: Number(form.transferAccount) }),
       ...(form.recurrenceDateRange.every(date => !!date) && { 
-        recurrenceDateRange: form.recurrenceDateRange.map(date => date?.toJSON())
+        recurrenceDateType: activeButtonDate 
+      }),
+      ...(form.recurrenceDateRange.every(date => !!date) && { 
+        recurrenceDateRange: form.recurrenceDateRange
+          .filter(date => !!date)
+          .map(date => date?.toJSON())
       }),
     };
 
-    console.log(payload);
+    try {
+      setLoading(true);
+      await transactionsApi.create(payload);
+      toastSuccess('Transação cadastrada com sucesso.');
+    } catch (err) {
+      toastError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <LayoutContainer title={pageConfig.title}>
+      {loading && <LoadingPage />}
+
       <Content>
         <PriceContainer>
           <DefaultInput 
