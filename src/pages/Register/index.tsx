@@ -5,6 +5,7 @@ import { IOption } from '@components/Inputs/Select';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
 import { accountsApi } from '@services/accounts';
+import { cardsApi } from '@services/cards';
 import { categoriesApi } from '@services/categories';
 import { transactionsApi } from '@services/transactions';
 import { TransactionsFormPayload } from '@services/transactions/interfaces';
@@ -45,6 +46,7 @@ interface IForm {
 interface IOptions {
   accounts: IOption[];
   categories: IOption[];
+  cards: IOption[];
 }
 
 export function Register() {
@@ -62,6 +64,7 @@ export function Register() {
   const optionsValue: IOptions = {
     accounts: [],
     categories: [],
+    cards: [],
   };
 
   const [form, setForm] = useState<IForm>(formValue);
@@ -73,12 +76,15 @@ export function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fecthCategories() {
+    async function fecthOptions() {
       try {
         setLoading(true);
 
-        const accountsResponse = await accountsApi.get();
-        const categoriesResponse = await categoriesApi.get();
+        const [accountsResponse, categoriesResponse, cardsResponse] = await Promise.all([
+          accountsApi.get(),
+          categoriesApi.get(),
+          cardsApi.get(),
+        ]); 
 
         setOptions({
           accounts: accountsResponse.map(account => (
@@ -86,6 +92,9 @@ export function Register() {
           )),
           categories: categoriesResponse.map(category => (
             { label: category.name, value: category.id.toString() }
+          )),
+          cards: cardsResponse.map(card => (
+            { label: card.name, value: card.id.toString() }
           ))
         });
 
@@ -95,7 +104,7 @@ export function Register() {
         setLoading(false);
       }
     }
-    fecthCategories();
+    fecthOptions();
   }, []);
 
   if (!type || !['receita', 'despesa', 'despesa-credito'].includes(type)) { return null; }
@@ -207,7 +216,7 @@ export function Register() {
               value={form.card}
               placeholder='Selecione um catão'
               handleChange={handleChangeForm}
-              options={[]}
+              options={options.cards}
             />
           ) : (
             <SelectInput
