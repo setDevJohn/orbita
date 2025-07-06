@@ -26,7 +26,7 @@ export const Separator = styled.div<{$margin?: number}>`
 
 export const BackgroundFocus = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 0;
   left: 0;
   display: flex;
