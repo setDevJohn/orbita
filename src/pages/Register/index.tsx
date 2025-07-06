@@ -175,6 +175,7 @@ export function Register() {
       setLoading(true);
       await transactionsApi.create(payload);
       toastSuccess('Transação cadastrada com sucesso.');
+      setForm(formValue);
     } catch (err) {
       toastError((err as Error).message);
     } finally {
