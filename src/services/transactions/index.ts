@@ -12,9 +12,9 @@ const create = async (data: TransactionsFormPayload) => {
   }
 };
 
-const get = async (query?: string) => {
+const get = async (page: number = 10, query?: string) => {
   try {
-    const requestUrl = `/transactions${query ? `?${query}` : ''}`; 
+    const requestUrl = `/transactions?page=${page}${query ? `&${query}` : ''}`; 
 
     const { data: response } = await api.get(requestUrl);    
     

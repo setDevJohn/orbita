@@ -1,18 +1,20 @@
 import { CardList } from '@components/CardList';
 import { ExtractList } from '@components/Extract/List';
-import { LoadingPage } from '@components/Loading';
+import { HomeContext } from '@context/Home';
 import { cardsApi } from '@services/cards';
 import { CardRaw } from '@services/cards/interface';
 import { transactionsApi } from '@services/transactions';
+import { TransactionRaw } from '@services/transactions/interfaces';
 import { toastError } from '@utils/toast';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Title } from 'styles/main';
 
-import { extractDateList } from './extractDateList';
-
 export function MainComponent() {
-  const [loading, setLoading] = useState<boolean>(false);
   const [cardList, setCardList] = useState<CardRaw[]>([]);
+  console.log(cardList);
+  const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
+
+  const { monthIndex, setLoading } = useContext(HomeContext);
 
   useEffect(() => {
     async function fetchCards() {
@@ -20,10 +22,11 @@ export function MainComponent() {
         setLoading(true);
         const [cardResponse, transactionResponse] = await Promise.all([
           cardsApi.get(),
-          transactionsApi.get()
+          transactionsApi.get(1, `limit=5&month=${monthIndex + 1}`),
         ]);
         
         setCardList(cardResponse);
+        setTransactions(transactionResponse);
       } catch (err) {
         toastError((err as Error).message);
       } finally {
@@ -31,7 +34,7 @@ export function MainComponent() {
       }
     }
     fetchCards();
-  }, []);
+  }, [monthIndex, setLoading]);
 
   return (
     <>
@@ -39,9 +42,7 @@ export function MainComponent() {
 
       <Title>Últimas transações</Title>
 
-      <ExtractList list={extractDateList}/>
-
-      {loading && <LoadingPage />}
+      <ExtractList list={transactions}/>
     </>
   );
 }

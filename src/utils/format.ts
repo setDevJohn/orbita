@@ -4,6 +4,13 @@ const currencyToDecimal = (value: string) => {
   return Number(value) / 100;
 };
 
+const dateToDayAndMonth = (value: Date) => {
+  const date = value.toString().split('T')[0];
+  const dayAndMonth = date.split('-').reverse().slice(0, 2).join('/');
+  return dayAndMonth;
+};
+
 export const format = {
-  currencyToDecimal
+  currencyToDecimal,
+  dateToDayAndMonth
 };
