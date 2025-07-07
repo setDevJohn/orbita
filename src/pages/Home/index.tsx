@@ -1,3 +1,4 @@
+import { LoadingPage } from '@components/Loading';
 import { HomeContext } from '@context/Home';
 import { useContext, useEffect, useRef } from 'react';
 
@@ -7,7 +8,7 @@ import { HomeFooter } from './components/HomeFooter';
 import { Container, MainContent } from './styles';
 
 export function Home () {
-  const { setMonthIndex, currentPage } = useContext(HomeContext);
+  const { setMonthIndex, currentPage, loading } = useContext(HomeContext);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,8 @@ export function Home () {
       </MainContent>
 
       <HomeFooter />
+
+      {loading && <LoadingPage />}
     </Container>
   );
 }

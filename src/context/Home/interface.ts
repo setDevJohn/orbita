@@ -4,7 +4,9 @@ export interface HomeProviderProps  {
   children: ReactNode
 }
 
-export interface IHomeContext { 
+export interface IHomeContext {
+  loading: boolean,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   monthIndex: number,
   setMonthIndex: React.Dispatch<React.SetStateAction<number>>,
   accontToggle: boolean,

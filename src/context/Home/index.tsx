@@ -3,6 +3,8 @@ import { createContext, useMemo, useState } from 'react';
 import { HomeProviderProps, IHomeContext } from './interface';
 
 const HomeContext = createContext<IHomeContext>({
+  loading: false,
+  setLoading: () => {},
   monthIndex: 0,
   setMonthIndex: () => {},
   accontToggle: false,
@@ -18,6 +20,7 @@ const HomeContext = createContext<IHomeContext>({
 });
 
 const HomeProvider = ({ children } : HomeProviderProps) => {
+  const [loading, setLoading] = useState(false);
   const [monthIndex, setMonthIndex] = useState<number>(0);
   const [accontToggle, setAccontToggle] = useState<boolean>(false);
   const [selectedAccountId, setSelectedAccountId] = useState<number>(1);
@@ -26,6 +29,8 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
 
   const homeValue = useMemo(() => ({
+    loading,
+    setLoading,
     monthIndex,
     setMonthIndex,
     accontToggle,
@@ -38,7 +43,15 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     setMenuRegister,
     currentPage,
     setCurrentPage
-  }), [accontToggle, currentPage, menuRegister, monthIndex, selectedAccountId, showPrice]);
+  }), [
+    accontToggle,
+    currentPage,
+    loading,
+    menuRegister,
+    monthIndex,
+    selectedAccountId,
+    showPrice
+  ]);
 
   return (
     <HomeContext.Provider value={homeValue}>
