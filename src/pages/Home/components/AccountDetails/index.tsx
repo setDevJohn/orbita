@@ -1,5 +1,9 @@
 import { HomeContext } from '@context/Home';
-import { useContext } from 'react';
+import { accountsApi } from '@services/accounts';
+import { AccountRaw } from '@services/accounts/interface';
+import { mask } from '@utils/mask';
+import { toastError } from '@utils/toast';
+import { useContext, useEffect, useState } from 'react';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright, IoMdArrowDropup } from 'react-icons/io';
 import { RiEyeCloseFill } from 'react-icons/ri';
@@ -7,7 +11,10 @@ import { RiEyeCloseFill } from 'react-icons/ri';
 import { AccountItem, AccountList, CurrentAccount, MainDetails, Month, MonthContainer, Price, PriceContainer, ToggleAccount } from './styles';
 
 export function AccountDetails () {
+  const [accounts, setAccounts] = useState<AccountRaw[]>([]);
+
   const { 
+    setLoading,
     monthIndex,
     setMonthIndex,
     accontToggle,
@@ -33,12 +40,6 @@ export function AccountDetails () {
     'Dez',
   ];
   
-  const accountList = [
-    { id: 1, name: 'Principal', value: '500,00'  },
-    { id: 2, name: 'Poupança', value: '400,00'  },
-    { id: 3, name: 'Investimentos', value: '300,99'  },
-  ];
-  
   function handlePrevMonth () {
     if (!monthIndex) { return setMonthIndex(11); }
     setMonthIndex(prev => prev - 1);
@@ -54,6 +55,27 @@ export function AccountDetails () {
     setSelectedAccountId(id);
   }
 
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        setLoading(true);
+  
+        const accounts = await accountsApi.get();
+        setAccounts(accounts);
+
+        if (!selectedAccountId) {
+          setSelectedAccountId(accounts[0].id);
+        }
+      } catch (err) {
+        toastError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAccounts();
+  }, [selectedAccountId, setLoading, setSelectedAccountId]);
+
   return (
     <MainDetails>
       <MonthContainer>
@@ -64,7 +86,7 @@ export function AccountDetails () {
     
       <ToggleAccount>
         <CurrentAccount>
-          {accountList.find(({ id }) => id === selectedAccountId)?.name}
+          {accounts.find(({ id }) => id === selectedAccountId)?.name}
           { accontToggle
             ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
             : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
@@ -72,7 +94,7 @@ export function AccountDetails () {
         </CurrentAccount>
     
         <AccountList $open={accontToggle}>
-          {accountList
+          {accounts
             .filter(({ id }) => (id !== selectedAccountId))
             .map(({ id, name }, i ) => (
               <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
@@ -84,10 +106,9 @@ export function AccountDetails () {
     
       <PriceContainer>
         <Price>
-          {'R$ '}
           {showPrice
-            ? accountList.find(({ id }) => id === selectedAccountId)?.value 
-            : '.....'
+            ? mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0') 
+            : 'R$ .....'
           }
         </Price>
     
