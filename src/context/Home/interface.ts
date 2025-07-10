@@ -7,8 +7,8 @@ export interface HomeProviderProps  {
 export interface IHomeContext {
   loading: boolean,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  monthIndex: number,
-  setMonthIndex: React.Dispatch<React.SetStateAction<number>>,
+  monthIndex: number | null,
+  setMonthIndex: React.Dispatch<React.SetStateAction<number | null>>,
   accontToggle: boolean,
   setAccontToggle: React.Dispatch<React.SetStateAction<boolean>>,
   selectedAccountId: number,

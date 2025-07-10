@@ -42,14 +42,14 @@ export function AccountDetails () {
   
   function handlePrevMonth () {
     if (!monthIndex) { return setMonthIndex(11); }
-    setMonthIndex(prev => prev - 1);
+    setMonthIndex(prev => (prev || 0) - 1);
   }
   
   function handleNextMonth () {
     if (monthIndex === 11) { return setMonthIndex(0); }
-    setMonthIndex(prev => prev + 1); 
+    setMonthIndex(prev => (prev || 0)  + 1); 
   }
-  
+   
   function handleSelectAccount (id: number) {
     setAccontToggle(false);
     setSelectedAccountId(id);
@@ -80,7 +80,7 @@ export function AccountDetails () {
     <MainDetails>
       <MonthContainer>
         <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
-        <Month>{months[monthIndex]}</Month>
+        <Month>{months[monthIndex || 0]}</Month>
         <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
       </MonthContainer>
     

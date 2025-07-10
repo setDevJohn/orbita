@@ -25,7 +25,7 @@ async function remove (categoryId: number) {
   try {
     await api.delete(`/categories/${categoryId}`);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     handlerAxiosError(err);
   }
 }

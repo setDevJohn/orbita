@@ -11,15 +11,16 @@ import { Title } from 'styles/main';
 
 export function MainComponent() {
   const [cardList, setCardList] = useState<CardRaw[]>([]);
-  console.log(cardList);
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
 
   const { monthIndex, setLoading } = useContext(HomeContext);
 
   useEffect(() => {
-    async function fetchCards() {
+    async function fetchData() {
+      if (monthIndex === null) { return; } 
+      setLoading(true);
+      
       try {
-        setLoading(true);
         const [cardResponse, transactionResponse] = await Promise.all([
           cardsApi.get(),
           transactionsApi.get(1, `limit=5&month=${monthIndex + 1}`),
@@ -33,12 +34,13 @@ export function MainComponent() {
         setLoading(false);
       }
     }
-    fetchCards();
+
+    fetchData();
   }, [monthIndex, setLoading]);
 
   return (
     <>
-      <CardList cardList={[]} />
+      <CardList cardList={cardList} />
 
       <Title>Últimas transações</Title>
 

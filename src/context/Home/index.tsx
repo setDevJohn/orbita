@@ -5,11 +5,11 @@ import { HomeProviderProps, IHomeContext } from './interface';
 const HomeContext = createContext<IHomeContext>({
   loading: false,
   setLoading: () => {},
-  monthIndex: 0,
+  monthIndex: null,
   setMonthIndex: () => {},
   accontToggle: false,
   setAccontToggle: () => {},
-  selectedAccountId: 1,
+  selectedAccountId: 0,
   setSelectedAccountId: () => {},
   showPrice: false,
   setShowPrice: () => {},
@@ -21,9 +21,9 @@ const HomeContext = createContext<IHomeContext>({
 
 const HomeProvider = ({ children } : HomeProviderProps) => {
   const [loading, setLoading] = useState(false);
-  const [monthIndex, setMonthIndex] = useState<number>(0);
+  const [monthIndex, setMonthIndex] = useState<number | null>(null);
   const [accontToggle, setAccontToggle] = useState<boolean>(false);
-  const [selectedAccountId, setSelectedAccountId] = useState<number>(1);
+  const [selectedAccountId, setSelectedAccountId] = useState<number>(0);
   const [showPrice, setShowPrice] = useState<boolean>(false);
   const [menuRegister, setMenuRegister] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
