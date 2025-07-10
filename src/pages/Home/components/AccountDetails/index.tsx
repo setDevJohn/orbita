@@ -26,18 +26,18 @@ export function AccountDetails () {
   } = useContext(HomeContext);
 
   const months = [
-    'Jan',
-    'Fev',
-    'Mar',
-    'Abr',
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
     'Maio',
-    'Jun',
-    'Jul',
-    'Ago',
-    'Set',
-    'Out',
-    'Nov',
-    'Dez',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
   ];
   
   function handlePrevMonth () {

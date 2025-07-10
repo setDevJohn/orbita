@@ -10,7 +10,6 @@ export const Month = styled.div`
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalSpan};
   text-align: center;
-  width: 40px;
 `;
 
 export const MainDetails = styled.section`
