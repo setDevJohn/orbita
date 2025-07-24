@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
+import { Title } from 'styles/main';
 
-import { Container, Content, Header, Overflow, Title } from './styles';
+import { Container, Content, Header, Overflow } from './styles';
 
 interface ILayoutContainer {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ export const LayoutContainer = forwardRef<HTMLDivElement, ILayoutContainer>(
     return (
       <Container>
         <Header>
-          <Title> {title} </Title>
+          <Title $margin='0'> {title} </Title>
         </Header>
         <Overflow ref={ref}>
           <Content> {children} </Content>

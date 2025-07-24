@@ -18,12 +18,6 @@ export const Header = styled.header`
   width: 100%;
 `;
 
-export const Title = styled.h1`
-  font-size: ${({ theme }) => theme.subtitle};
-  font-family: ${({ theme }) => theme.secondaryFont};
-  font-weight: 400;
-`;
-
 export const Overflow = styled.div`
   flex: 1;
   width: 100%;
