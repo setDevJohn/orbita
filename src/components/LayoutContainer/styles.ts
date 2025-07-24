@@ -13,7 +13,7 @@ export const Header = styled.header`
   font-size: ${({ theme }) => theme.subtitle};
   padding: 10px 20px;
   border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 6px 2px #0004;
+  box-shadow: 1px 2px 10px #0004;
   height: 60px;
   width: 100%;
 `;

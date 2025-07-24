@@ -19,7 +19,6 @@ export const ToggleContainer = styled.div`
 `;
 
 export const Dropdown = styled.div<{$open: boolean }>`	
-  background-color: ${({ theme }) => theme.lightBackground};
   max-height: ${({ $open }) => $open ? '300px' : '0px'};
   border-radius: 4px;
   overflow: hidden;

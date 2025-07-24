@@ -17,6 +17,7 @@ export const Card = styled.li<{$details: boolean}>`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.lightBackground};
   border-radius: 10px;
+  border: 1px solid #334155;
   box-shadow: 2px 2px 7px -2px #0004;
   transition: all 0.4s ease;
   padding: 17px;

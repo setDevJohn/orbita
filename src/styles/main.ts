@@ -12,15 +12,16 @@ export const Text = styled.p`
 `;
 
 export const InputLabel = styled.label<{$minWidth?: string}>`
-  font-size: ${({ theme }) => theme.normalText};
+  color: ${({ theme }) => theme.secondaryColor};
+  font-size: ${({ theme }) => theme.smallText};
   min-width: ${({ $minWidth }) => $minWidth ? $minWidth : '120px'};
 `;
 
 export const Separator = styled.div<{$margin?: number}>`
   width: 100%;
-  height: 2px;
+  height: 1px;
   margin: ${({ $margin }) => $margin && `${$margin}px 0`};
-  background-color: ${({ theme }) => theme.darkBackground};
+  background-color: #2d333b;
 `;
 
 export const BackgroundFocus = styled.div`

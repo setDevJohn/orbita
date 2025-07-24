@@ -1,7 +1,7 @@
 import { ToggleButton } from '@components/Buttons';
 import { ReactNode, useState } from 'react';
 import { CSSObject } from 'styled-components';
-import { Separator, Text } from 'styles/main';
+import { InputLabel, Separator } from 'styles/main';
 
 import { DropContainer, Dropdown, ToggleContainer, ToggleDropdownContainer } from './styles';
 
@@ -30,7 +30,7 @@ export function ToggleDropdown({
   return (
     <ToggleDropdownContainer $customStyle={customStyle}>
       <ToggleContainer>
-        <Text>{ text }</Text>
+        <InputLabel>{ text }</InputLabel>
     
         <ToggleButton
           checked={toggleStatus}

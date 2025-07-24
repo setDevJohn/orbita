@@ -41,7 +41,7 @@ export const RegisterList = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: ${({ theme }) => theme.mainBackground};
+  background-color: ${({ theme }) => theme.lightBackground};
   border-radius: 4px;
   padding: 15px 20px;
   animation: ${fadeIn} 0.4s ease;

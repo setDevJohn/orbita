@@ -26,7 +26,6 @@ import {
   Footer, 
   InputContainer, 
   PriceContainer, 
-  Separator 
 } from './styles';
 
 type TDateRange = [Date | null, Date | null];
@@ -192,20 +191,19 @@ export function Register() {
           <DefaultInput 
             type='text'
             name='price'
-            width='60%'
-            size='28'
+            width='67%'
+            size='26'
             value={mask.currency(form.price)}
             handleChange={handleChangeForm}
           />
         </PriceContainer>
-
-        <Separator />
 
         <InputContainer>
           <TextInputWithLabel
             value={form.description}
             label='Descrição'
             name='description'
+            labelInColumn
             placeholder='Transação xyz'
             handleChange={handleChangeForm}
           />
@@ -214,6 +212,7 @@ export function Register() {
             <SelectInput
               label='Cartão'
               name='card'
+              labelInColumn
               value={form.card}
               placeholder='Selecione um catão'
               handleChange={handleChangeForm}
@@ -223,6 +222,7 @@ export function Register() {
             <SelectInput
               label='Conta'
               name='account'
+              labelInColumn
               value={form.account}
               placeholder='Selecione uma conta'
               handleChange={handleChangeForm}
@@ -233,6 +233,7 @@ export function Register() {
           <SelectInput
             label='Categoria'
             name='category'
+            labelInColumn
             value={form.category}
             placeholder='Selecione uma categoria'
             handleChange={handleChangeForm}
@@ -242,12 +243,14 @@ export function Register() {
           <DateInput
             label='Data do registro'
             startDate={form.date}
+            labelInColumn
             placeholder='dd / mm / aaaa'
             handleChange={(date) => handleChangeForm('date', date as Date)}
           />
 
-          <ToggleDropdown 
-            text='Recorrência' 
+          <ToggleDropdown
+            text='Recorrência'
+            noAlign
             clearToggleStorage={clearRecurrenceStorage}
             customStyle={{ marginTop: '25px' }}
           >

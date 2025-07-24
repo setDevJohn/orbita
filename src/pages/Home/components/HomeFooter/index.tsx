@@ -52,7 +52,7 @@ export function HomeFooter () {
                   setMenuRegister(false);
                 }}
               >
-                <BasicButton text={name} icon={icon}/>
+                <BasicButton text={name} icon={icon} custonStyle={{ background: '#161B22' }} />
               </RegisterItem>
             ))}
           </RegisterList>

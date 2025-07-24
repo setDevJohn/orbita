@@ -4,11 +4,12 @@ import { ThemeProvider } from 'styled-components';
 export interface ITheme {
   contrastColor: string
   textColor: string
+  secondaryColor: string
   linearGradient: string
   mainBackground: string
   lightBackground: string
   darkBackground: string
-  buttonColor: string
+  borderColor: string
   primaryFont: string
   bigTitle: string
   title: string,
@@ -36,21 +37,23 @@ const themeColor = {
   dark : {
     contrastColor: '#6366F1',
     textColor: '#cecdcd',
+    secondaryColor: '#94a3b8',
     linearGradient: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
     mainBackground: '#161B22 ',
     lightBackground: '#1F242C',
     darkBackground: '#0D1117',
-    buttonColor: '#0C3A46',
+    borderColor: '#334155',
     ...commonAttr
   },
   light: {
     contrastColor: '#0073E6',
     textColor: '#1A1A1A',
+    secondaryColor: '#4B5563',
     linearGradient: '#E0E0E0',
     mainBackground: '#CFCFCF',
     lightBackground: '#CFCFCF',
     darkBackground: '#535358',
-    buttonColor: '#CFCFCF',
+    borderColor: '#CFCFCF',
     ...commonAttr
   },
 };
