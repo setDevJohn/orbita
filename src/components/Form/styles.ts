@@ -21,7 +21,6 @@ export const FormStyled = styled.form`
 `;
 
 export const FormTitle = styled.h2`
-  font-family: ${({ theme }) => theme.secondaryFont};
   font-size: ${({ theme }) => theme.bigTitle};
   font-weight: 400;
   margin-bottom: 10px;

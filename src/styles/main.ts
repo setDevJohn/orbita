@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Title = styled.h1<{$margin?: string}>`
   font-size: ${({ theme }) => theme.subtitle};
   font-weight: 400;
-  font-family: ${({ theme }) => theme.secondaryFont};
   margin: ${({ $margin }) => $margin ? $margin : '20px'};
 `;
 
