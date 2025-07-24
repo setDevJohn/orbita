@@ -27,4 +27,20 @@ export interface TransactionRaw {
   } | null
 }
 
-export type TransactionsFormPayload = Omit<TransactionRaw, 'id'>;
+export interface TransactionsFormPayload {
+  name: string;
+  type: 'income' | 'expense';
+  amount: number;
+  transactionDate: string;
+  source: 'account' | 'card';
+  referenceMonth?: number;
+  referenceYear?: number;
+  currenInstallment?: number | null; // Se for "current", pode ajustar o nome
+  totalInstallments?: number | null;
+  categoryId: number | null;
+  accountId?: number;
+  cardId?: number;
+  transferAccountId?: number;
+  recurrenceDateType?: string;
+  recurrenceDateRange?: string[];
+}
