@@ -45,7 +45,6 @@ export const CardList = ({
       {cardList.map(card => (
         <Card
           key={card.id}
-          $color={'#394b54'}
           $details={cardIdInDetails === card.id}
           onClick={() => handleDetailsCard(card.id)}
         >

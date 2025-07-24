@@ -87,10 +87,14 @@ export function AccountDetails () {
       <ToggleAccount>
         <CurrentAccount>
           {accounts.find(({ id }) => id === selectedAccountId)?.name}
-          { accontToggle
-            ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
-            : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
-          }
+          { accounts.length > 1 && (
+            <>
+              { accontToggle
+                ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
+                : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
+              }
+            </>
+          )}
         </CurrentAccount>
     
         <AccountList $open={accontToggle}>

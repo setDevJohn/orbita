@@ -10,7 +10,6 @@ export interface ITheme {
   darkBackground: string
   buttonColor: string
   primaryFont: string
-  secondaryFont: string
   bigTitle: string
   title: string,
   subtitle: string,
@@ -23,7 +22,6 @@ export interface ITheme {
 
 const commonAttr = {
   primaryFont: '"Inter", sans-serif',
-  secondaryFont: '"Poppins", sans-serif',
   bigTitle: '28px',
   title: '24px',
   subtitle: '20px',
@@ -36,12 +34,12 @@ const commonAttr = {
 
 const themeColor = {
   dark : {
-    contrastColor: '#1de9b6',
+    contrastColor: '#6366F1',
     textColor: '#cecdcd',
-    linearGradient: 'linear-gradient(35deg, #05050d, #165868)',
-    mainBackground: '#22303c ',
-    lightBackground: '#394b54',
-    darkBackground: '#0A212C',
+    linearGradient: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
+    mainBackground: '#161B22 ',
+    lightBackground: '#1F242C',
+    darkBackground: '#0D1117',
     buttonColor: '#0C3A46',
     ...commonAttr
   },
@@ -88,3 +86,15 @@ const ThemeStyleProvider = ({ children } : ThemeProviderProps) => {
 };
 
 export { ThemeContext, ThemeStyleProvider };
+
+// Old theme:
+// dark : {
+//   contrastColor: '#1de9b6',
+//   textColor: '#cecdcd',
+//   linearGradient: 'linear-gradient(35deg, #05050d, #165868)',
+//   mainBackground: '#22303c ',
+//   lightBackground: '#394b54',
+//   darkBackground: '#0A212C',
+//   buttonColor: '#0C3A46',
+//   ...commonAttr
+// },

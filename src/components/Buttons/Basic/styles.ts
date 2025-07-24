@@ -11,11 +11,10 @@ export const ButtonStyled = styled.button<IButtonsStyled>`
   align-items: center;
   gap: 5px;
   background-color: ${({ theme, $type }) =>  (
-    $type === 'cancel' ? '#8b2d23' : $type === 'confirm' ? '#288573' : theme.buttonColor
+    $type === 'cancel' ? '#aa2516' : $type === 'confirm' ? '#0d8f75' : theme.buttonColor
   )};
   color: ${({ theme }) => theme.textColor};
   text-align: center;
-  font-family: ${({ theme }) => theme.secondaryFont};
   font-size: ${({ theme }) => theme.bigText};
   font-weight: 500;
   border: none;

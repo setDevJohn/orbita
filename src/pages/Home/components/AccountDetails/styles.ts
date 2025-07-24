@@ -16,11 +16,11 @@ export const Month = styled.div`
 export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
-  border-radius: 0  0 20px 20px;
+  border-radius: 10px;
   background: ${({ theme }) => theme.linearGradient};
-  box-shadow: 0 4px 6px 2px #0004;
+  box-shadow: 1px 2px 10px #0004;
   padding: 10px;
-  width: 100%;
+  margin: 10px;
 `;
 
 export const MonthContainer = styled.div`

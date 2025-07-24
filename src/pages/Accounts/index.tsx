@@ -179,8 +179,6 @@ export function Accounts() {
         {!accounts.length ? 'Nenhuma conta cadastrada' : 'Contas cadastradas'}
       </Title>
 
-      {loading && <LoadingPage />}
-
       <AccountsList>
         {accounts.map(({ id, name, balance }, i) => (
           <AccountCard key={i}>
@@ -221,6 +219,8 @@ export function Accounts() {
           `}
         />
       )}
+      
+      {loading && <LoadingPage />}  
     </LayoutContainer>
   );
 }

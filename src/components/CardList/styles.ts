@@ -10,18 +10,18 @@ export const CardListContainer = styled.ul`
   width: 100%;
 `;
 
-export const Card = styled.li<{$details: boolean; $color: string}>`
+export const Card = styled.li<{$details: boolean}>`
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: ${({ $color }) => $color};;
+  background-color: ${({ theme }) => theme.lightBackground};
   border-radius: 10px;
   box-shadow: 2px 2px 7px -2px #0004;
   transition: all 0.4s ease;
-  padding: 12px;
+  padding: 17px;
   overflow: hidden;
-  height: ${({ $details }) => $details ? '157px': '58px' };
+  height: ${({ $details }) => $details ? '157px': '67px' };
   width: 100%;
   cursor: pointer;
 
