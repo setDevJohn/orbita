@@ -17,7 +17,8 @@ export function DefaultInput({
   type,
   size,
   width,
-  placeholder }: ITextWithLabel) {
+  placeholder
+}: ITextWithLabel) {
   return (
     <TextInput 
       id={name}

@@ -17,10 +17,9 @@ export const SelectStyled = styled.select<{$darkBackground?: boolean}>`
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
   outline: none;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 1px 1px 7px -1px #0009;
-  padding: 10px 15px;
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  border-radius: 10px;
+  padding: 13px 15px;
   width: 100%;
 `;
 
