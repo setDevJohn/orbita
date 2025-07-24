@@ -2,7 +2,8 @@ import { BasicButton } from '@components/Buttons';
 import { HomeContext } from '@context/Home';
 import { useContext } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
-import { FaArrowTrendDown, FaArrowTrendUp, FaPlus } from 'react-icons/fa6';
+import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
+import { FiPlus } from 'react-icons/fi';
 import { PiCalendarFill } from 'react-icons/pi';
 import { RiFileList3Fill } from 'react-icons/ri';
 import { TiHome } from 'react-icons/ti';
@@ -69,8 +70,8 @@ export function HomeFooter () {
       >
         <Icon $open={menuRegister}>
           { currentPage !== 'home' 
-            ? <TiHome size={37} fill="#000" />
-            : <FaPlus size={37} fill="#000" />
+            ? <TiHome size={32} fill="#000" />
+            : <FiPlus size={32} fill="#fff" />
           }
         </Icon>
       </MenuIcon>
