@@ -1,11 +1,14 @@
 import { ExtractList } from '@components/Extract/List';
 import { DateInput, DefaultInput } from '@components/Inputs';
-import { useState } from 'react';
+import { HomeContext } from '@context/Home';
+import { transactionsApi } from '@services/transactions';
+import { TransactionRaw } from '@services/transactions/interfaces';
+import { toastError } from '@utils/toast';
+import { useContext, useEffect, useState } from 'react';
 import { Title } from 'styles/main';
 
 import { StatisticButtons } from '../StatisticButtons';
 
-import { projectionDateList } from './list';
 import { FilterContainer } from './styles';
 
 export interface IFilters {
@@ -15,10 +18,33 @@ export interface IFilters {
 
 export function ProjectionComponent () {
   const [filters, setFilters] = useState<IFilters>({ description: '', date: null });
+  const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
+
+  const { monthIndex, setLoading } = useContext(HomeContext);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (monthIndex === null) { return; } 
+      setLoading(true);
+      
+      try {
+        const transactionResponse = await transactionsApi.get(1, `&month=${monthIndex + 1}`);
+        
+        setTransactions(transactionResponse);
+      } catch (err) {
+        toastError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [monthIndex, setLoading]);  
 
   const handleChange = (name: string, value: string | Date) => {
     setFilters({ ...filters, [name]: value });
   };
+
   return (
     <>
       <Title>Projeções</Title>
@@ -41,7 +67,7 @@ export function ProjectionComponent () {
     
       <StatisticButtons />
     
-      <ExtractList list={projectionDateList} />
+      <ExtractList list={transactions} />
     </>
   );
 }
