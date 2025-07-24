@@ -70,7 +70,7 @@ export function HomeFooter () {
       >
         <Icon $open={menuRegister}>
           { currentPage !== 'home' 
-            ? <TiHome size={32} fill="#000" />
+            ? <TiHome size={32} fill="#fff" />
             : <FiPlus size={32} fill="#fff" />
           }
         </Icon>
