@@ -76,6 +76,7 @@ export function Form({ onSubmit, fields, title, cancelFunction }: IForm) {
             
           <BasicButton
             text="Salvar"
+            type="confirm"
             custonStyle={{ width: '70%' }}
           />
         </ButtonsContainer>
