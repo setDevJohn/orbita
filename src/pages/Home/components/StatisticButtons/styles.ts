@@ -10,6 +10,8 @@ export const ButtonFilter = styled.button<{$select?: boolean, $operationType?: s
   font-size: ${({ theme }) => theme.normalText};
   font-weight: 600;
   border: none;
+  outline: ${({ $select }) => $select ? '1px solid #334155' : 'none'};
+  box-shadow: ${({ $select }) => $select ? '0px 10px 20px -5px #6365f146' : 'none'};
   border-radius: 10px;
   padding: 15px;
   min-width: 80px;
