@@ -6,7 +6,7 @@ export const Footer = styled.footer`
   justify-content: space-evenly;
   align-items: center;
   gap: 45px;
-  background: ${({ theme }) => theme.linearGradient};
+  background: ${({ theme }) => theme.lightBackground};
   padding: 7px 15px;
   width: 100%;
 `;
@@ -69,15 +69,24 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.textColor};
-  box-shadow: 0px 0px 10px 4px #0004;
-  transform: translateY(-22px);
-  padding: ${({ $open }) => $open ? '7px 8px 2px 6px' : '7px 7px 2px 7px'};;
-  border-radius: 25%;
+  background: ${({ theme }) => theme.linearGradient};
+  box-shadow: 0px 10px 20px -5px #6366f166;
+  transform: translateY(-16px);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-18px) scale(1.05);
+    box-shadow: 0 12px 25px -6px #6366f199;
+  }
 `;
 
 export const Icon = styled.div<{$open: boolean}>`
   transition: all 0.4s ease;
   transform: ${({ $open }) => $open ? 'rotate(45deg)' : 'rotate(0deg)' };
+  width: 32px;
+  height: 32px;
 `;
