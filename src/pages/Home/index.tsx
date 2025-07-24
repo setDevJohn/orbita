@@ -32,8 +32,8 @@ export function Home () {
 
   return (
     <Container>
-      <AccountDetails />
-      
+      <AccountDetails mainPage={currentPage === 'home'} />
+
       <MainContent ref={contentRef}>
         {selectedComponent[currentPage]}
       </MainContent>

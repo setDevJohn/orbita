@@ -25,6 +25,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    font-family: ${({ theme }) => theme.primaryFont};
     cursor: pointer;
   }
 

@@ -47,15 +47,12 @@ export function ProjectionComponent () {
 
   return (
     <>
-      <Title>Projeções</Title>
-
       <FilterContainer>
         <DefaultInput 
           name='description'
           placeholder='Descrição'
           value={filters.description}
           handleChange={handleChange}
-          width='80%'
         />
       
         <DateInput
@@ -66,6 +63,8 @@ export function ProjectionComponent () {
       </FilterContainer>
     
       <StatisticButtons />
+
+      <Title>Próximas Projeções</Title>
     
       <ExtractList list={transactions} />
     </>

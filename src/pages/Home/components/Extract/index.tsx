@@ -46,15 +46,12 @@ export function ExtractComponent() {
 
   return (
     <>
-      <Title>Extrato</Title>
-
       <FilterContainer>
         <DefaultInput 
           name='description'
           placeholder='Descrição'
           value={filters.description}
           handleChange={handleChange}
-          width='80%'
         />
 
         <DateInput
@@ -65,6 +62,8 @@ export function ExtractComponent() {
       </FilterContainer>
 
       <StatisticButtons />
+
+      <Title>Extrato Atual</Title>
 
       <ExtractList list={transactions} />
     </>

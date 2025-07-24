@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 
-export const ButtonFilter = styled.button<{$select?: boolean}>`
+export const ButtonFilter = styled.button<{$select?: boolean, $operationType?: string}>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  background-color: ${({ theme }) => theme.darkBackground};
-  color: ${({ theme }) => theme.textColor};
+  gap: 10px;
+  background-color: ${({ theme }) => theme.lightBackground};
+  color: ${({ $operationType }) => $operationType === 'income' ? '#22c55e' : '#ef4444'};
   font-size: ${({ theme }) => theme.normalText};
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
-  box-shadow: ${({ $select, theme }) => `2px 2px 7px -1px ${$select ? theme.contrastColor : '#0004'} `};
-  padding: 3px 7px;
+  border-radius: 10px;
+  padding: 15px;
   min-width: 80px;
+  width: 100%;
+  max-width: 37%;
+  cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`
@@ -20,5 +23,5 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   width: 100%;
   gap: 22px;
-  margin: 15px 0 30px 0;
+  margin: 15px 0 35px 0;
 `;

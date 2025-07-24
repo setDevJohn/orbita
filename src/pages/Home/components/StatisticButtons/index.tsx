@@ -1,5 +1,5 @@
+import { TransactionIcon } from '@components/TransactionIcon';
 import { useState } from 'react';
-import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 
 import { ButtonContainer, ButtonFilter } from './styles';
 
@@ -14,20 +14,22 @@ export function StatisticButtons () {
     <ButtonContainer>
       <ButtonFilter
         type="button"
-        $select={typeListFilter === 'revenue'}
-        onClick={() => handleChangeTypeList('revenue')}
+        $operationType='income'
+        $select={typeListFilter === 'income'}
+        onClick={() => handleChangeTypeList('income')}
       >
-        <FaArrowTrendUp size={22} fill="#0f0" />
-          R$ 50,49
+        <TransactionIcon type="income" />
+        R$ 50,49
       </ButtonFilter>
 
       <ButtonFilter 
         type="button"
+        $operationType='expense'
         $select={typeListFilter === 'expense'}
         onClick={() => handleChangeTypeList('expense')}
       >
-        <FaArrowTrendDown size={22} fill="#f00" />
-          R$ 50,49
+        <TransactionIcon type="expense" />
+        R$ 50,49
       </ButtonFilter>
     </ButtonContainer>
   );

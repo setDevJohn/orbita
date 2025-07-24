@@ -10,7 +10,7 @@ import { RiEyeCloseFill } from 'react-icons/ri';
 
 import { AccountItem, AccountList, CurrentAccount, MainDetails, Month, MonthContainer, Price, PriceContainer, ToggleAccount } from './styles';
 
-export function AccountDetails () {
+export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
 
   const { 
@@ -84,43 +84,48 @@ export function AccountDetails () {
         <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
       </MonthContainer>
     
-      <ToggleAccount>
-        <CurrentAccount>
-          {accounts.find(({ id }) => id === selectedAccountId)?.name}
-          { accounts.length > 1 && (
-            <>
-              { accontToggle
-                ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
-                : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
+      {mainPage &&(
+        <>
+          <ToggleAccount>
+            <CurrentAccount>
+              {accounts.find(({ id }) => id === selectedAccountId)?.name}
+              { accounts.length > 1 && (
+                <>
+                  { accontToggle
+                    ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
+                    : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
+                  }
+                </>
+              )}
+            </CurrentAccount>
+    
+            <AccountList $open={accontToggle}>
+              {accounts
+                .filter(({ id }) => (id !== selectedAccountId))
+                .map(({ id, name }, i ) => (
+                  <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
+                    {name}
+                  </AccountItem>
+                ))}
+            </AccountList>
+          </ToggleAccount>
+    
+          <PriceContainer>
+            <Price>
+              {showPrice
+                ? mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0') 
+                : 'R$ .....'
               }
-            </>
-          )}
-        </CurrentAccount>
+            </Price>
     
-        <AccountList $open={accontToggle}>
-          {accounts
-            .filter(({ id }) => (id !== selectedAccountId))
-            .map(({ id, name }, i ) => (
-              <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
-                {name}
-              </AccountItem>
-            ))}
-        </AccountList>
-      </ToggleAccount>
-    
-      <PriceContainer>
-        <Price>
-          {showPrice
-            ? mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0') 
-            : 'R$ .....'
-          }
-        </Price>
-    
-        {showPrice
-          ? <BsFillEyeFill size={22} onClick={() => setShowPrice(false)} />
-          : <RiEyeCloseFill size={22} onClick={() => setShowPrice(true)} />
-        }
-      </PriceContainer>
+            {showPrice
+              ? <BsFillEyeFill size={22} onClick={() => setShowPrice(false)} />
+              : <RiEyeCloseFill size={22} onClick={() => setShowPrice(true)} />
+            }
+          </PriceContainer>
+        </>
+      
+      )}
     </MainDetails>
   );
 }
