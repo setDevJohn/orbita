@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1<{$margin?: string}>`
-  font-size: ${({ theme }) => theme.subtitle};
+export const Title = styled.h1<{$margin?: string; $bigSize?: boolean}>`
+  font-size: ${({ theme, $bigSize }) => $bigSize ? theme.bigTitle : theme.subtitle};
   font-weight: 500;
   margin: ${({ $margin }) => $margin ? $margin : '20px'};
 `;
