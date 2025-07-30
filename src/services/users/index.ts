@@ -14,7 +14,7 @@ async function login (data: UserFormLogin) {
 
 async function register (data: UserFormPayload) {
   try {
-    const { data: response } = await api.post('/accounts', data);
+    const { data: response } = await api.post('/users', data);
     return response.resource;
   } catch (err) {
     handlerAxiosError(err);
