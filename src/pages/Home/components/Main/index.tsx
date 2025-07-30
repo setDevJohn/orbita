@@ -19,15 +19,17 @@ export function MainComponent() {
     async function fetchData() {
       if (monthIndex === null) { return; } 
       setLoading(true);
+
+      const transactionQuery = `&month=${monthIndex + 1}&limit=5&extract=true`;
       
       try {
         const [cardResponse, transactionResponse] = await Promise.all([
           cardsApi.get(),
-          transactionsApi.get(1, `limit=5&month=${monthIndex + 1}`),
+          transactionsApi.get(1, transactionQuery),
         ]);
         
         setCardList(cardResponse);
-        setTransactions(transactionResponse);
+        setTransactions(transactionResponse.transactions);
       } catch (err) {
         toastError((err as Error).message);
       } finally {

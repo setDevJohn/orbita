@@ -12,7 +12,7 @@ const create = async (data: TransactionsFormPayload) => {
   }
 };
 
-const get = async (page: number = 10, query?: string) => {
+const get = async (page: number = 1, query?: string) => {
   try {
     const requestUrl = `/transactions?page=${page}${query ? `&${query}` : ''}`; 
 

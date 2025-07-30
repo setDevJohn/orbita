@@ -19,6 +19,8 @@ export interface IFilters {
 export function ExtractComponent() {
   const [filters, setFilters] = useState<IFilters>({ description: '', date: null });
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
+  const [statistics, setStatistics] = useState<Record<string, string>>({});
+  const [transactionType, setTransactionType] = useState('');
 
   const { monthIndex, setLoading } = useContext(HomeContext);
 
@@ -27,10 +29,13 @@ export function ExtractComponent() {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
+      const query = `&month=${monthIndex + 1}&extract=true`;
+
       try {
-        const transactionResponse = await transactionsApi.get(1, `&month=${monthIndex + 1}`);
-        
-        setTransactions(transactionResponse);
+        const { transactions , valuesByType } = await transactionsApi.get(1, query);
+
+        setTransactions(transactions);
+        setStatistics(valuesByType);
       } catch (err) {
         toastError((err as Error).message);
       } finally {
@@ -39,7 +44,8 @@ export function ExtractComponent() {
     }
 
     fetchData();
-  }, [monthIndex, setLoading]);    
+  }, [monthIndex, setLoading]);   
+  
   const handleChange = (name: string, value: string | Date) => {
     setFilters({ ...filters, [name]: value });
   };
@@ -61,7 +67,11 @@ export function ExtractComponent() {
         />
       </FilterContainer>
 
-      <StatisticButtons />
+      <StatisticButtons 
+        statistics={statistics} 
+        stateValue={transactionType}
+        setStateValue={setTransactionType}
+      />
 
       <Title>Extrato Atual</Title>
 

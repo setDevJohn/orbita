@@ -19,6 +19,8 @@ export interface IFilters {
 export function ProjectionComponent () {
   const [filters, setFilters] = useState<IFilters>({ description: '', date: null });
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
+  const [statistics, setStatistics] = useState<Record<string, string>>({});
+  const [transactionType, setTransactionType] = useState('');
 
   const { monthIndex, setLoading } = useContext(HomeContext);
 
@@ -27,10 +29,13 @@ export function ProjectionComponent () {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
+      const query = `&month=${monthIndex + 1}&projection=true`;
+
       try {
-        const transactionResponse = await transactionsApi.get(1, `&month=${monthIndex + 1}`);
+        const { transactions , valuesByType } = await transactionsApi.get(1, query);
         
-        setTransactions(transactionResponse);
+        setTransactions(transactions);
+        setStatistics(valuesByType);
       } catch (err) {
         toastError((err as Error).message);
       } finally {
@@ -61,8 +66,12 @@ export function ProjectionComponent () {
           placeholder='dd / mm / aaaa'
         />
       </FilterContainer>
-    
-      <StatisticButtons />
+
+      <StatisticButtons 
+        statistics={statistics} 
+        stateValue={transactionType}
+        setStateValue={setTransactionType}
+      />
 
       <Title>Próximas Projeções</Title>
     

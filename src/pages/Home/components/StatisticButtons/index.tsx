@@ -1,13 +1,19 @@
 import { TransactionIcon } from '@components/TransactionIcon';
-import { useState } from 'react';
+import { mask } from '@utils/mask';
+import { Dispatch, SetStateAction } from 'react';
 
 import { ButtonContainer, ButtonFilter } from './styles';
 
-export function StatisticButtons () {
-  const [typeListFilter, setTypeListFilter] = useState<string>('');
+interface StatisticButtonsProps {
+  statistics: Record<string, string>;
+  stateValue: string;
+  setStateValue: Dispatch<SetStateAction<string>>;
+}
+
+export function StatisticButtons ({ statistics, stateValue, setStateValue }: StatisticButtonsProps) {
 
   function handleChangeTypeList(type: string) {
-    setTypeListFilter(prev => prev === type ? '' : type);
+    setStateValue(prev => prev === type ? '' : type);
   }
 
   return (
@@ -15,21 +21,21 @@ export function StatisticButtons () {
       <ButtonFilter
         type="button"
         $operationType='income'
-        $select={typeListFilter === 'income'}
+        $select={stateValue === 'income'}
         onClick={() => handleChangeTypeList('income')}
       >
         <TransactionIcon type="income" />
-        R$ 50,49
+        {mask.brlCurrency(statistics?.income ? statistics.income : '0')}
       </ButtonFilter>
 
       <ButtonFilter 
         type="button"
         $operationType='expense'
-        $select={typeListFilter === 'expense'}
+        $select={stateValue === 'expense'}
         onClick={() => handleChangeTypeList('expense')}
       >
         <TransactionIcon type="expense" />
-        R$ 50,49
+        {mask.brlCurrency(statistics?.expense ? statistics.expense : '0')}
       </ButtonFilter>
     </ButtonContainer>
   );
