@@ -2,6 +2,7 @@ import { Accounts } from '@pages/Accounts';
 import { Cards } from '@pages/Cards';
 import { Categories } from '@pages/Categories';
 import { Home } from '@pages/Home';
+import { Login } from '@pages/Login';
 import { NaviGation } from '@pages/Navigation';
 import { Notifications } from '@pages/Notifications';
 import { Profile } from '@pages/Profile';
@@ -14,6 +15,8 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to='/inicio' />} />
+
+        <Route path='/login' element={<Login />} />
 
         <Route path='/' element={<NaviGation />}>
           <Route index path='/inicio' element={<Home />} />

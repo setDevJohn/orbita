@@ -82,11 +82,7 @@ export function NaviGation () {
             <LuSettings size={25}/>
           </Item>
 
-          <Item
-            onClick={() => {
-              window.alert('Sair da conta');
-            }}
-          >
+          <Item onClick={() => navigate('/login')}>
             Sair
             <LuLogOut size={24}/>
           </Item>
