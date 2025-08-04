@@ -1,6 +1,7 @@
 import { HomeContext } from '@context/Home';
 import { accountsApi } from '@services/accounts';
 import { AccountRaw } from '@services/accounts/interface';
+import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastError } from '@utils/toast';
 import { useContext, useEffect, useState } from 'react';
@@ -17,6 +18,8 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     setLoading,
     monthIndex,
     setMonthIndex,
+    customDateFilter,
+    setCustomDateFilter,
     accontToggle,
     setAccontToggle,
     selectedAccountId,
@@ -41,11 +44,15 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   ];
   
   function handlePrevMonth () {
+    if(customDateFilter) { return setCustomDateFilter(null); }
+
     if (!monthIndex) { return setMonthIndex(11); }
     setMonthIndex(prev => (prev || 0) - 1);
   }
   
   function handleNextMonth () {
+    if(customDateFilter) { return setCustomDateFilter(null); }
+
     if (monthIndex === 11) { return setMonthIndex(0); }
     setMonthIndex(prev => (prev || 0)  + 1); 
   }
@@ -80,7 +87,7 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     <MainDetails>
       <MonthContainer>
         <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
-        <Month>{months[monthIndex || 0]}</Month>
+        <Month>{customDateFilter ? format.dateToDayAndMonth(customDateFilter.toISOString()) : months[monthIndex || 0]}</Month>
         <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
       </MonthContainer>
     

@@ -7,6 +7,8 @@ const HomeContext = createContext<IHomeContext>({
   setLoading: () => {},
   monthIndex: null,
   setMonthIndex: () => {},
+  customDateFilter: null,
+  setCustomDateFilter: () => {}, 
   accontToggle: false,
   setAccontToggle: () => {},
   selectedAccountId: 0,
@@ -22,6 +24,7 @@ const HomeContext = createContext<IHomeContext>({
 const HomeProvider = ({ children } : HomeProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [monthIndex, setMonthIndex] = useState<number | null>(null);
+  const [customDateFilter, setCustomDateFilter] = useState<Date | null>(null);
   const [accontToggle, setAccontToggle] = useState<boolean>(false);
   const [selectedAccountId, setSelectedAccountId] = useState<number>(0);
   const [showPrice, setShowPrice] = useState<boolean>(false);
@@ -33,6 +36,8 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     setLoading,
     monthIndex,
     setMonthIndex,
+    customDateFilter,
+    setCustomDateFilter,
     accontToggle,
     setAccontToggle,
     selectedAccountId,
@@ -50,7 +55,8 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     menuRegister,
     monthIndex,
     selectedAccountId,
-    showPrice
+    showPrice,
+    customDateFilter
   ]);
 
   return (

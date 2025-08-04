@@ -11,25 +11,20 @@ import { StatisticButtons } from '../StatisticButtons';
 
 import { FilterContainer } from './styles';
 
-export interface IFilters {
-  description: string;
-  date: Date | null;
-}
-
 export function ProjectionComponent () {
-  const [filters, setFilters] = useState<IFilters>({ description: '', date: null });
+  const [description, setDescription] = useState('');
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
   const [statistics, setStatistics] = useState<Record<string, string>>({});
   const [transactionType, setTransactionType] = useState('');
 
-  const { monthIndex, setLoading } = useContext(HomeContext);
+  const { monthIndex, customDateFilter, setCustomDateFilter, setLoading } = useContext(HomeContext);
 
   useEffect(() => {
     async function fetchData() {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
-      const query = `projection=true${!filters.date ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${filters.description ? `&description=${filters.description}` : ''}${filters.date ? `&date=${filters.date.toJSON().split('T')[0]}` : ''}`;
+      const query = `projection=true${!customDateFilter ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}${customDateFilter ? `&date=${customDateFilter.toJSON().split('T')[0]}` : ''}`;
 
       try {
         const { transactions , valuesByType } = await transactionsApi.get(1, query);
@@ -44,10 +39,13 @@ export function ProjectionComponent () {
     }
 
     fetchData();
-  }, [monthIndex, transactionType, setLoading, filters.description, filters.date]);  
+  }, [monthIndex, transactionType, setLoading, description, customDateFilter]);  
 
   const handleChange = (name: string, value: string | Date) => {
-    setFilters({ ...filters, [name]: value });
+    if (name === 'description') {
+      return setDescription(value as string);
+    }
+    setCustomDateFilter(value as Date);
   };
 
   return (
@@ -56,12 +54,12 @@ export function ProjectionComponent () {
         <DefaultInput 
           name='description'
           placeholder='Descrição / Categoria'
-          value={filters.description}
+          value={description}
           handleChange={handleChange}
         />
       
         <DateInput
-          startDate={filters.date}
+          startDate={customDateFilter}
           handleChange={(date) => handleChange('date', date as Date)}
           placeholder='dd / mm / aaaa'
         />

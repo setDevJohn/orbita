@@ -4,7 +4,7 @@ const currencyToDecimal = (value: string) => {
   return Number(value) / 100;
 };
 
-const dateToDayAndMonth = (value: Date) => {
+const dateToDayAndMonth = (value: Date | string) => {
   const date = value.toString().split('T')[0];
   const dayAndMonth = date.split('-').reverse().slice(0, 2).join('/');
   return dayAndMonth;

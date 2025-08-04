@@ -9,6 +9,8 @@ export interface IHomeContext {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   monthIndex: number | null,
   setMonthIndex: React.Dispatch<React.SetStateAction<number | null>>,
+  customDateFilter: Date |null,
+  setCustomDateFilter: React.Dispatch<React.SetStateAction<Date | null>>,
   accontToggle: boolean,
   setAccontToggle: React.Dispatch<React.SetStateAction<boolean>>,
   selectedAccountId: number,
