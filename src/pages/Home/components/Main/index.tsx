@@ -20,7 +20,7 @@ export function MainComponent() {
       if (monthIndex === null) { return; } 
       setLoading(true);
 
-      const transactionQuery = `&month=${monthIndex + 1}&limit=5&extract=true`;
+      const transactionQuery = `month=${monthIndex + 1}&limit=5`;
       
       try {
         const [cardResponse, transactionResponse] = await Promise.all([
@@ -44,7 +44,7 @@ export function MainComponent() {
     <>
       <CardList cardList={cardList} />
 
-      <Title>Últimas transações</Title>
+      <Title>Últimas atualizações</Title>
 
       <ExtractList list={transactions}/>
     </>
