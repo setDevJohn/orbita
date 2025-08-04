@@ -11,7 +11,9 @@ import { StatisticButtons } from '../StatisticButtons';
 
 import { FilterContainer } from './styles';
 
-export function ProjectionComponent () {
+type PageType = 'extract' | 'projection';
+
+export function TransactionDetails({ type }: { type: PageType }) {
   const [description, setDescription] = useState('');
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
   const [statistics, setStatistics] = useState<Record<string, string>>({});
@@ -24,11 +26,11 @@ export function ProjectionComponent () {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
-      const query = `projection=true${!customDateFilter ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}${customDateFilter ? `&date=${customDateFilter.toJSON().split('T')[0]}` : ''}`;
+      const query = `${type}=true${!customDateFilter ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}${customDateFilter ? `&date=${customDateFilter.toJSON().split('T')[0]}` : ''}`;
 
       try {
         const { transactions , valuesByType } = await transactionsApi.get(1, query);
-        
+
         setTransactions(transactions);
         setStatistics(valuesByType);
       } catch (err) {
@@ -39,13 +41,18 @@ export function ProjectionComponent () {
     }
 
     fetchData();
-  }, [monthIndex, transactionType, setLoading, description, customDateFilter]);  
-
+  }, [customDateFilter, description, monthIndex, setLoading, transactionType, type]);   
+  
   const handleChange = (name: string, value: string | Date) => {
     if (name === 'description') {
       return setDescription(value as string);
     }
     setCustomDateFilter(value as Date);
+  };
+
+  const pageTitles: Record<PageType, string> = {
+    extract: 'Extrato Atual',
+    projection: 'Próximas Projeções',
   };
 
   return (
@@ -57,7 +64,7 @@ export function ProjectionComponent () {
           value={description}
           handleChange={handleChange}
         />
-      
+
         <DateInput
           startDate={customDateFilter}
           handleChange={(date) => handleChange('date', date as Date)}
@@ -71,8 +78,8 @@ export function ProjectionComponent () {
         setStateValue={setTransactionType}
       />
 
-      <Title>Próximas Projeções</Title>
-    
+      <Title>{ pageTitles[ type ] }</Title>
+
       <ExtractList list={transactions} />
     </>
   );

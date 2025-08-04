@@ -1,5 +1,4 @@
-import { ExtractComponent } from './Extract';
 import { MainComponent } from './Main';
-import { ProjectionComponent } from './Projection';
+import { TransactionDetails } from './TransactionDetails';
 
-export { ExtractComponent, ProjectionComponent, MainComponent };
+export { TransactionDetails, MainComponent };
