@@ -6,7 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   preview: {
-    allowedHosts: ['wallet.johndevstudio.com'],
+    allowedHosts: ['orbita.johndevstudio.com'],
   },	
   resolve: {
     alias: {
