@@ -29,7 +29,7 @@ export function ExtractComponent() {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
-      const query = `&month=${monthIndex + 1}&extract=true`;
+      const query = `extract=true${!filters.date ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${filters.description ? `&description=${filters.description}` : ''}${filters.date ? `&date=${filters.date.toJSON().split('T')[0]}` : ''}`;
 
       try {
         const { transactions , valuesByType } = await transactionsApi.get(1, query);
@@ -44,7 +44,7 @@ export function ExtractComponent() {
     }
 
     fetchData();
-  }, [monthIndex, setLoading]);   
+  }, [monthIndex, transactionType, setLoading, filters.description, filters.date]);   
   
   const handleChange = (name: string, value: string | Date) => {
     setFilters({ ...filters, [name]: value });
@@ -55,7 +55,7 @@ export function ExtractComponent() {
       <FilterContainer>
         <DefaultInput 
           name='description'
-          placeholder='Descrição'
+          placeholder='Descrição / Categoria'
           value={filters.description}
           handleChange={handleChange}
         />
