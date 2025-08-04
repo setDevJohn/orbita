@@ -11,7 +11,6 @@ interface StatisticButtonsProps {
 }
 
 export function StatisticButtons ({ statistics, stateValue, setStateValue }: StatisticButtonsProps) {
-
   function handleChangeTypeList(type: string) {
     setStateValue(prev => prev === type ? '' : type);
   }
