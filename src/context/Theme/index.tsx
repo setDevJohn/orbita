@@ -25,7 +25,7 @@ const commonAttr = {
   primaryFont: '"Inter", sans-serif',
   bigTitle: '28px',
   title: '24px',
-  subtitle: '20px',
+  subtitle: '22px',
   bigText: '18px',
   normalText: '16px',
   smallText: '14px',
