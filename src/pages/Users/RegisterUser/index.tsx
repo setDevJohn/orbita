@@ -4,12 +4,14 @@ import { toastError, toastWarn } from '@utils/toast';
 import { useState } from 'react';
 import { Title } from 'styles/main';
 
-import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from './styles';
+import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../styles';
 
-export const Login = () => {
+export const RegisterUser = () => {
   const [formValue, setFormValue] = useState({
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    passwordConfirmation: '',
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,6 +23,10 @@ export const Login = () => {
 
     if (formValue.password.length < 8) {
       return toastWarn('A senha deve ter no mínimo 8 caracteres');
+    }
+
+    if (formValue.password !== formValue.passwordConfirmation) {
+      return toastWarn('As senhas devem ser iguais');
     }
 
     try {
@@ -39,6 +45,14 @@ export const Login = () => {
 
   const fields = [
     {
+      label: 'Nome',
+      name: 'name',
+      type: 'text',
+      placeholder: 'Nome Sobrenome',
+      value: formValue.name,
+      handleChange,
+    },
+    {
       label: 'Email',
       name: 'email',
       type: 'email',
@@ -54,13 +68,21 @@ export const Login = () => {
       value: formValue.password,
       handleChange,
     },
+    {
+      label: 'Confirmação de senha',
+      name: 'passwordConfirmation',
+      type: 'password',
+      placeholder: '***********',
+      value: formValue.passwordConfirmation,
+      handleChange,
+    },
   ];
 
   return (
     <LoginContainer>
       <FormContainer>
         <FormHeader>
-          <Title $bigSize >Login</Title>
+          <Title $bigSize >Registro</Title>
         </FormHeader>
 
         <Form onSubmit={handleSubmit}>
@@ -68,12 +90,11 @@ export const Login = () => {
             <TextInputWithLabel key={field.name} {...field} labelInColumn />
           ))}
 
-          <SubmitButton text="Entrar" />
+          <SubmitButton text="Registre-se" />
         </Form>
 
         <FormFooter>
-          <a href="/register">Esqueceu sua senha?</a>
-          <a href="/register">Não tem uma conta? Crie uma!</a>
+          <a href="/login">Já possui um cadastro? Faça login</a>
         </FormFooter>
       </FormContainer>
     </LoginContainer>

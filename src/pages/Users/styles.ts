@@ -46,4 +46,9 @@ export const FormFooter = styled.footer`
     margin-top: 10px;
   }
 
+  span {
+    width: 100%;
+    text-align: center;
+    color: #b3b3b3;
+  }
 `;
