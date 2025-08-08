@@ -13,7 +13,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Container, FooterSideBar, IconContainer, Item, List, MenuIcon, SideBar } from './styles';
 
-export function NaviGation () {
+export function Navigation () {
   const [sideBar, setSideBar] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('');
 
