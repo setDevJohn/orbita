@@ -17,6 +17,7 @@ export const FormContainer = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.mainBackground};
   box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -2px #0000001a;
+  border: 1px solid ${({ theme }) => `${theme.borderColor}55`};
   border-radius: 20px;
 `;
 
