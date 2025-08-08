@@ -21,6 +21,7 @@ export const FormContainer = styled.div`
 `;
 
 export const FormHeader = styled.header`
+  position: relative;
   padding: 10px;
 `;
 
