@@ -12,8 +12,9 @@ import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 export const AppRoutes = () => {
-  const [authencticated, setAuthencticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(true);
 
+  setAuthenticated(true);
   const routes = {
     publics: [
       { path: '/login', element: <Login /> },
@@ -35,7 +36,7 @@ export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        { !authencticated ? (
+        { !authenticated ? (
           <>
             <Route path='/' element={ <Navigate to='/login' /> } />
 
