@@ -1,5 +1,5 @@
 // src/context/AuthContext.tsx
-import { api } from '@services/api';
+import { setupInterceptors } from '@services/api';
 import { usersApi } from '@services/users';
 import { UserFormLogin } from '@services/users/interface';
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
@@ -23,10 +23,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLoadingAuth(true);
 
       await usersApi.verify();
-      console.log('Verificação de autenticação bem-sucedida');
       setAuthenticated(true);
     } catch {
-      console.error('Erro ao verificar autenticação');
       setAuthenticated(false);
     } finally {
       setLoadingAuth(false);
@@ -38,11 +36,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await checkAuthentication();
   }, [checkAuthentication]);
 
-  const logout = useCallback(() => {
-    api.post('/auth/logout').finally(() => {
-      setAuthenticated(false);
-    });
+  const logout = useCallback(async () => {
+    await usersApi.logout();
+    setAuthenticated(false);
   }, []);
+
+  useEffect(() => {
+    setupInterceptors(logout);
+  }, [logout]);
 
   useEffect(() => {
     checkAuthentication();

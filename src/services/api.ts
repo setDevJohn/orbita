@@ -11,12 +11,14 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.request.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      // logout();
+export function setupInterceptors(logout: () => void) {
+  api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response?.status === 401) {
+        logout();
+      }
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
-  }
-);
+  );
+}

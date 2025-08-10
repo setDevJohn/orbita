@@ -21,6 +21,15 @@ async function register (data: UserFormPayload) {
   }
 }
 
+async function logout () {
+  try {
+    const { data: response } = await api.post('/users/logout');
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 async function verify () {
   try {
     const { data: response } = await api.get('/users/verify');
@@ -34,4 +43,5 @@ export const usersApi = {
   login,
   register,
   verify,
+  logout
 };
