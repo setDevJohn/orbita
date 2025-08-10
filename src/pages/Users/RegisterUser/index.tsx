@@ -1,18 +1,23 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
+import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastWarn } from '@utils/toast';
+import { toastError, toastSuccess, toastWarn } from '@utils/toast';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Title } from 'styles/main';
 
 import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../styles';
 
 export const RegisterUser = () => {
+  const [loading, setLoading] = useState(false);
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
   });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,8 +26,8 @@ export const RegisterUser = () => {
       return toastWarn('Preencha todos os campos!');
     }
 
-    if (formValue.password.length < 8) {
-      return toastWarn('A senha deve ter no mínimo 8 caracteres');
+    if (formValue.password.length < 6) {
+      return toastWarn('A senha deve ter no mínimo 6 caracteres');
     }
 
     if (formValue.password !== formValue.passwordConfirmation) {
@@ -30,16 +35,21 @@ export const RegisterUser = () => {
     }
 
     try {
-      const response = await usersApi.login(formValue);
-      console.log(response);
+      setLoading(true);
+
+      await usersApi.register(formValue);
+      
+      toastSuccess('Usuário registrado com sucesso!');
+      navigate('/login');
     } catch (err) {
       console.error(err);
       toastError((err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleChange = (name: string, value: string) => {
-    console.log(name);
     setFormValue(prev => ({ ...prev, [name]: value }));
   };
 
@@ -97,6 +107,8 @@ export const RegisterUser = () => {
           <a href="/login">Já possui um cadastro? Faça login</a>
         </FormFooter>
       </FormContainer>
+
+      {loading && <LoadingPage />}
     </LoginContainer>
   );
 };
