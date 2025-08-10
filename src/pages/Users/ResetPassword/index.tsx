@@ -25,14 +25,11 @@ export const ResetPassword = () => {
     try {
       if (type === 'email') {
         setEmailSent(true);
-        console.log(type);
       } else if (type === 'token') {
         setVerifiedToken(true);
-        console.log(type);
       } else {
         setEmailSent(false);
         setVerifiedToken(false);
-        console.log(type);
       }
     } catch (err) {
       console.error(err);
@@ -90,7 +87,8 @@ export const ResetPassword = () => {
             style={{
               position: 'absolute',
               top: '31px',
-              left: '-10px'
+              left: '-10px',
+              cursor: 'pointer'
             }}
           />
           <Title>Recuperação de Senha</Title>

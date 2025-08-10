@@ -46,11 +46,13 @@ export const FormFooter = styled.footer`
     font-size: ${({ theme }) => theme.smallText};
     cursor: pointer;
     margin-top: 10px;
+    padding: 0 10px;
   }
 
   span {
     width: 100%;
     text-align: center;
     color: #b3b3b3;
+    padding: 0 10px;
   }
 `;

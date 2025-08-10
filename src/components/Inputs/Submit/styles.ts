@@ -11,4 +11,5 @@ export const SubmitStyled = styled.input`
   margin: 10px 0;
   border: none;
   outline: none;
+  cursor: pointer;
 `;
