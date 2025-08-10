@@ -21,7 +21,17 @@ async function register (data: UserFormPayload) {
   }
 }
 
+async function verify () {
+  try {
+    const { data: response } = await api.get('/users/verify');
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 export const usersApi = {
   login,
   register,
+  verify,
 };
