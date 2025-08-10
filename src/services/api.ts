@@ -6,12 +6,17 @@ if (!apiBaseUrl) {
   throw new Error('Variável de ambiente VITE_API_URL não encontrada!');
 }
 
-export const api = axios.create({ baseURL: apiBaseUrl });
-
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+export const api = axios.create({ 
+  baseURL: apiBaseUrl,
+  withCredentials: true,
 });
+
+api.interceptors.request.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // logout();
+    }
+    return Promise.reject(error);
+  }
+);
