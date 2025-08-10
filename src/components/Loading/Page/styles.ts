@@ -20,3 +20,9 @@ export const GrowingIcon = styled.div`
   color: ${({ theme }) => theme.contrastColor};
   animation: ${growFade} 1.5s infinite;
 `;
+
+export const BackgroundColor = styled.div`
+  background-color: ${({ theme }) => theme.mainBackground};
+  width: 100%;
+  height: 100svh;
+`;
