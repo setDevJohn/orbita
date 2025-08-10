@@ -1,16 +1,20 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
-import { usersApi } from '@services/users';
+import { LoadingPage } from '@components/Loading';
+import { AuthContext } from '@context/Auth';
 import { toastError, toastWarn } from '@utils/toast';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Title } from 'styles/main';
 
 import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../styles';
 
 export const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [formValue, setFormValue] = useState({
-    email: '',
-    password: ''
+    email: 'jhony00._@hotmail.com',
+    password: '123456'
   });
+
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,21 +23,23 @@ export const Login = () => {
       return toastWarn('Preencha todos os campos!');
     }
 
-    if (formValue.password.length < 8) {
-      return toastWarn('A senha deve ter no mínimo 8 caracteres');
+    if (formValue.password.length < 6) {
+      return toastWarn('A senha deve ter no mínimo 6 caracteres');
     }
 
     try {
-      const response = await usersApi.login(formValue);
-      console.log(response);
+      setLoading(true);
+
+      await login(formValue);
     } catch (err) {
       console.error(err);
       toastError((err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleChange = (name: string, value: string) => {
-    console.log(name);
     setFormValue(prev => ({ ...prev, [name]: value }));
   };
 
@@ -76,6 +82,8 @@ export const Login = () => {
           <a href="/registrar">Não tem uma conta? Crie uma!</a>
         </FormFooter>
       </FormContainer>
+
+      {loading && <LoadingPage />}
     </LoginContainer>
   );
 };
