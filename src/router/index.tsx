@@ -1,3 +1,5 @@
+import { LoadingPage } from '@components/Loading';
+import { AuthContext } from '@context/Auth';
 import { Accounts } from '@pages/Accounts';
 import { Cards } from '@pages/Cards';
 import { Categories } from '@pages/Categories';
@@ -8,13 +10,12 @@ import { Profile } from '@pages/Profile';
 import { Register } from '@pages/Register';
 import { Settings } from '@pages/Settings';
 import { Login, RegisterUser, ResetPassword } from '@pages/Users';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 export const AppRoutes = () => {
-  const [authenticated, setAuthenticated] = useState(true);
+  const { authenticated, loadingAuth } = useContext(AuthContext);
 
-  setAuthenticated(true);
   const routes = {
     publics: [
       { path: '/login', element: <Login /> },
@@ -22,7 +23,6 @@ export const AppRoutes = () => {
       { path: '/recuperar-senha', element: <ResetPassword /> },
     ],
     privates: [
-      { path: '/inicio', element: <Home /> },
       { path: '/inicio/registro/:type', element: <Register /> },
       { path: '/perfil', element: <Profile /> },
       { path: '/contas', element: <Accounts /> },
@@ -33,50 +33,34 @@ export const AppRoutes = () => {
     ]
   };
 
+  if (loadingAuth) {
+    return <LoadingPage backgroundColor/>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={ <Navigate to={authenticated ? '/inicio' : '/login'} /> } />
+
         { !authenticated ? (
           <>
-            <Route path='/' element={ <Navigate to='/login' /> } />
-
             {routes.publics.map(({ path, element }, i) => (
-              <Route key={i} path={ path } element={ element } />
+              <Route key={i} path={path} element={element} />
             ))}
-
-            <Route path='*' element={ <Navigate to='/login' /> } />
           </>
         ) : (
-          <>
-            <Route path='/' element={ <Navigate to='/inicio' /> } />
+          <Route path="/" element={ <Navigation /> }> 
+            <Route index path='/inicio' element={<Home />} />
+          
+            {routes.privates.map(({ path, element }, i) => (
+              <Route key={i} path={path} element={element} />
+            ))}
+          </Route>
+        )}
 
-            <Route path='/' element={ <Navigation /> }>
-              {routes.privates.map(({ path, element }, i) => (
-                <Route key={i} index={ i === 0 } path={ path } element={ element } />
-              ))}
-            </Route>
-
-            <Route path='*' element={ <Navigate to='/inicio' /> } />
-          </>
-        ) }
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
 };
-
-//  <Route path='/' element={<Navigate to='/inicio' />} />
-
-//   <Route path='/login' element={<Login />} />
-//   <Route path='/registrar' element={<RegisterUser />} />
-//   <Route path='/recuperar-senha' element={<ResetPassword />} />
-
-//   <Route path='/' element={<NaviGation />}>
-//     <Route index path='/inicio' element={<Home />} />
-//     <Route path='/inicio/registro/:type' element={<Register />} />
-//     <Route path='/perfil' element={<Profile /> } />
-//     <Route path='/contas' element={<Accounts /> } />
-//     <Route path='/cartoes' element={<Cards /> } />
-//     <Route path='/categorias' element={<Categories /> } />
-//     <Route path='/notificacoes' element={<Notifications /> } />
-//     <Route path='/configuracoes' element={<Settings /> } />
-//   </Route>
