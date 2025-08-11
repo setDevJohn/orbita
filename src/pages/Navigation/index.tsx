@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import { LoadingPage } from '@components/Loading';
+import { AuthContext } from '@context/Auth';
+import { toastError } from '@utils/toast';
+import { useContext, useEffect, useState } from 'react';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { BsFillCreditCardFill } from 'react-icons/bs';
 import { BsBank2 } from 'react-icons/bs';
@@ -13,9 +16,12 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { Container, FooterSideBar, IconContainer, Item, List, MenuIcon, SideBar } from './styles';
 
-export function NaviGation () {
+export function Navigation () {
   const [sideBar, setSideBar] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+
+  const { logout } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,6 +30,18 @@ export function NaviGation () {
     const pathName = location.pathname;
     setSelected(pathName);
   }, [location]);
+  
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+
+      await logout();
+    } catch (error) {
+      toastError((error as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const list = [
     {  path: '/inicio', label: 'Início', icon: <IoHome size={22}/> },
@@ -82,11 +100,7 @@ export function NaviGation () {
             <LuSettings size={25}/>
           </Item>
 
-          <Item
-            onClick={() => {
-              window.alert('Sair da conta');
-            }}
-          >
+          <Item onClick={handleLogout}>
             Sair
             <LuLogOut size={24}/>
           </Item>
@@ -94,6 +108,8 @@ export function NaviGation () {
       </SideBar>
 
       <Outlet/>
+
+      {loading && <LoadingPage /> }
     </Container>
   );
 }
