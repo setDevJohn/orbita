@@ -9,7 +9,7 @@ interface AuthContextProps {
   loadingAuth: boolean;
   checkAuthentication: () => Promise<void>;
   login: (userData: UserFormLogin) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
