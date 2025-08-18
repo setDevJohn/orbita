@@ -1,7 +1,7 @@
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { UserFormLogin, UserFormPayload } from './interface';
+import { UserBase, UserFormLogin, UserFormPayload } from './interface';
 
 async function login (data: UserFormLogin) {
   try {
@@ -39,9 +39,48 @@ async function verify () {
   }
 }
 
+async function sendEmailToRecoverPassword (email: string): Promise<UserBase> {
+  try {
+    const { data: response } = await api.post(
+      '/users/password-recovery/send-email',
+      { email }
+    );
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function confirmTokenToRecoverPassword (userId: number, token: string): Promise<UserBase> {
+  try {
+    const { data: response } = await api.post(
+      '/users/password-recovery/confirm-token',
+      { userId, token }
+    );
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function recoverPassword (userId: number, password: string, token: string): Promise<UserBase> {
+  try {
+    const { data: response } = await api.patch(
+      '/users/password-recovery',
+      { userId, password, token }
+    );
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 export const usersApi = {
   login,
   register,
   verify,
-  logout
+  logout,
+  sendEmailToRecoverPassword,
+  confirmTokenToRecoverPassword,
+  recoverPassword
 };
