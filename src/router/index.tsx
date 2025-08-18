@@ -9,7 +9,8 @@ import { Notifications } from '@pages/Notifications';
 import { Profile } from '@pages/Profile';
 import { Register } from '@pages/Register';
 import { Settings } from '@pages/Settings';
-import { Login, RegisterUser, ResetPassword } from '@pages/Users';
+import { Login, RegisterUser } from '@pages/Users';
+import { EmailStep, NewPasswordStep, TokenStep } from '@pages/Users/ResetPassword';
 import { useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
@@ -20,7 +21,9 @@ export const AppRoutes = () => {
     publics: [
       { path: '/login', element: <Login /> },
       { path: '/registrar', element: <RegisterUser /> },
-      { path: '/recuperar-senha', element: <ResetPassword /> },
+      { path: '/recuperar-senha', element: <EmailStep /> },
+      { path: '/recuperar-senha/token', element: <TokenStep /> },
+      { path: '/recuperar-senha/nova-senha', element: <NewPasswordStep /> },
     ],
     privates: [
       { path: '/inicio/registro/:type', element: <Register /> },
