@@ -1,18 +1,19 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
+import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastWarn } from '@utils/toast';
+import { toastError, toastSuccess, toastWarn } from '@utils/toast';
 import { FormEvent, useState } from 'react';
-import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Title } from 'styles/main';
 
-import { Form, FormContainer, FormHeader, LoginContainer } from '../styles';
+import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../styles';
 
 export const NewPasswordStep = () => {
   const [passwordForm, setPasswordForm] = useState({
     password: '',
     passwordConfirmation: ''
   });
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,25 +24,35 @@ export const NewPasswordStep = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!userId || !token) {
+      toastError('Erro ao obeter informação do usuário');
+      return navigate('/recuperar-senha'); 
+    }
+
+    if (!passwordForm.password) {
+      return toastWarn('Informe sua nova senha');
+    }
+
+    if (passwordForm.password.length < 6) {
+      return toastWarn('A senha deve ter no mínimo 6 caracteres');
+    }
+
+    if (passwordForm.password !== passwordForm.passwordConfirmation) {
+      return toastWarn('As senhas não coincidem');
+    } 
+
     try {
-      if (!userId || !token) {
-        toastError('Erro ao obeter informação do usuário');
-        return navigate('/recuperar-senha'); 
-      }
-
-      if (!passwordForm.password) {
-        return toastWarn('Informe sua nova senha');
-      }
-
-      if (passwordForm.password !== passwordForm.passwordConfirmation) {
-        return toastWarn('As senhas não coincidem');
-      } 
+      setLoading(true);
 
       await usersApi.recoverPassword(+userId, passwordForm.password, token);
-      navigate('/');
+
+      toastSuccess('Senha redefinida com sucesso');
+      navigate('/login');
     } catch (err) {
       console.error(err);
       toastError((err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,17 +81,6 @@ export const NewPasswordStep = () => {
     <LoginContainer>
       <FormContainer>
         <FormHeader>
-          <IoArrowBackOutline
-            size={27}
-            fill='#ffffff'
-            onClick={() => navigate('/login')}
-            style={{
-              position: 'absolute',
-              top: '31px',
-              left: '-10px',
-              cursor: 'pointer'
-            }}
-          />
           <Title>Recuperação de Senha</Title>
         </FormHeader>
 
@@ -95,7 +95,13 @@ export const NewPasswordStep = () => {
           
           <SubmitButton text='Redefinir' />
         </Form>
+
+        <FormFooter>
+          <a href="/login">Voltar para o login</a>
+        </FormFooter>
       </FormContainer>
+      
+      {loading && <LoadingPage />}
     </LoginContainer>
   );
 };

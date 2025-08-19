@@ -1,8 +1,8 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
+import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastWarn } from '@utils/toast';
+import { toastError, toastWarn } from '@utils/toast';
 import { FormEvent, useState } from 'react';
-import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import { Title } from 'styles/main';
 
@@ -10,21 +10,28 @@ import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../
 
 export const EmailStep = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!email) {
+      return toastWarn('Informe o e-mail da sua conta');
+    }
 
     try {
-      if (!email) {
-        return toastWarn('Informe o e-mail da sua conta');
-      }
+      setLoading(true);
+      
       const userResponse = await usersApi.sendEmailToRecoverPassword(email);
 
       navigate(`/recuperar-senha/token?userId=${userResponse.id}`);
     } catch (err) {
       console.error(err);
+      toastError((err as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,17 +48,6 @@ export const EmailStep = () => {
     <LoginContainer>
       <FormContainer>
         <FormHeader>
-          <IoArrowBackOutline
-            size={27}
-            fill='#ffffff'
-            onClick={() => navigate('/login')}
-            style={{
-              position: 'absolute',
-              top: '31px',
-              left: '-10px',
-              cursor: 'pointer'
-            }}
-          />
           <Title>Recuperação de Senha</Title>
         </FormHeader>
 
@@ -68,8 +64,12 @@ export const EmailStep = () => {
           <span>
             Se existir um cadastro nesse email será enviado um token para redefinição da senha
           </span>
+
+          <a href="/login">Voltar para o login</a>
         </FormFooter>
       </FormContainer>
+
+      {loading && <LoadingPage />}
     </LoginContainer>
   );
 };
