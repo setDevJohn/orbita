@@ -278,7 +278,7 @@ export function Register() {
             />
           </ToggleDropdown>
           
-          {pageConfig.title !== 'Receitas' && (
+          {pageConfig.title === 'Despesas' && (
             <ToggleDropdown text='Transferência entre contas' noAlign>
               <SelectInput
                 label='Conta'
