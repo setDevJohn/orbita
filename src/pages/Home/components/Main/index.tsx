@@ -42,10 +42,10 @@ export function MainComponent() {
 
   return (
     <>
+      <Title>Meus cartões</Title>
       <CardList cardList={cardList} />
 
       <Title>Últimas atualizações</Title>
-
       <ExtractList list={transactions}/>
     </>
   );
