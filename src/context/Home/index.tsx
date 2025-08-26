@@ -13,8 +13,6 @@ const HomeContext = createContext<IHomeContext>({
   setAccontToggle: () => {},
   selectedAccountId: 0,
   setSelectedAccountId: () => {},
-  showPrice: false,
-  setShowPrice: () => {},
   menuRegister: false,
   setMenuRegister: () => {},
   currentPage: 'home',
@@ -27,7 +25,6 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
   const [customDateFilter, setCustomDateFilter] = useState<Date | null>(null);
   const [accontToggle, setAccontToggle] = useState<boolean>(false);
   const [selectedAccountId, setSelectedAccountId] = useState<number>(0);
-  const [showPrice, setShowPrice] = useState<boolean>(false);
   const [menuRegister, setMenuRegister] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
 
@@ -42,8 +39,6 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     setAccontToggle,
     selectedAccountId,
     setSelectedAccountId,
-    showPrice,
-    setShowPrice,
     menuRegister,
     setMenuRegister,
     currentPage,
@@ -55,7 +50,6 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     menuRegister,
     monthIndex,
     selectedAccountId,
-    showPrice,
     customDateFilter
   ]);
 
