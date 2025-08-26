@@ -71,7 +71,7 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
         setAccounts(accounts);
 
         if (!selectedAccountId) {
-          setSelectedAccountId(accounts[0].id);
+          setSelectedAccountId(accounts[0]?.id);
         }
       } catch (err) {
         toastError((err as Error).message);
