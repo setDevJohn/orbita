@@ -28,7 +28,7 @@ export const MonthContainer = styled.div`
   border-radius: 0 0 10px 10px;
   background: ${({ theme }) => theme.lightBackground};
   box-shadow: 1px 2px 10px #0004;
-  padding: 18px 15px;
+  padding: 19px 15px;
   margin-bottom: 15px;
 `;
 
