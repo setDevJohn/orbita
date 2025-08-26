@@ -39,8 +39,9 @@ export const AccountList = styled.ul<{$open: boolean}>`
   gap: 2px;
   background-color: ${({ theme }) => theme.mainBackground};
   border-radius: 4px;
-  width: 140px;
-  padding: ${({ $open }) => $open ? '5px' : '0px'};
+  min-width: 140px;
+  max-width: 200px;
+  padding: ${({ $open }) => $open ? '5px 10px' : '0px'};
   margin: 5px 0 0 10px;
   transition: all 0.4s ease;
   overflow: auto;
@@ -48,6 +49,9 @@ export const AccountList = styled.ul<{$open: boolean}>`
 `;
 
 export const AccountItem = styled.li`
+  background-color: #494c4f;
+  padding: 3px;
+  border-radius: 3px;
 `;
 
 export const ToggleAccount = styled.div`
@@ -65,10 +69,11 @@ export const PriceContainer = styled.div`
 
 export const CurrentAccount = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 4px;
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
   margin: 30px 0 0 15px;
-  width: 130px;
+  min-width: 130px;
+  max-width: 200px;
 `;
