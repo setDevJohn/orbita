@@ -2,8 +2,12 @@ import styled from 'styled-components';
 
 export const Price = styled.p`
   color: ${({ theme }) => theme.textColor};
-  font-size: ${({ theme }) => theme.subtitle};
+  font-size: 36px;
   font-weight: 500;
+`;
+
+export const Span = styled.span`
+  font-size: ${({ theme }) => theme.normalSpan};
 `;
 
 export const Month = styled.div`
@@ -16,16 +20,26 @@ export const Month = styled.div`
 export const MainDetails = styled.section`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.linearGradient};
-  box-shadow: 1px 2px 10px #0004;
-  padding: 10px;
-  margin: 10px;
 `;
 
 export const MonthContainer = styled.div`
   display: flex;
   align-items: center;
+  border-radius: 0 0 10px 10px;
+  background: ${({ theme }) => theme.lightBackground};
+  box-shadow: 1px 2px 10px #0004;
+  padding: 18px 15px;
+  margin-bottom: 15px;
+`;
+
+export const AccountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: ${({ theme }) => theme.linearGradient};;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 20px;
 `;
 
 export const AccountList = styled.ul<{$open: boolean}>`
@@ -42,29 +56,24 @@ export const AccountList = styled.ul<{$open: boolean}>`
   min-width: 140px;
   max-width: 200px;
   padding: ${({ $open }) => $open ? '5px 10px' : '0px'};
-  margin: 5px 0 0 10px;
   transition: all 0.4s ease;
   overflow: auto;
-  max-height: ${({ $open }) => $open ? '65px' : '0px' };
+  max-height: ${({ $open }) => $open ? '80px' : '0px' };
 `;
 
 export const AccountItem = styled.li`
   background-color: #494c4f;
   padding: 3px;
   border-radius: 3px;
+  width: 100%;
 `;
 
 export const ToggleAccount = styled.div`
   position: relative;
-`;
-
-export const PriceContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: end;
-  width: 100%;
-  padding: 10px 15px; 
-  margin-top: 12px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7px;
 `;
 
 export const CurrentAccount = styled.div`
@@ -73,7 +82,12 @@ export const CurrentAccount = styled.div`
   gap: 4px;
   color: ${({ theme }) => theme.textColor};
   font-size: ${({ theme }) => theme.normalText};
-  margin: 30px 0 0 15px;
-  min-width: 130px;
   max-width: 200px;
+
+  p {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;

@@ -5,11 +5,9 @@ import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastError } from '@utils/toast';
 import { useContext, useEffect, useState } from 'react';
-import { BsFillEyeFill } from 'react-icons/bs';
 import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright, IoMdArrowDropup } from 'react-icons/io';
-import { RiEyeCloseFill } from 'react-icons/ri';
 
-import { AccountItem, AccountList, CurrentAccount, MainDetails, Month, MonthContainer, Price, PriceContainer, ToggleAccount } from './styles';
+import { AccountContainer, AccountItem, AccountList, CurrentAccount, MainDetails, Month, MonthContainer, Price, Span, ToggleAccount } from './styles';
 
 export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
@@ -24,8 +22,6 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     setAccontToggle,
     selectedAccountId,
     setSelectedAccountId,
-    showPrice,
-    setShowPrice,
   } = useContext(HomeContext);
 
   const months = [
@@ -87,15 +83,19 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     <MainDetails>
       <MonthContainer>
         <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
+
         <Month>{customDateFilter ? format.dateToDayAndMonth(customDateFilter.toISOString()) : months[monthIndex || 0]}</Month>
+
         <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
       </MonthContainer>
     
       {mainPage &&(
-        <>
+        <AccountContainer>
           <ToggleAccount>
             <CurrentAccount>
-              {accounts.find(({ id }) => id === selectedAccountId)?.name}
+              <p>
+                {accounts.find(({ id }) => id === selectedAccountId)?.name}
+              </p>
               { accounts.length > 1 && (
                 <>
                   { accontToggle
@@ -117,20 +117,12 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
             </AccountList>
           </ToggleAccount>
     
-          <PriceContainer>
-            <Price>
-              {showPrice
-                ? mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0') 
-                : 'R$ .....'
-              }
-            </Price>
-    
-            {showPrice
-              ? <BsFillEyeFill size={22} onClick={() => setShowPrice(false)} />
-              : <RiEyeCloseFill size={22} onClick={() => setShowPrice(true)} />
-            }
-          </PriceContainer>
-        </>
+          <Price>
+            {mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0')}
+          </Price>
+
+          <Span>Saldo disponível</Span>
+        </AccountContainer>
       
       )}
     </MainDetails>
