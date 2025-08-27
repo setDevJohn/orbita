@@ -7,7 +7,7 @@ import { toastError } from '@utils/toast';
 import { useContext, useEffect, useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright, IoMdArrowDropup } from 'react-icons/io';
 
-import { AccountContainer, AccountItem, AccountList, CurrentAccount, MainDetails, Month, MonthContainer, Price, Span, ToggleAccount } from './styles';
+import { AccountContainer, AccountItem, AccountList, ContentContainer, CurrentAccount, ImageContainer, MainDetails, Month, MonthContainer, Price, Span, ToggleAccount, UserContainer, UserLogo, UserName, UserSpan } from './styles';
 
 export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
@@ -90,40 +90,53 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
       </MonthContainer>
     
       {mainPage &&(
-        <AccountContainer>
-          <ToggleAccount>
-            <CurrentAccount>
-              <p>
-                {accounts.find(({ id }) => id === selectedAccountId)?.name}
-              </p>
-              { accounts.length > 1 && (
-                <>
-                  { accontToggle
-                    ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
-                    : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
-                  }
-                </>
-              )}
-            </CurrentAccount>
-    
-            <AccountList $open={accontToggle}>
-              {accounts
-                .filter(({ id }) => (id !== selectedAccountId))
-                .map(({ id, name }, i ) => (
-                  <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
-                    {name}
-                  </AccountItem>
-                ))}
-            </AccountList>
-          </ToggleAccount>
-    
-          <Price>
-            {mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0')}
-          </Price>
+        <>
+          <UserContainer>
+            <ImageContainer>
+              <UserLogo src="https://i.pravatar.cc/60" alt="Foto usuário" />
+            </ImageContainer>
 
-          <Span>Saldo disponível</Span>
-        </AccountContainer>
-      
+            <ContentContainer>
+              <UserSpan>Bem-vindo(a) de volta,</UserSpan>
+              <UserName>UserName</UserName>
+            </ContentContainer>
+          </UserContainer>
+
+          <AccountContainer>
+
+            <ToggleAccount>
+              <CurrentAccount>
+                <p>
+                  {accounts.find(({ id }) => id === selectedAccountId)?.name}
+                </p>
+                { accounts.length > 1 && (
+                  <>
+                    { accontToggle
+                      ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
+                      : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
+                    }
+                  </>
+                )}
+              </CurrentAccount>
+    
+              <AccountList $open={accontToggle}>
+                {accounts
+                  .filter(({ id }) => (id !== selectedAccountId))
+                  .map(({ id, name }, i ) => (
+                    <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
+                      {name}
+                    </AccountItem>
+                  ))}
+              </AccountList>
+            </ToggleAccount>
+    
+            <Price>
+              {mask.brlCurrency(accounts.find(({ id }) => id === selectedAccountId)?.balance || '0')}
+            </Price>
+
+            <Span>Saldo disponível</Span>
+          </AccountContainer>
+        </>
       )}
     </MainDetails>
   );

@@ -32,6 +32,40 @@ export const MonthContainer = styled.div`
   margin-bottom: 15px;
 `;
 
+export const UserContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+`;
+
+export const ImageContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
+export const UserLogo = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const UserSpan = styled.span`
+  font-size: ${({ theme }) => theme.smallSpan};
+  color: ${({ theme }) => theme.textColor};
+`;
+export const UserName = styled.p`
+  font-size: ${({ theme }) => theme.bigText};
+`;
+
 export const AccountContainer = styled.div`
   display: flex;
   flex-direction: column;
