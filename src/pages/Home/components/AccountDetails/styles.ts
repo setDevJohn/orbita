@@ -26,7 +26,7 @@ export const MonthContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   width: 100%;
 
   & > div:nth-child(2) {
