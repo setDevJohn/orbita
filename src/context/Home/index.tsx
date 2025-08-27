@@ -7,6 +7,8 @@ const HomeContext = createContext<IHomeContext>({
   setLoading: () => {},
   monthIndex: null,
   setMonthIndex: () => {},
+  year: null,
+  setYear: () => {},
   customDateFilter: null,
   setCustomDateFilter: () => {}, 
   accontToggle: false,
@@ -22,10 +24,11 @@ const HomeContext = createContext<IHomeContext>({
 const HomeProvider = ({ children } : HomeProviderProps) => {
   const [loading, setLoading] = useState(false);
   const [monthIndex, setMonthIndex] = useState<number | null>(null);
+  const [year, setYear] = useState<Date | null>(null);
   const [customDateFilter, setCustomDateFilter] = useState<Date | null>(null);
-  const [accontToggle, setAccontToggle] = useState<boolean>(false);
-  const [selectedAccountId, setSelectedAccountId] = useState<number>(0);
-  const [menuRegister, setMenuRegister] = useState<boolean>(false);
+  const [accontToggle, setAccontToggle] = useState(false);
+  const [selectedAccountId, setSelectedAccountId] = useState(0);
+  const [menuRegister, setMenuRegister] = useState(false);
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
 
   const homeValue = useMemo(() => ({
@@ -33,6 +36,8 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     setLoading,
     monthIndex,
     setMonthIndex,
+    year,
+    setYear,
     customDateFilter,
     setCustomDateFilter,
     accontToggle,
@@ -49,6 +54,7 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     loading,
     menuRegister,
     monthIndex,
+    year,
     selectedAccountId,
     customDateFilter
   ]);

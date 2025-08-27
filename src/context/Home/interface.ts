@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface HomeProviderProps  { 
   children: ReactNode
@@ -6,17 +6,19 @@ export interface HomeProviderProps  {
 
 export interface IHomeContext {
   loading: boolean,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: Dispatch<SetStateAction<boolean>>,
   monthIndex: number | null,
-  setMonthIndex: React.Dispatch<React.SetStateAction<number | null>>,
+  setMonthIndex: Dispatch<SetStateAction<number | null>>,
+  year: Date | null,
+  setYear: Dispatch<SetStateAction<Date | null>>
   customDateFilter: Date |null,
-  setCustomDateFilter: React.Dispatch<React.SetStateAction<Date | null>>,
+  setCustomDateFilter: Dispatch<SetStateAction<Date | null>>,
   accontToggle: boolean,
-  setAccontToggle: React.Dispatch<React.SetStateAction<boolean>>,
+  setAccontToggle: Dispatch<SetStateAction<boolean>>,
   selectedAccountId: number,
-  setSelectedAccountId: React.Dispatch<React.SetStateAction<number>>,
+  setSelectedAccountId: Dispatch<SetStateAction<number>>,
   menuRegister: boolean,
-  setMenuRegister: React.Dispatch<React.SetStateAction<boolean>>,
+  setMenuRegister: Dispatch<SetStateAction<boolean>>,
   currentPage: 'home' | 'extract' | 'projection',
-  setCurrentPage: React.Dispatch<React.SetStateAction<'home' | 'extract' | 'projection'>>
+  setCurrentPage: Dispatch<SetStateAction<'home' | 'extract' | 'projection'>>
 }
