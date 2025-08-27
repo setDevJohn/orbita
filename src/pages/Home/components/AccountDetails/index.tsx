@@ -1,3 +1,4 @@
+import { DateInput } from '@components/Inputs';
 import { HomeContext } from '@context/Home';
 import { accountsApi } from '@services/accounts';
 import { AccountRaw } from '@services/accounts/interface';
@@ -5,9 +6,27 @@ import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastError } from '@utils/toast';
 import { useContext, useEffect, useState } from 'react';
-import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright, IoMdArrowDropup } from 'react-icons/io';
+import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 
-import { AccountContainer, AccountItem, AccountList, ContentContainer, CurrentAccount, ImageContainer, MainDetails, Month, MonthContainer, Price, Span, ToggleAccount, UserContainer, UserLogo, UserName, UserSpan } from './styles';
+import { 
+  AccountContainer,
+  AccountItem,
+  AccountList,
+  ContentContainer,
+  CurrentAccount,
+  ImageContainer,
+  MainDetails,
+  Month,
+  MonthContainer,
+  Price,
+  Span,
+  ToggleAccount,
+  ToggleMonth,
+  UserContainer,
+  UserLogo,
+  UserName,
+  UserSpan
+} from './styles';
 
 export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
@@ -16,6 +35,8 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     setLoading,
     monthIndex,
     setMonthIndex,
+    year,
+    setYear,
     customDateFilter,
     setCustomDateFilter,
     accontToggle,
@@ -38,7 +59,7 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     'Novembro',
     'Dezembro',
   ];
-  
+
   function handlePrevMonth () {
     if(customDateFilter) { return setCustomDateFilter(null); }
 
@@ -81,52 +102,49 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
 
   return (
     <MainDetails>
+      <UserContainer>
+        <ImageContainer>
+          <UserLogo src="https://i.pravatar.cc/60" alt="Foto usuário" />
+        </ImageContainer>
+
+        <ContentContainer>
+          <UserSpan>Bem-vindo(a) de volta,</UserSpan>
+          <UserName>UserName</UserName>
+        </ContentContainer>
+      </UserContainer>
+
       <MonthContainer>
-        <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
+        <ToggleMonth>
+          <IoMdArrowDropleft size={22} onClick={handlePrevMonth}/>
 
-        <Month>{customDateFilter ? format.dateToDayAndMonth(customDateFilter.toISOString()) : months[monthIndex || 0]}</Month>
+          <Month>{customDateFilter ? format.dateToDayAndMonth(customDateFilter.toISOString()) : months[monthIndex || 0]}</Month>
 
-        <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
+          <IoMdArrowDropright size={22} onClick={handleNextMonth}/>
+        </ToggleMonth>
+        
+        <DateInput
+          mode='year'
+          startDate={year}
+          handleChange={(date) => setYear(date as Date)}
+        />
       </MonthContainer>
     
       {mainPage &&(
         <>
-          <UserContainer>
-            <ImageContainer>
-              <UserLogo src="https://i.pravatar.cc/60" alt="Foto usuário" />
-            </ImageContainer>
-
-            <ContentContainer>
-              <UserSpan>Bem-vindo(a) de volta,</UserSpan>
-              <UserName>UserName</UserName>
-            </ContentContainer>
-          </UserContainer>
-
           <AccountContainer>
-
             <ToggleAccount>
-              <CurrentAccount>
-                <p>
-                  {accounts.find(({ id }) => id === selectedAccountId)?.name}
-                </p>
-                { accounts.length > 1 && (
-                  <>
-                    { accontToggle
-                      ? <IoMdArrowDropup size={22} onClick={() => setAccontToggle(false)} />
-                      : <IoMdArrowDropdown size={22} onClick={() => setAccontToggle(true)} />
-                    }
-                  </>
-                )}
+              <CurrentAccount onClick={() => setAccontToggle(prev => !prev)}>
+                <p>{accounts.find(({ id }) => id === selectedAccountId)?.name}</p>
+
+                <IoMdArrowDropdown size={22} />
               </CurrentAccount>
-    
+              
               <AccountList $open={accontToggle}>
-                {accounts
-                  .filter(({ id }) => (id !== selectedAccountId))
-                  .map(({ id, name }, i ) => (
-                    <AccountItem key={i} onClick={() => handleSelectAccount(id)}>
-                      {name}
-                    </AccountItem>
-                  ))}
+                {accounts.map(({ id, name }) => (
+                  <AccountItem key={id} onClick={() => handleSelectAccount(id)}>
+                    {name}
+                  </AccountItem>
+                ))}
               </AccountList>
             </ToggleAccount>
     

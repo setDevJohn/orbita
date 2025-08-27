@@ -8,15 +8,17 @@ import { HomeFooter } from './components/HomeFooter';
 import { Container, MainContent } from './styles';
 
 export function Home () {
-  const { setMonthIndex, currentPage, loading } = useContext(HomeContext);
+  const { setMonthIndex, setYear, currentPage, loading } = useContext(HomeContext);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const date = new Date();
     const currentMonth = date.getMonth();
+    
+    setYear(date);
     setMonthIndex(currentMonth);
-  }, [setMonthIndex]);
+  }, [setMonthIndex, setYear]);
 
   useEffect(() => {
     if (contentRef.current) {
