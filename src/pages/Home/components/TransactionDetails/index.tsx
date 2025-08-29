@@ -19,14 +19,14 @@ export function TransactionDetails({ type }: { type: PageType }) {
   const [statistics, setStatistics] = useState<Record<string, string>>({});
   const [transactionType, setTransactionType] = useState('');
 
-  const { monthIndex, customDateFilter, setCustomDateFilter, setLoading } = useContext(HomeContext);
+  const { monthIndex, year, customDateFilter, setCustomDateFilter, setLoading } = useContext(HomeContext);
 
   useEffect(() => {
     async function fetchData() {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
-      const query = `${type}=true${!customDateFilter ? `&month=${monthIndex + 1}` : ''}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}${customDateFilter ? `&date=${customDateFilter.toJSON().split('T')[0]}` : ''}`;
+      const query = `${type}=true${!customDateFilter ? `&month=${monthIndex + 1}&year=${year}` : `&date=${customDateFilter.toJSON().split('T')[0]}`}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}`;
 
       try {
         const { transactions , valuesByType } = await transactionsApi.get(1, query);
@@ -41,7 +41,7 @@ export function TransactionDetails({ type }: { type: PageType }) {
     }
 
     fetchData();
-  }, [customDateFilter, description, monthIndex, setLoading, transactionType, type]);   
+  }, [customDateFilter, description, monthIndex, setLoading, transactionType, type, year]);   
   
   const handleChange = (name: string, value: string | Date) => {
     if (name === 'description') {

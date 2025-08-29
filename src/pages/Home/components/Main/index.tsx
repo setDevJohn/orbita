@@ -13,14 +13,14 @@ export function MainComponent() {
   const [cardList, setCardList] = useState<CardRaw[]>([]);
   const [transactions, setTransactions] = useState<TransactionRaw[]>([]);
 
-  const { monthIndex, setLoading } = useContext(HomeContext);
+  const { monthIndex, year, setLoading } = useContext(HomeContext);
 
   useEffect(() => {
     async function fetchData() {
       if (monthIndex === null) { return; } 
       setLoading(true);
 
-      const transactionQuery = `month=${monthIndex + 1}&limit=5`;
+      const transactionQuery = `month=${monthIndex + 1}&year=${year}&limit=5`;
       
       try {
         const [cardResponse, transactionResponse] = await Promise.all([
@@ -38,7 +38,7 @@ export function MainComponent() {
     }
 
     fetchData();
-  }, [monthIndex, setLoading]);
+  }, [monthIndex, year, setLoading]);
 
   return (
     <>
