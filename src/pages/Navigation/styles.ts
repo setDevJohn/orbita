@@ -31,6 +31,7 @@ export const SideBar = styled.div<{$open: boolean }>`
   overflow: hidden;
   height: 100svh;
   width: ${({ $open }) => $open ? '50%' : '0px'};
+  min-width: 175px;
 `;
 
 export const IconContainer = styled.div`
