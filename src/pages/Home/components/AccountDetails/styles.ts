@@ -68,14 +68,19 @@ export const UserLogo = styled.img`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100vw - 130px);
 `;
 
 export const UserSpan = styled.span`
   font-size: ${({ theme }) => theme.smallSpan};
   color: ${({ theme }) => theme.textColor};
 `;
+
 export const UserName = styled.p`
   font-size: ${({ theme }) => theme.bigText};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const AccountContainer = styled.div`

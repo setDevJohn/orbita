@@ -2,6 +2,7 @@ import { DateInput } from '@components/Inputs';
 import { HomeContext } from '@context/Home';
 import { accountsApi } from '@services/accounts';
 import { AccountRaw } from '@services/accounts/interface';
+import { usersApi } from '@services/users';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastError } from '@utils/toast';
@@ -32,6 +33,8 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
 
   const { 
+    decodedUser,
+    setDecodedUser,
     setLoading,
     monthIndex,
     setMonthIndex,
@@ -44,6 +47,8 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
     selectedAccountId,
     setSelectedAccountId,
   } = useContext(HomeContext);
+
+  const defaultProfileImage = `https://ui-avatars.com/api/?name=${decodedUser?.name}&background=333333&color=ffffff`;
 
   const months = [
     'Janeiro',
@@ -80,15 +85,17 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
   }
 
   useEffect(() => {
-    const fetchAccounts = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
   
-        const accounts = await accountsApi.get();
-        setAccounts(accounts);
+        const [accountRes, userRes] = await Promise.all([accountsApi.get(), usersApi.verify()]);
+
+        setAccounts(accountRes);
+        setDecodedUser(userRes);
 
         if (!selectedAccountId) {
-          setSelectedAccountId(accounts[0]?.id);
+          setSelectedAccountId(accountRes[0]?.id ?? null);
         }
       } catch (err) {
         toastError((err as Error).message);
@@ -97,19 +104,23 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
       }
     };
 
-    fetchAccounts();
-  }, [selectedAccountId, setLoading, setSelectedAccountId]);
+    fetchData();
+  }, [selectedAccountId, setDecodedUser, setLoading, setSelectedAccountId]);
 
   return (
     <MainDetails>
       <UserContainer>
         <ImageContainer>
-          <UserLogo src="https://i.pravatar.cc/60" alt="Foto usuário" />
+          <UserLogo 
+            alt="Foto usuário"
+            src={decodedUser?.profileImage || defaultProfileImage} 
+            onError={(e) => (e.target as HTMLImageElement).src = defaultProfileImage}
+          />
         </ImageContainer>
 
         <ContentContainer>
           <UserSpan>Bem-vindo(a) de volta,</UserSpan>
-          <UserName>UserName</UserName>
+          <UserName> {decodedUser?.name} </UserName>
         </ContentContainer>
       </UserContainer>
 

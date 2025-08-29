@@ -1,8 +1,10 @@
 import { createContext, useMemo, useState } from 'react';
 
-import { HomeProviderProps, IHomeContext } from './interface';
+import { HomeProviderProps, IHomeContext, TokenData } from './interface';
 
 const HomeContext = createContext<IHomeContext>({
+  decodedUser: null,
+  setDecodedUser: () => {},
   loading: false,
   setLoading: () => {},
   monthIndex: null,
@@ -22,6 +24,7 @@ const HomeContext = createContext<IHomeContext>({
 });
 
 const HomeProvider = ({ children } : HomeProviderProps) => {
+  const [decodedUser, setDecodedUser] = useState<TokenData | null>(null);
   const [loading, setLoading] = useState(false);
   const [monthIndex, setMonthIndex] = useState<number | null>(null);
   const [year, setYear] = useState<Date | null>(null);
@@ -32,6 +35,8 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
   const [currentPage, setCurrentPage] = useState<'home' | 'extract' | 'projection'>('home');
 
   const homeValue = useMemo(() => ({
+    decodedUser,
+    setDecodedUser,
     loading,
     setLoading,
     monthIndex,
@@ -49,6 +54,7 @@ const HomeProvider = ({ children } : HomeProviderProps) => {
     currentPage,
     setCurrentPage
   }), [
+    decodedUser,
     accontToggle,
     currentPage,
     loading,

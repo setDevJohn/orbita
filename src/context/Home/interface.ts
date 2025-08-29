@@ -1,10 +1,22 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 
+export interface TokenData {
+  id: number,
+  email: string,
+  verified: boolean,
+  name: string,
+  profileImage: string,
+  iat: number,
+  exp: number
+}
+
 export interface HomeProviderProps  { 
   children: ReactNode
 }
 
 export interface IHomeContext {
+  decodedUser: TokenData | null,
+  setDecodedUser: Dispatch<SetStateAction<TokenData | null>>
   loading: boolean,
   setLoading: Dispatch<SetStateAction<boolean>>,
   monthIndex: number | null,
