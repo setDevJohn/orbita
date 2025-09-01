@@ -22,7 +22,7 @@ export const Card = styled.li<{$details: boolean}>`
   transition: all 0.4s ease;
   padding: 17px;
   overflow: hidden;
-  height: ${({ $details }) => $details ? '157px': '67px' };
+  height: ${({ $details }) => $details ? '140px': '67px' };
   width: 100%;
   cursor: pointer;
 
@@ -35,7 +35,15 @@ export const Card = styled.li<{$details: boolean}>`
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 13px;
+  width: 100%;
+`;
+
+export const InvoiceCard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${({ theme }) => theme.title};
   width: 100%;
 `;
 
@@ -65,19 +73,7 @@ export const CardFooter = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 15px;
-`;
-
-export const InvoiceValue = styled.p`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: ${({ theme }) => theme.textColor};
-  font-size: ${({ theme }) => theme.smallText};
-`;
-
-export const InvoiceSpan = styled.span`
-  font-size: ${({ theme }) => theme.smallSpan};
+  margin-top: 5px;
 `;
 
 export const RecentExtract = styled.div`
