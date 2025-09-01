@@ -5,7 +5,7 @@ const currency = (value: string) => {
 };
 
 const brlCurrency = (value: string): string => {
-  value = value.replace(/[^\d.]/g, '');
+  value = value.replace(/[^\d.-]/g, '');
 
   const numericValue = parseFloat(value);
 
