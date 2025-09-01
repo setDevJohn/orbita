@@ -29,9 +29,9 @@ async function remove (cardId: number) {
   }
 }
 
-async function get (): Promise<CardRaw[]> {
+async function get (query?: string): Promise<CardRaw[]> {
   try {
-    const { data } = await api.get('/cards');
+    const { data } = await api.get(`/cards${query ? `?${query}`: ''}`);
     return data.resource;
   } catch (err) {
     handlerAxiosError(err);

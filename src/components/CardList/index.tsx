@@ -12,8 +12,7 @@ import {
   CardListContainer,
   EditBackgroundFocus,
   IconCardContainer, 
-  // InvoiceSpan,
-  // InvoiceValue',
+  InvoiceCard, 
   TextCard,
   TextCardSpan
 } from './styles';
@@ -51,18 +50,16 @@ export const CardList = ({
           <CardHeader>
             <TextCard $name>{card.name}</TextCard>
             <TextCard $column>
-              <TextCardSpan>limite disponível</TextCardSpan> 
-              {mask.brlCurrency(card.creditLimit.toString())}
+              <TextCardSpan>{ `limite ${editMode ? 'total' : 'disponível'}`}</TextCardSpan> 
+              {mask.brlCurrency((editMode ? card.creditLimit : card.availableCreditLimit).toString())}
             </TextCard>
           </CardHeader>
 
-          {/* TODO: Adicionar campo para fatura */}
-          {/* <InvoiceValue>
-            {`R$ ${card.invoice}`}
-            <InvoiceSpan>
-                fatura aberta
-            </InvoiceSpan>
-          </InvoiceValue> */}
+          {!editMode && (
+            <InvoiceCard>
+              {mask.brlCurrency(card.invoice.toString())}
+            </InvoiceCard>
+          )}
 
           <CardFooter>
             <TextCard $column>

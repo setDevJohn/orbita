@@ -20,11 +20,12 @@ export function MainComponent() {
       if (monthIndex === null) { return; } 
       setLoading(true);
 
-      const transactionQuery = `month=${monthIndex + 1}&year=${year}&limit=5`;
+      const cardQuery = `month=${monthIndex + 1}&year=${year?.getFullYear()}`;
+      const transactionQuery = 'limit=5&noInstallments=true';
       
       try {
         const [cardResponse, transactionResponse] = await Promise.all([
-          cardsApi.get(),
+          cardsApi.get(cardQuery),
           transactionsApi.get(1, transactionQuery),
         ]);
         

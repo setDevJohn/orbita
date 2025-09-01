@@ -26,7 +26,7 @@ export function TransactionDetails({ type }: { type: PageType }) {
       if (monthIndex === null) { return; } 
       setLoading(true);
       
-      const query = `${type}=true${!customDateFilter ? `&month=${monthIndex + 1}&year=${year}` : `&date=${customDateFilter.toJSON().split('T')[0]}`}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}`;
+      const query = `${type}=true${!customDateFilter ? `&month=${monthIndex + 1}&year=${year?.getFullYear()}` : `&date=${customDateFilter.toJSON().split('T')[0]}`}${transactionType ? `&type=${transactionType}` : ''}${description ? `&description=${description}` : ''}`;
 
       try {
         const { transactions , valuesByType } = await transactionsApi.get(1, query);
