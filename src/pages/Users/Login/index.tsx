@@ -10,8 +10,8 @@ import { Form, FormContainer, FormFooter, FormHeader, LoginContainer } from '../
 export const Login = () => {
   const [loading, setLoading] = useState(false);
   const [formValue, setFormValue] = useState({
-    email: 'jhony00._@hotmail.com',
-    password: '123456'
+    email: '',
+    password: ''
   });
 
   const { login } = useContext(AuthContext);
