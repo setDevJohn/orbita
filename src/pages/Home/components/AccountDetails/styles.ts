@@ -28,6 +28,7 @@ export const MonthContainer = styled.div`
   align-items: center;
   gap: 15px;
   width: 100%;
+  padding-bottom: 8px;
 
   & > div:nth-child(2) {
     width: 38%;
