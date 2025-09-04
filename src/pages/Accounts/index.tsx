@@ -69,9 +69,6 @@ export function Accounts() {
     if (!form.name) {
       return toastWarn('Escolha um nome para conta');
     }
-    if (!form.balance) {
-      return toastWarn('Escolha um saldo para conta');
-    }
 
     try {
       setLoading(true);
@@ -135,7 +132,7 @@ export function Accounts() {
       value: form.name,
       handleChange,
       label: 'Nome',
-      placeholder: 'Conta Poupanca',
+      placeholder: 'Conta Corrente',
       labelInColumn: true
     },
     {
