@@ -40,7 +40,6 @@ export interface TransactionsFormPayload {
   categoryId: number | null;
   accountId?: number;
   cardId?: number;
-  transferAccountId?: number;
   recurrenceDateType?: string;
   recurrenceDateRange?: string[];
 }

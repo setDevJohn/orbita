@@ -39,7 +39,6 @@ interface IForm {
   category: string;
   date: Date | null;
   recurrenceDateRange: TDateRange;
-  transferAccount: string;
 }
 
 interface IOptions {
@@ -57,7 +56,6 @@ export function Register() {
     category: '',
     date: null,
     recurrenceDateRange: [null, null],
-    transferAccount: '',
   };
 
   const optionsValue: IOptions = {
@@ -159,7 +157,6 @@ export function Register() {
       categoryId: Number(form.category),
       ...(form.card && { cardId: Number(form.card) }),
       ...(form.account && { accountId: Number(form.account) }),
-      ...(form.transferAccount && { transferAccountId: Number(form.transferAccount) }),
       ...(form.recurrenceDateRange.every(date => !!date) && { 
         recurrenceDateType: activeButtonDate 
       }),
@@ -277,20 +274,21 @@ export function Register() {
               isRange
             />
           </ToggleDropdown>
-          
-          {pageConfig.title === 'Despesas' && (
-            <ToggleDropdown text='Transferência entre contas' noAlign>
-              <SelectInput
-                label='Conta'
-                minWidth='80px'
-                name='transferAccount'
-                value={form.transferAccount}
-                placeholder='Selecione uma conta'
-                handleChange={handleChangeForm}
-                options={options.accounts.filter(account => account.value !== form.account)}
-              />
-            </ToggleDropdown>
-          )}
+          {/* 
+            {pageConfig.title === 'Despesas' && (
+              <ToggleDropdown text='Transferência entre contas' noAlign>
+                <SelectInput
+                  label='Conta'
+                  minWidth='80px'
+                  name='transferAccount'
+                  value={form.transferAccount}
+                  placeholder='Selecione uma conta'
+                  handleChange={handleChangeForm}
+                  options={options.accounts.filter(account => account.value !== form.account)}
+                />
+              </ToggleDropdown>
+            )}
+          */} 
         </InputContainer>
       </Content>
       
