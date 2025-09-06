@@ -17,7 +17,16 @@ export function Profile() {
       value: '',
       handleChange: () => {},
       label: 'Nome',
-      placeholder: 'Seu nome',
+      placeholder: 'Nome Sobrenome',
+      labelInColumn: true  
+    },
+    {
+      type: 'default',
+      name: 'cellPhone',
+      value: '',
+      handleChange: () => {},
+      label: 'Celular',
+      placeholder: '(99) 99999-9999',
       labelInColumn: true  
     },
     {
@@ -26,7 +35,7 @@ export function Profile() {
       value: '',
       handleChange: () => {},
       label: 'E-mail',
-      placeholder: 'Seu e-mail',
+      placeholder: 'seuemail@example.com',
       labelInColumn: true  
     },
     {

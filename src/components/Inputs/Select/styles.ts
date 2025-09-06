@@ -11,7 +11,7 @@ export const Label = styled.label`
   font-size: ${({ theme }) => theme.normalText};
 `;
 
-export const SelectStyled = styled.select<{$darkBackground?: boolean}>`
+export const SelectStyled = styled.select<{$darkBackground?: boolean, $minWidth?: string}>`
   background-color: ${({ theme, $darkBackground }) => 
     theme[ $darkBackground ? 'darkBackground' : 'lightBackground']};
   color: ${({ theme }) => theme.textColor};
@@ -20,6 +20,7 @@ export const SelectStyled = styled.select<{$darkBackground?: boolean}>`
   border: 1px solid ${({ theme }) => theme.borderColor};
   border-radius: 10px;
   padding: 13px 15px;
+  min-width: ${({ $minWidth }) => $minWidth && $minWidth};
   width: 100%;
 `;
 
