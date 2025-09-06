@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const CardListContainer = styled.ul`
+export const CardListContainer = styled.ul<{$editMode: boolean}>`
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-top: 15px;
   margin-bottom: 30px;
-  padding: 10px 15px;
+  padding: ${({ $editMode }) => ($editMode ? '10px 15px' : '0')};
   width: 100%;
 `;
 

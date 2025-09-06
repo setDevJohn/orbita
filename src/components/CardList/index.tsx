@@ -37,10 +37,10 @@ export const CardList = ({
     setCardIdInDetails(id);
   }
 
-  { /* TODO: Calcular cores de cartõtes  */ }
+  { /* TODO: Calcular cores de cartões  */ }
   { /* TODO: Calcular cores de contrastes  */ }
   return (
-    <CardListContainer>
+    <CardListContainer $editMode={!editMode}>
       {cardList.map(card => (
         <Card
           key={card.id}
