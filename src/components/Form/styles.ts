@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.div<{ $marginBottom?: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
   padding: 15px 0 30px 0;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom ? `${$marginBottom}px` : '0'};
   width: 100%;
 `;
 

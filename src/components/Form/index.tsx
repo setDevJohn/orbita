@@ -19,9 +19,11 @@ interface IForm {
   fields: FieldsProps[];
   title?: string;
   cancelFunction?: () => void;
+  marginBottom?: number;
+  confirmText?: string;
 }
 
-export function Form({ onSubmit, fields, title, cancelFunction }: IForm) {
+export function Form({ onSubmit, fields, title, cancelFunction, marginBottom, confirmText }: IForm) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ export function Form({ onSubmit, fields, title, cancelFunction }: IForm) {
   };
 
   return ( 
-    <FormContainer>
+    <FormContainer $marginBottom={marginBottom}>
       {title && <FormTitle>{title}</FormTitle>}
 
       <FormStyled onSubmit={handleSubmit}>
@@ -75,7 +77,7 @@ export function Form({ onSubmit, fields, title, cancelFunction }: IForm) {
           )}
             
           <BasicButton
-            text="Salvar"
+            text={confirmText || 'Salvar'}
             type="confirm"
             custonStyle={{ width: '70%' }}
           />
