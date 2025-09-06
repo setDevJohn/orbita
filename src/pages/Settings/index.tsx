@@ -126,8 +126,15 @@ export function Settings() {
     },
     {
       type: 'toggle',
+      name: 'closures',
+      label: 'Lembretes de fechamento',
+      icon: <IoNotificationsOutline size={26}/>,
+      checked: true,
+    },
+    {
+      type: 'toggle',
       name: 'invoices',
-      label: 'Lembretes de faturas',
+      label: 'Lembretes de vencimento',
       icon: <IoNotificationsOutline size={26}/>,
       checked: true,
     },
