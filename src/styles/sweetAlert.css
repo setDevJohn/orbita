@@ -1,0 +1,33 @@
+.swal2-popup.question .swal2-title {
+  font-size: 25px !important;
+}
+
+.swal2-popup.question .swal2-icon {
+  width: 55px !important;
+  height: 55px !important;
+  margin: 20px auto 0 auto !important;
+}
+
+.swal2-popup.question .swal2-icon .swal2-icon-content {
+  font-size: 45px !important;
+  text-align: center !important;
+}
+
+.swal2-popup.question .swal2-actions {
+  gap: 7px !important;
+}
+
+.swal2-popup.question.dark-theme-popup {
+  background-color: #1f232b !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+
+.swal2-popup.toast.dark-theme-popup {
+  background-color: #1f232b !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+.swal2-popup.toast.dark-theme-popup .swal2-timer-progress-bar {
+  background-color: #6366F1 !important;
+}
