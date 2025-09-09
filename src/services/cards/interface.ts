@@ -8,6 +8,6 @@ export interface CardRaw {
   availableCreditLimit: number
 }
 
-export type CardFormPayload = Omit<CardRaw, 'id invoice availableCreditLimit'>
+export type CardFormPayload = Omit<CardRaw, 'id' | 'invoice' | 'availableCreditLimit'>
 
-export type UpdateCardPayload = Omit<CardRaw, 'invoice availableCreditLimit'>
+export type UpdateCardPayload = Omit<CardRaw, 'invoice' | 'availableCreditLimit'>
