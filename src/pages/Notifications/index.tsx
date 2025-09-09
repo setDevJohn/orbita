@@ -1,12 +1,16 @@
 import { LayoutContainer } from '@components/LayoutContainer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
 import { ButtonCardContainer, ButtonFilter, ButtonFilterContainer, IconLabelContainer, Item, List, ListContainer, NoNotificationSpan, SpanButton } from './styles';
 
 export function Notifications() {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'unread'>('all');
-  const [notifications, setNotifications] = useState(['']);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    setNotifications([]);
+  }, []);
 
   return (
     <LayoutContainer title="Notificações">
