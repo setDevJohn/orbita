@@ -21,7 +21,7 @@ interface ICardList {
   cardList: CardRaw[];
   editMode?: boolean;
   editFunction?: (card: CardRaw) => void
-  removeFunction?: (card: CardRaw) => void
+  removeFunction?: (id: number) => void
 }
 
 export const CardList = ({ 
@@ -89,7 +89,7 @@ export const CardList = ({
             {removeFunction && (
               <IoTrashOutline size={30} onClick={(e) => {
                 e.stopPropagation();
-                removeFunction(card);
+                removeFunction(card.id);
                 setCardIdInDetails(null);
               }}/>
             )}

@@ -2,10 +2,9 @@ import { BasicButton } from '@components/Buttons';
 import { FieldsProps, Form } from '@components/Form';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
-import { ConfirmationModal } from '@components/Modals';
 import { categoriesApi } from '@services/categories';
 import { CategoryRaw } from '@services/categories/interface';
-import { toastFire } from '@utils/sweetAlert';
+import { questionFire, toastFire } from '@utils/sweetAlert';
 import { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { IoTrashOutline } from 'react-icons/io5';
@@ -23,11 +22,6 @@ export function Categories() {
   const [reloadList, setReloadList] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [removeModal, setRemoveModal] = useState(false);
-  const [categoryToRemove, setCategoryToRemove] = useState<{
-    id: number; 
-    name: string
-  } | null>(null);
   const [categories, setCategories] = useState<CategoryRaw[]>([]);
   const [form, setForm] = useState<IForm>({
     name: '',
@@ -99,18 +93,18 @@ export function Categories() {
     setEditMode(true);
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async (id: number) => {
     try {
-      setLoading(true);
+      const result = await questionFire();
 
-      if (!categoryToRemove?.id) {
-        return toastFire('Erro ao remover a categoria.', 'error');
+      if (result.isConfirmed) {
+        setLoading(true);
+
+        await categoriesApi.remove(id);
+
+        reloadComponent();
+        toastFire('Categoria removida com sucesso');
       }
-
-      await categoriesApi.remove(categoryToRemove.id);
-      reloadComponent();
-      setRemoveModal(false);
-      toastFire('Categoria removida com sucesso');
     } catch (err) {
       toastFire((err as Error).message, 'error');
     } finally {
@@ -177,26 +171,12 @@ export function Categories() {
                 type='cancel'
                 icon={<IoTrashOutline size={20} fill="#fff" />}
                 custonStyle={{ minWidth: 'unset' }}
-                action={() => {
-                  setCategoryToRemove({ id, name });
-                  setRemoveModal(true);
-                }}
+                action={() => handleRemove(id)}
               />
             </ButtonsContainer>
           </CategoryCard>
         ))}
       </CategoriesList>
-
-      {removeModal && (
-        <ConfirmationModal 
-          cancelAction={() => setRemoveModal(false)}
-          confirmAction={handleRemove}
-          text={`
-            Deseja realmente excluir essa categoria?
-            (${categoryToRemove?.name})
-          `}
-        />
-      )}
 
       {loading && <LoadingPage />}
     </LayoutContainer>
