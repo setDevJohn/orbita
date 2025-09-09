@@ -1,7 +1,7 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
 import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastSuccess, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { FormEvent, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Title } from 'styles/main';
@@ -25,20 +25,20 @@ export const NewPasswordStep = () => {
     e.preventDefault();
 
     if (!userId || !token) {
-      toastError('Erro ao obeter informação do usuário');
+      toastFire('Erro ao obeter informação do usuário', 'error');
       return navigate('/recuperar-senha'); 
     }
 
     if (!passwordForm.password) {
-      return toastWarn('Informe sua nova senha');
+      return toastFire('Informe sua nova senha', 'warning');
     }
 
     if (passwordForm.password.length < 6) {
-      return toastWarn('A senha deve ter no mínimo 6 caracteres');
+      return toastFire('A senha deve ter no mínimo 6 caracteres', 'warning');
     }
 
     if (passwordForm.password !== passwordForm.passwordConfirmation) {
-      return toastWarn('As senhas não coincidem');
+      return toastFire('As senhas não coincidem', 'warning');
     } 
 
     try {
@@ -46,11 +46,11 @@ export const NewPasswordStep = () => {
 
       await usersApi.recoverPassword(+userId, passwordForm.password, token);
 
-      toastSuccess('Senha redefinida com sucesso');
+      toastFire('Senha redefinida com sucesso');
       navigate('/login');
     } catch (err) {
       console.error(err);
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

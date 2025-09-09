@@ -8,7 +8,7 @@ import { cardsApi } from '@services/cards';
 import { CardRaw } from '@services/cards/interface';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastError, toastSuccess, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useEffect, useRef, useState } from 'react';
 import { Separator, Title } from 'styles/main';
 
@@ -48,7 +48,7 @@ export function Cards() {
         const response = await cardsApi.get();
         setCardList(response);
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }
@@ -75,7 +75,7 @@ export function Cards() {
     const emptyFields = Object.values(form).some(value => !value);
 
     if (emptyFields) {
-      return toastWarn('Preencha todos os campos');
+      return toastFire('Preencha todos os campos', 'warning');
     }
 
     try {
@@ -89,20 +89,20 @@ export function Cards() {
 
       if (editMode) {
         if (!form.id) { 
-          return toastError('Erro ao atualizar o cartão.');
+          return toastFire('Erro ao atualizar o cartão.', 'error');
         }
 
         await cardsApi.update({ ...payload, id: form.id });
-        toastSuccess('Cartão atualizado com sucesso.');
+        toastFire('Cartão atualizado com sucesso.');
       } else {
         await cardsApi.create(payload);
-        toastSuccess('Cartão cadastrado com sucesso.');
+        toastFire('Cartão cadastrado com sucesso.');
       }
       
       handleCancel();
       reloadComponent();
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }
@@ -127,7 +127,7 @@ export function Cards() {
   };
 
   const handleRemove = async () => {
-    if (!cardToRemove?.id) { return toastError('Erro ao remover o cartão.'); }
+    if (!cardToRemove?.id) { return toastFire('Erro ao remover o cartão.', 'error'); }
 
     try {
       setLoading(false);
@@ -135,9 +135,9 @@ export function Cards() {
       await cardsApi.remove(cardToRemove.id);
       reloadComponent();
       setRemoveModal(false);
-      toastSuccess('Cartão removido com sucesso.');
+      toastFire('Cartão removido com sucesso.');
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

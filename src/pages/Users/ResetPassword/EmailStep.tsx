@@ -1,7 +1,7 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
 import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Title } from 'styles/main';
@@ -18,7 +18,7 @@ export const EmailStep = () => {
     e.preventDefault();
     
     if (!email) {
-      return toastWarn('Informe o e-mail da sua conta');
+      return toastFire('Informe o e-mail da sua conta', 'warning');
     }
 
     try {
@@ -29,7 +29,7 @@ export const EmailStep = () => {
       navigate(`/recuperar-senha/token?userId=${userResponse.id}`);
     } catch (err) {
       console.error(err);
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

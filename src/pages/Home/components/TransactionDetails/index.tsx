@@ -3,7 +3,7 @@ import { DateInput, DefaultInput } from '@components/Inputs';
 import { HomeContext } from '@context/Home';
 import { transactionsApi } from '@services/transactions';
 import { TransactionRaw } from '@services/transactions/interfaces';
-import { toastError } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
 import { Title } from 'styles/main';
 
@@ -34,7 +34,7 @@ export function TransactionDetails({ type }: { type: PageType }) {
         setTransactions(transactions);
         setStatistics(valuesByType);
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }

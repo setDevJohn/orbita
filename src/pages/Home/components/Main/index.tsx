@@ -5,7 +5,7 @@ import { cardsApi } from '@services/cards';
 import { CardRaw } from '@services/cards/interface';
 import { transactionsApi } from '@services/transactions';
 import { TransactionRaw } from '@services/transactions/interfaces';
-import { toastError } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
 import { Title } from 'styles/main';
 
@@ -32,7 +32,7 @@ export function MainComponent() {
         setCardList(cardResponse);
         setTransactions(transactionResponse.transactions);
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }

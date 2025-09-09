@@ -2,12 +2,11 @@ import { BasicButton } from '@components/Buttons';
 import { FieldsProps, Form } from '@components/Form';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading/Page';
-import { ConfirmationModal } from '@components/Modals';
 import { accountsApi } from '@services/accounts';
 import { AccountBase, AccountRaw } from '@services/accounts/interface';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastError, toastSuccess, toastWarn } from '@utils/toast';
+import { questionFire, toastFire } from '@utils/sweetAlert';
 import { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { IoTrashOutline } from 'react-icons/io5';
@@ -26,9 +25,7 @@ export function Accounts() {
   const [openForm, setOpenForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [reloadList, setReloadList] = useState(false);
-  const [removeModal, setRemoveModal] = useState(false);
   const [accounts, setAccounts] = useState<AccountRaw[]>([]);
-  const [accountToRemove, setAccountToRemove] = useState<{id: number; name: string} | null>(null);
   const [form, setForm] = useState<IForm>({
     name: '',
     balance: '',
@@ -42,7 +39,7 @@ export function Accounts() {
         const response = await accountsApi.get();
         setAccounts(response);
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }
@@ -67,7 +64,7 @@ export function Accounts() {
 
   const handleSubmit = async () => {
     if (!form.name) {
-      return toastWarn('Escolha um nome para conta');
+      return toastFire('Escolha um nome para conta', 'warning');
     }
 
     try {
@@ -80,40 +77,40 @@ export function Accounts() {
 
       if (editMode) {
         if (!payload.id) {
-          return toastError('Erro ao atualizar a conta.');
+          return toastFire('Erro ao atualizar a conta.', 'error');
         }
 
         await accountsApi.update(payload as AccountBase);
-        toastSuccess('Conta atualizada com sucesso');
+        toastFire('Conta atualizada com sucesso');
       } else {
         await accountsApi.create(payload);
-        toastSuccess('Conta criada com sucesso');
+        toastFire('Conta criada com sucesso');
       }
 
       reloadComponent();
       handleCancel();
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }
 
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async  (id: number) => {
     try {
-      setLoading(true);
+      const result = await questionFire();
 
-      if (!accountToRemove?.id) {
-        return toastError('Erro ao remover a conta.');
+      if (result.isConfirmed) {
+        setLoading(true);
+
+        await accountsApi.remove(id);
+        
+        reloadComponent();
+        toastFire('Conta removida com sucesso');
       }
-
-      await accountsApi.remove(accountToRemove.id);
-      reloadComponent();
-      setRemoveModal(false);
-      toastSuccess('Conta removida com sucesso');
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }
@@ -196,27 +193,13 @@ export function Accounts() {
                 type='cancel'
                 icon={<IoTrashOutline size={20} fill="#fff" />}
                 custonStyle={{ minWidth: 'unset' }}
-                action={() => {
-                  setAccountToRemove({ id, name });
-                  setRemoveModal(true);
-                }}
+                action={() => handleRemove(id)}
               />
             </ButtonsContainer>
           </AccountCard>
         ))}
       </AccountsList>
 
-      {removeModal && (
-        <ConfirmationModal 
-          cancelAction={() => setRemoveModal(false)}
-          confirmAction={handleRemove}
-          text={`
-            Deseja realmente excluir essa conta?
-            (${accountToRemove?.name})
-          `}
-        />
-      )}
-      
       {loading && <LoadingPage />}  
     </LayoutContainer>
   );

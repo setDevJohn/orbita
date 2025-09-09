@@ -11,7 +11,7 @@ import { transactionsApi } from '@services/transactions';
 import { TransactionsFormPayload } from '@services/transactions/interfaces';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastError, toastSuccess } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useEffect, useState } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
@@ -96,7 +96,7 @@ export function Register() {
         });
 
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }
@@ -138,14 +138,14 @@ export function Register() {
   }
 
   async function handleSubmit () {
-    if (!form.price) { return toastError('Valor é obrigatório.'); }
-    if (!form.description) { return toastError('Descrição é obrigatória.'); }
-    if (!form.date) { return toastError('Data da transação é obrigatória.'); }
+    if (!form.price) { return toastFire('Valor é obrigatório.', 'warning'); }
+    if (!form.description) { return toastFire('Descrição é obrigatória.', 'warning'); }
+    if (!form.date) { return toastFire('Data da transação é obrigatória.', 'warning'); }
     if (pageConfig?.title === 'Despesas Crédito' && !form.card) { 
-      return toastError('Cartão é obrigatório.');
+      return toastFire('Cartão é obrigatório.', 'warning');
     }
     if (pageConfig?.title !== 'Despesas Crédito' && !form.account) { 
-      return toastError('Conta é obrigatório.');
+      return toastFire('Conta é obrigatório.', 'warning');
     }
     
     const payload: TransactionsFormPayload = {
@@ -170,10 +170,10 @@ export function Register() {
     try {
       setLoading(true);
       await transactionsApi.create(payload);
-      toastSuccess('Transação cadastrada com sucesso.');
+      toastFire('Transação cadastrada com sucesso.');
       setForm(formValue);
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

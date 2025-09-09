@@ -5,7 +5,7 @@ import { LoadingPage } from '@components/Loading';
 import { ConfirmationModal } from '@components/Modals';
 import { categoriesApi } from '@services/categories';
 import { CategoryRaw } from '@services/categories/interface';
-import { toastError, toastSuccess, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useEffect, useState } from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { IoTrashOutline } from 'react-icons/io5';
@@ -41,7 +41,7 @@ export function Categories() {
         const categoryList = await categoriesApi.get(); 
         setCategories(categoryList);
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }
@@ -66,7 +66,7 @@ export function Categories() {
   
   const handleSubmit = async () => {
     if (!form.name) {
-      return toastWarn('Escolha um nome para categoria');
+      return toastFire('Escolha um nome para categoria', 'warning');
     }
 
     try {
@@ -74,20 +74,20 @@ export function Categories() {
 
       if (editMode) {
         if (!form.id) {
-          return toastError('Erro ao atualizar a categoria.');
+          return toastFire('Erro ao atualizar a categoria.', 'error');
         }
 
         await categoriesApi.update(form);
-        toastSuccess('Categoria atualizada com sucesso');
+        toastFire('Categoria atualizada com sucesso');
       } else {
         await categoriesApi.create(form);
-        toastSuccess('Categoria criada com sucesso');
+        toastFire('Categoria criada com sucesso');
       }
 
       reloadComponent();
       handleCancel();
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }
@@ -104,15 +104,15 @@ export function Categories() {
       setLoading(true);
 
       if (!categoryToRemove?.id) {
-        return toastError('Erro ao remover a categoria.');
+        return toastFire('Erro ao remover a categoria.', 'error');
       }
 
       await categoriesApi.remove(categoryToRemove.id);
       reloadComponent();
       setRemoveModal(false);
-      toastSuccess('Categoria removida com sucesso');
+      toastFire('Categoria removida com sucesso');
     } catch (err) {
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

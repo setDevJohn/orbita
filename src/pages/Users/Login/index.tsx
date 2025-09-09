@@ -1,7 +1,7 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
 import { LoadingPage } from '@components/Loading';
 import { AuthContext } from '@context/Auth';
-import { toastError, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useContext, useState } from 'react';
 import { Title } from 'styles/main';
 
@@ -20,11 +20,11 @@ export const Login = () => {
     e.preventDefault();
 
     if (Object.values(formValue).some(value => !value)) {
-      return toastWarn('Preencha todos os campos!');
+      return toastFire('Preencha todos os campos!', 'warning');
     }
 
     if (formValue.password.length < 6) {
-      return toastWarn('A senha deve ter no mínimo 6 caracteres');
+      return toastFire('A senha deve ter no mínimo 6 caracteres', 'warning');
     }
 
     try {
@@ -33,7 +33,7 @@ export const Login = () => {
       await login(formValue);
     } catch (err) {
       console.error(err);
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

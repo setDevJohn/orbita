@@ -5,7 +5,7 @@ import { AccountRaw } from '@services/accounts/interface';
 import { usersApi } from '@services/users';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastError } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 
@@ -98,7 +98,7 @@ export function AccountDetails ({ mainPage }: { mainPage: boolean }) {
           setSelectedAccountId(accountRes[0]?.id ?? null);
         }
       } catch (err) {
-        toastError((err as Error).message);
+        toastFire((err as Error).message, 'error');
       } finally {
         setLoading(false);
       }

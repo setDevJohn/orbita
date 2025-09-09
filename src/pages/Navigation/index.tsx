@@ -1,6 +1,6 @@
 import { LoadingPage } from '@components/Loading';
 import { AuthContext } from '@context/Auth';
-import { toastError } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { BsFillCreditCardFill } from 'react-icons/bs';
@@ -37,7 +37,7 @@ export function Navigation () {
 
       await logout();
     } catch (error) {
-      toastError((error as Error).message);
+      toastFire((error as Error).message, 'error');
     } finally {
       setLoading(false);
     }

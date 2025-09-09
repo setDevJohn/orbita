@@ -1,7 +1,7 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
 import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastSuccess, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Title } from 'styles/main';
@@ -23,15 +23,15 @@ export const RegisterUser = () => {
     e.preventDefault();
 
     if (Object.values(formValue).some(value => !value)) {
-      return toastWarn('Preencha todos os campos!');
+      return toastFire('Preencha todos os campos!', 'warning');
     }
 
     if (formValue.password.length < 6) {
-      return toastWarn('A senha deve ter no mínimo 6 caracteres');
+      return toastFire('A senha deve ter no mínimo 6 caracteres', 'warning');
     }
 
     if (formValue.password !== formValue.passwordConfirmation) {
-      return toastWarn('As senhas devem ser iguais');
+      return toastFire('As senhas devem ser iguais', 'warning');
     }
 
     try {
@@ -39,11 +39,11 @@ export const RegisterUser = () => {
 
       await usersApi.register(formValue);
       
-      toastSuccess('Usuário registrado com sucesso!');
+      toastFire('Usuário registrado com sucesso!');
       navigate('/login');
     } catch (err) {
       console.error(err);
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import { SubmitButton, TextInputWithLabel } from '@components/Inputs';
 import { LoadingPage } from '@components/Loading';
 import { usersApi } from '@services/users';
-import { toastError, toastWarn } from '@utils/toast';
+import { toastFire } from '@utils/sweetAlert';
 import { FormEvent, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Title } from 'styles/main';
@@ -21,12 +21,12 @@ export const TokenStep = () => {
     e.preventDefault();
 
     if (!userId) {
-      toastError('Erro ao obeter informação do usuário');
+      toastFire('Erro ao obeter informação do usuário', 'error');
       return navigate('/recuperar-senha'); 
     }
 
     if (!token) {
-      toastWarn('Informe o token de recuperação');
+      toastFire('Informe o token de recuperação', 'warning');
       return navigate('/recuperar-senha'); 
     }
 
@@ -38,7 +38,7 @@ export const TokenStep = () => {
       navigate(`/recuperar-senha/nova-senha?userId=${userId}&token=${token}`);
     } catch (err) {
       console.error(err);
-      toastError((err as Error).message);
+      toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
     }
