@@ -1,30 +1,71 @@
 import { FieldsProps, Form } from '@components/Form';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { LoadingPage } from '@components/Loading';
 import { HomeContext } from '@context/Home';
-import { useContext } from 'react';
+import { usersApi } from '@services/users';
+import { mask } from '@utils/mask';
+import { toastFire } from '@utils/sweetAlert';
+import { useContext, useEffect, useState } from 'react';
 
 import { EditBackgroundFocus, ImageContainer, UserLogo } from './styles';
 
 export function Profile() {
-  const { decodedUser } = useContext(HomeContext);
+  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    name: '',
+    cellPhone: '',
+    email: '',
+    wage: '',
+    payday: ''
+  });
 
+  const { decodedUser } = useContext(HomeContext);
+  
   const defaultProfileImage = `https://ui-avatars.com/api/?name=${decodedUser?.name}&size=100&background=333333&color=ffffff`;
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        setLoading(true);
+        const userResponse = await usersApi.findInfo();
+
+        setForm({
+          name: userResponse.name,
+          cellPhone: userResponse.cellPhone || '',
+          email: userResponse.email,
+          wage: userResponse.wage?.toString() || '',
+          payday: userResponse.name?.toString() || ''
+        });
+      } catch (err) {
+        toastFire((err as Error).message, 'error');
+      } finally {
+        setLoading(false);
+      }
+    }; 
+    
+    fetchUserInfo();
+  }, []);
+
+  const handleChange = (name: string, value: string) => {
+    setForm(prev => ({ ...prev, [name]: mask.name(value) }));
+  };
 
   const profileFields: FieldsProps[] = [
     {
       type: 'default',
       name: 'name',
-      value: '',
-      handleChange: () => {},
+      value: form.name,
+      handleChange,
       label: 'Nome',
+      required: true,
       placeholder: 'Nome Sobrenome',
       labelInColumn: true  
     },
     {
       type: 'default',
       name: 'cellPhone',
-      value: '',
-      handleChange: () => {},
+      value: mask.phone(form.cellPhone),
+      handleChange,
       label: 'Celular',
       placeholder: '(99) 99999-9999',
       labelInColumn: true  
@@ -32,26 +73,28 @@ export function Profile() {
     {
       type: 'default',
       name: 'email',
-      value: '',
-      handleChange: () => {},
+      value: form.email,
+      handleChange,
       label: 'E-mail',
+      inputType: 'email',
+      required: true,
       placeholder: 'seuemail@example.com',
       labelInColumn: true  
     },
     {
       type: 'default',
       name: 'wage',
-      value: '',
-      handleChange: () => {},
+      value: mask.currency(form.wage),
+      handleChange,
       label: 'Salário líquido',
-      placeholder: '0,00',
+      placeholder: 'R$ 0,00',
       labelInColumn: true  
     },
     {
       type: 'default',
-      name: 'paymentDay',
-      value: '',
-      handleChange: () => {},
+      name: 'payday',
+      value: mask.dayOfMonth(form.payday),
+      handleChange,
       label: 'Dia de pagamento',
       placeholder: '05',
       labelInColumn: true  
@@ -63,27 +106,36 @@ export function Profile() {
       type: 'default',
       name: 'currentPassword',
       value: '',
-      handleChange: () => {},
+      handleChange,
       label: 'Senha atual',
       placeholder: '********',
+      inputType: 'password',
+      autoComplete: 'current-password',
+      required: true,
       labelInColumn: true  
     },
     {
       type: 'default',
       name: 'newPassword',
       value: '',
-      handleChange: () => {},
+      handleChange,
       label: 'Nova senha',
       placeholder: '********',
+      inputType: 'password',
+      autoComplete: 'new-password',
+      required: true,
       labelInColumn: true  
     },
     {
       type: 'default',
       name: 'confirmNewPassword',
       value: '',
-      handleChange: () => {},
+      handleChange,
       label: 'Confirmar nova senha',
       placeholder: '********',
+      inputType: 'password',
+      autoComplete: 'confirm-new-password',
+      required: true,
       labelInColumn: true  
     },
   ];
@@ -124,6 +176,8 @@ export function Profile() {
           marginBottom={30}
         />
       ))}
+
+      {loading && <LoadingPage/>}
     </LayoutContainer>
   );
 }

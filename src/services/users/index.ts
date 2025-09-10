@@ -77,7 +77,7 @@ async function update(): Promise<UserBase> {
 
 async function findInfo(): Promise<UserBase> {
   try {
-    const { data: response } = await api.put('/users/info');
+    const { data: response } = await api.get('/users/info');
     return response.resource;
   } catch (err) {
     handlerAxiosError(err);
