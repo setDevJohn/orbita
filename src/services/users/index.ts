@@ -1,18 +1,18 @@
+import { TokenData } from '@context/Home/interface';
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { UserBase, UserFormLogin, UserFormPayload } from './interface';
+import { UserBase, UserFormLogin, UserFormPayload, UserRegisterResponse } from './interface';
 
-async function login (data: UserFormLogin) {
+async function login(data: UserFormLogin): Promise<void> {
   try {
-    const { data: response } = await api.post('/users/auth', data);
-    return response.resource;
+    await api.post('/users/auth', data);
   } catch (err) {
     handlerAxiosError(err);
   }
 }
 
-async function register (data: UserFormPayload) {
+async function register(data: UserFormPayload): Promise<UserRegisterResponse> {
   try {
     const { data: response } = await api.post('/users', data);
     return response.resource;
@@ -21,16 +21,15 @@ async function register (data: UserFormPayload) {
   }
 }
 
-async function logout () {
+async function logout(): Promise<void> {
   try {
-    const { data: response } = await api.post('/users/logout');
-    return response.resource;
+    await api.post('/users/logout');
   } catch (err) {
     handlerAxiosError(err);
   }
 }
 
-async function verify () {
+async function verify(): Promise<TokenData> {
   try {
     const { data: response } = await api.get('/users/verify');
     return response.resource;
@@ -39,7 +38,7 @@ async function verify () {
   }
 }
 
-async function sendEmailToRecoverPassword (email: string): Promise<UserBase> {
+async function sendEmailToRecoverPassword (email: string): Promise<{ id: number }> {
   try {
     const { data: response } = await api.post(
       '/users/password-recovery/send-email',
@@ -51,24 +50,34 @@ async function sendEmailToRecoverPassword (email: string): Promise<UserBase> {
   }
 }
 
-async function confirmTokenToRecoverPassword (userId: number, token: string): Promise<UserBase> {
+async function confirmTokenToRecoverPassword (userId: number, token: string): Promise<void> {
   try {
-    const { data: response } = await api.post(
-      '/users/password-recovery/confirm-token',
-      { userId, token }
-    );
+    await api.post('/users/password-recovery/confirm-token', { userId, token });
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function recoverPassword (userId: number, password: string, token: string): Promise<void> {
+  try {
+    await api.patch('/users/password-recovery', { userId, password, token });
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function update(): Promise<UserBase> {
+  try {
+    const { data: response } = await api.put('/users');
     return response.resource;
   } catch (err) {
     handlerAxiosError(err);
   }
 }
 
-async function recoverPassword (userId: number, password: string, token: string): Promise<UserBase> {
+async function findInfo(): Promise<UserBase> {
   try {
-    const { data: response } = await api.patch(
-      '/users/password-recovery',
-      { userId, password, token }
-    );
+    const { data: response } = await api.put('/users/info');
     return response.resource;
   } catch (err) {
     handlerAxiosError(err);
@@ -82,5 +91,7 @@ export const usersApi = {
   logout,
   sendEmailToRecoverPassword,
   confirmTokenToRecoverPassword,
-  recoverPassword
+  recoverPassword,
+  update,
+  findInfo
 };

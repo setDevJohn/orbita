@@ -2,17 +2,10 @@ export interface UserBase {
   id: number;
   name: string;
   email: string;
-  password: string;
-  active: boolean;
-  verified: boolean | null;
-  failedAttempts: number | null;
-  passwordResetToken: string | null;
-  accountVerificationToken: string | null;
-  lockedUntil: Date | null;
-  lastLogin: Date | null;
-  deletedAt: Date | null;
-  createdAt: Date | null;
-  updatedAt: Date | null;
+  verified: boolean | null;  
+  cellPhone: string | null,
+  wage: string | null,
+  payday: string | null,
 }
 
 export type UserFormLogin = {
@@ -24,4 +17,9 @@ export type UserFormPayload = {
   name: string
   email: string
   password: string  
+}
+
+export type UserRegisterResponse = { 
+  id: number,
+  email: string
 }
