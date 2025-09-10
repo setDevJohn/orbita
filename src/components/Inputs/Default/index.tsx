@@ -7,6 +7,8 @@ interface ITextWithLabel {
   type?: string
   size?: string
   width?: string
+  required?: boolean
+  autoComplete?: string
   placeholder?: string;
 }
 
@@ -17,6 +19,8 @@ export function DefaultInput({
   type,
   size,
   width,
+  required,
+  autoComplete,
   placeholder
 }: ITextWithLabel) {
   return (
@@ -27,7 +31,9 @@ export function DefaultInput({
       value={value}
       $size={size}
       $width={width}
+      required={!!required}
       placeholder={placeholder}
+      autoComplete={autoComplete || ''}
       onChange={({ target :{ value, name } }) => handleChange(name, value)}
     />
   );

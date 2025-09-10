@@ -9,8 +9,11 @@ export type FieldsProps = {
   value: string;
   handleChange: (name: string, value: string) => void;
   label: string;
+  required?: boolean;
+  autoComplete?: string;
   placeholder?: string;
   labelInColumn?: boolean;
+  inputType?: 'email' | 'text' | 'password',
   options?: { label: string; value: string }[];
 }
 
@@ -35,30 +38,21 @@ export function Form({ onSubmit, fields, title, cancelFunction, marginBottom, co
       {title && <FormTitle>{title}</FormTitle>}
 
       <FormStyled onSubmit={handleSubmit}>
-        {fields.map((input, i) => {
-          if (input.type === 'default') {
+        {fields.map(({ type, inputType, options, ...inputProps }, i) => {
+          if (type === 'default') {
             return (
               <TextInputWithLabel
                 key={i}
-                name={input.name}
-                value={input.value}
-                handleChange={input.handleChange}
-                label={input.label}
-                placeholder={input.placeholder || ''}
-                labelInColumn={input.labelInColumn}
+                type={inputType || 'text'}
+                { ...inputProps }
               />
             );
-          } else if (input.type === 'select') {
+          } else if (type === 'select') {
             return (
               <SelectInput
                 key={i}
-                name={input.name}
-                label={input.label}
-                value={input.value}
-                options={input.options || []}
-                handleChange={input.handleChange}
-                placeholder={input.placeholder || ''}
-                labelInColumn={input.labelInColumn}
+                options={options || []}
+                { ...inputProps }
               />
             );
           } else {
