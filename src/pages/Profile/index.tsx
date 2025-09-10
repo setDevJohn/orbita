@@ -47,7 +47,7 @@ export function Profile() {
   }, []);
 
   const handleChange = (name: string, value: string) => {
-    setForm(prev => ({ ...prev, [name]: mask.name(value) }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const profileFields: FieldsProps[] = [

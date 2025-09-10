@@ -38,7 +38,6 @@ const phone = (value: string): string => {
 const dayOfMonth = (value: string): string => {
   const digits = value.replace(/\D/g, '');
 
-  console.log(digits);
   if (digits === '') { return ''; }
 
   let day = parseInt(digits, 10);
