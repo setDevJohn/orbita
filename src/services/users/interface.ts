@@ -24,3 +24,8 @@ export type UserRegisterResponse = {
 }
 
 export type UpdateUserPayload = Omit<UserBase, 'verified'>
+
+export type UpdatePasswordForm = { 
+  currentPassword: string,
+  newPassword: string
+}

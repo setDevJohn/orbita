@@ -12,12 +12,17 @@ import { EditBackgroundFocus, ImageContainer, UserLogo } from './styles';
 
 export function Profile() {
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
+  const [profileForm, setProfileForm] = useState({
     name: '',
     cellPhone: '',
     email: '',
     wage: '',
     payday: ''
+  });
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
   });
 
   const { decodedUser } = useContext(HomeContext);
@@ -30,7 +35,7 @@ export function Profile() {
         setLoading(true);
         const userResponse = await usersApi.findInfo();
 
-        setForm({
+        setProfileForm({
           name: userResponse.name.trim(),
           cellPhone: userResponse.cellPhone || '',
           email: userResponse.email,
@@ -52,11 +57,11 @@ export function Profile() {
       setLoading(true);
  
       await usersApi.update({
-        cellPhone: format.extractNumberOfCellPhone(form.cellPhone),
-        email: form.email,
-        name: form.name,
-        payday: +form.payday,
-        wage: format.currencyToDecimal(form.wage)
+        cellPhone: format.extractNumberOfCellPhone(profileForm.cellPhone),
+        email: profileForm.email,
+        name: profileForm.name,
+        payday: +profileForm.payday,
+        wage: format.currencyToDecimal(profileForm.wage)
       });
 
       toastFire('Perfil atualizado com sucesso');
@@ -71,32 +76,45 @@ export function Profile() {
     try {
       setLoading(true);
  
-      await usersApi.update({
-        cellPhone: format.extractNumberOfCellPhone(form.cellPhone),
-        email: form.email,
-        name: form.name,
-        payday: +form.payday,
-        wage: format.currencyToDecimal(form.wage)
-      });
+      const { currentPassword, newPassword, confirmNewPassword } = passwordForm;
+      
+      if (newPassword.length < 6) {
+        return toastFire('A senha deve ter no mínimo 6 caracteres', 'warning');
+      }
 
-      toastFire('Perfil atualizado com sucesso');
+      if (newPassword !== confirmNewPassword) {
+        return toastFire('As senhas não coincidem', 'warning');
+      } 
+
+      await usersApi.updatePassword({ currentPassword, newPassword });
+
+      toastFire('Senha atualizada com sucesso');
     } catch (err) {
       toastFire((err as Error).message, 'error');
     } finally {
       setLoading(false);
+      setPasswordForm({
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
+      });
     }
   }; 
 
-  const handleChange = (name: string, value: string) => {
-    setForm(prev => ({ ...prev, [name]: value }));
+  const handleChangeProfileForm = (name: string, value: string) => {
+    setProfileForm(prev => ({ ...prev, [name]: value }));
+  };
+  
+  const handleChangePasswordForm = (name: string, value: string) => {
+    setPasswordForm(prev => ({ ...prev, [name]: value }));
   };
 
   const profileFields: FieldsProps[] = [
     {
       type: 'default',
       name: 'name',
-      value: mask.name(form.name),
-      handleChange,
+      value: mask.name(profileForm.name),
+      handleChange: handleChangeProfileForm,
       label: 'Nome',
       required: true,
       placeholder: 'Nome Sobrenome',
@@ -105,8 +123,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'cellPhone',
-      value: mask.phone(form.cellPhone),
-      handleChange,
+      value: mask.phone(profileForm.cellPhone),
+      handleChange: handleChangeProfileForm,
       label: 'Celular',
       placeholder: '(99) 99999-9999',
       labelInColumn: true  
@@ -114,8 +132,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'email',
-      value: form.email,
-      handleChange,
+      value: profileForm.email,
+      handleChange: handleChangeProfileForm,
       label: 'E-mail',
       inputType: 'email',
       required: true,
@@ -125,8 +143,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'wage',
-      value: mask.currency(form.wage),
-      handleChange,
+      value: mask.currency(profileForm.wage),
+      handleChange: handleChangeProfileForm,
       label: 'Salário líquido',
       placeholder: 'R$ 0,00',
       labelInColumn: true  
@@ -134,8 +152,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'payday',
-      value: mask.dayOfMonth(form.payday),
-      handleChange,
+      value: mask.dayOfMonth(profileForm.payday),
+      handleChange: handleChangeProfileForm,
       label: 'Dia de pagamento',
       placeholder: '05',
       labelInColumn: true  
@@ -146,8 +164,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'currentPassword',
-      value: '',
-      handleChange,
+      value: passwordForm.currentPassword,
+      handleChange: handleChangePasswordForm,
       label: 'Senha atual',
       placeholder: '********',
       inputType: 'password',
@@ -158,8 +176,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'newPassword',
-      value: '',
-      handleChange,
+      value: passwordForm.newPassword,
+      handleChange: handleChangePasswordForm,
       label: 'Nova senha',
       placeholder: '********',
       inputType: 'password',
@@ -170,8 +188,8 @@ export function Profile() {
     {
       type: 'default',
       name: 'confirmNewPassword',
-      value: '',
-      handleChange,
+      value: passwordForm.confirmNewPassword,
+      handleChange: handleChangePasswordForm,
       label: 'Confirmar nova senha',
       placeholder: '********',
       inputType: 'password',

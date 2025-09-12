@@ -31,8 +31,8 @@ export const RegisterUser = () => {
     }
 
     if (formValue.password !== formValue.passwordConfirmation) {
-      return toastFire('As senhas devem ser iguais', 'warning');
-    }
+      return toastFire('As senhas não coincidem', 'warning');
+    } 
 
     try {
       setLoading(true);

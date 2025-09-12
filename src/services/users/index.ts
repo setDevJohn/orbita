@@ -2,7 +2,7 @@ import { TokenData } from '@context/Home/interface';
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { UserBase, UserFormLogin, UserFormPayload, UserRegisterResponse } from './interface';
+import { UpdatePasswordForm, UpdateUserPayload, UserBase, UserFormLogin, UserFormPayload, UserRegisterResponse } from './interface';
 
 async function login(data: UserFormLogin): Promise<void> {
   try {
@@ -66,10 +66,18 @@ async function recoverPassword (userId: number, password: string, token: string)
   }
 }
 
-async function update(): Promise<UserBase> {
+async function update(data: UpdateUserPayload): Promise<UserBase> {
   try {
-    const { data: response } = await api.put('/users');
+    const { data: response } = await api.put('/users', data);
     return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
+async function updatePassword(formData: UpdatePasswordForm): Promise<void> {
+  try {
+    await api.patch('/users/update-password', formData);
   } catch (err) {
     handlerAxiosError(err);
   }
@@ -93,5 +101,6 @@ export const usersApi = {
   confirmTokenToRecoverPassword,
   recoverPassword,
   update,
+  updatePassword,
   findInfo
 };
