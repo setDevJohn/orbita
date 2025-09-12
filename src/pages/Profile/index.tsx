@@ -3,6 +3,7 @@ import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
 import { HomeContext } from '@context/Home';
 import { usersApi } from '@services/users';
+import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
@@ -30,11 +31,11 @@ export function Profile() {
         const userResponse = await usersApi.findInfo();
 
         setForm({
-          name: userResponse.name,
+          name: userResponse.name.trim(),
           cellPhone: userResponse.cellPhone || '',
           email: userResponse.email,
-          wage: userResponse.wage?.toString() || '',
-          payday: userResponse.name?.toString() || ''
+          wage: userResponse.wage ? parseFloat(userResponse.wage.toString()).toFixed(2) : '',
+          payday: userResponse.payday?.toString() || ''
         });
       } catch (err) {
         toastFire((err as Error).message, 'error');
@@ -46,6 +47,46 @@ export function Profile() {
     fetchUserInfo();
   }, []);
 
+  const handleSubmitProfile = async () => {
+    try {
+      setLoading(true);
+ 
+      await usersApi.update({
+        cellPhone: format.extractNumberOfCellPhone(form.cellPhone),
+        email: form.email,
+        name: form.name,
+        payday: +form.payday,
+        wage: format.currencyToDecimal(form.wage)
+      });
+
+      toastFire('Perfil atualizado com sucesso');
+    } catch (err) {
+      toastFire((err as Error).message, 'error');
+    } finally {
+      setLoading(false);
+    }
+  }; 
+
+  const handleSubmitPassword = async () => {
+    try {
+      setLoading(true);
+ 
+      await usersApi.update({
+        cellPhone: format.extractNumberOfCellPhone(form.cellPhone),
+        email: form.email,
+        name: form.name,
+        payday: +form.payday,
+        wage: format.currencyToDecimal(form.wage)
+      });
+
+      toastFire('Perfil atualizado com sucesso');
+    } catch (err) {
+      toastFire((err as Error).message, 'error');
+    } finally {
+      setLoading(false);
+    }
+  }; 
+
   const handleChange = (name: string, value: string) => {
     setForm(prev => ({ ...prev, [name]: value }));
   };
@@ -54,7 +95,7 @@ export function Profile() {
     {
       type: 'default',
       name: 'name',
-      value: form.name,
+      value: mask.name(form.name),
       handleChange,
       label: 'Nome',
       required: true,
@@ -144,13 +185,13 @@ export function Profile() {
     {
       title: 'Meu Perfil',
       fields: profileFields,
-      onSubmit: () => {},
+      onSubmit: handleSubmitProfile,
       confirmText: 'Salvar alterações'
     },
     {
       title: 'Alterar senha',
       fields: passwordFields,
-      onSubmit: () => {},
+      onSubmit: handleSubmitPassword,
       confirmText: 'Atualizar senha'
     }
   ];

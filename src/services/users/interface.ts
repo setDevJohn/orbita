@@ -1,11 +1,10 @@
 export interface UserBase {
-  id: number;
   name: string;
   email: string;
   verified: boolean | null;  
   cellPhone: string | null,
-  wage: string | null,
-  payday: string | null,
+  wage: number | null,
+  payday: number | null,
 }
 
 export type UserFormLogin = {
@@ -23,3 +22,5 @@ export type UserRegisterResponse = {
   id: number,
   email: string
 }
+
+export type UpdateUserPayload = Omit<UserBase, 'verified'>

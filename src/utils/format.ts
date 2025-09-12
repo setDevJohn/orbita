@@ -10,7 +10,10 @@ const dateToDayAndMonth = (value: Date | string) => {
   return dayAndMonth;
 };
 
+const extractNumberOfCellPhone = (value: string) => value.replace(/\D/g, '');
+
 export const format = {
   currencyToDecimal,
-  dateToDayAndMonth
+  dateToDayAndMonth,
+  extractNumberOfCellPhone,
 };
