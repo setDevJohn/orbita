@@ -1,6 +1,7 @@
 export interface UserBase {
   name: string;
   email: string;
+  profileImage: string | null;
   verified: boolean | null;  
   cellPhone: string | null,
   wage: number | null,
@@ -23,7 +24,7 @@ export type UserRegisterResponse = {
   email: string
 }
 
-export type UpdateUserPayload = Omit<UserBase, 'verified'>
+export type UpdateUserPayload = Omit<UserBase, 'verified' | 'profileImage'>
 
 export type UpdatePasswordForm = { 
   currentPassword: string,

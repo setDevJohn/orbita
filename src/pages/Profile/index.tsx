@@ -1,17 +1,19 @@
 import { FieldsProps, Form } from '@components/Form';
+import { FileInput } from '@components/Inputs/File';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
-import { HomeContext } from '@context/Home';
 import { usersApi } from '@services/users';
+import { UserBase } from '@services/users/interface';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
 import { toastFire } from '@utils/sweetAlert';
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import { EditBackgroundFocus, ImageContainer, UserLogo } from './styles';
 
 export function Profile() {
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<UserBase | null>(null);
   const [profileForm, setProfileForm] = useState({
     name: '',
     cellPhone: '',
@@ -24,10 +26,9 @@ export function Profile() {
     newPassword: '',
     confirmNewPassword: ''
   });
-
-  const { decodedUser } = useContext(HomeContext);
   
-  const defaultProfileImage = `https://ui-avatars.com/api/?name=${decodedUser?.name}&size=100&background=333333&color=ffffff`;
+  const imageRef = useRef<HTMLImageElement>(null);
+  const defaultProfileImage = `https://ui-avatars.com/api/?name=${user?.name}&size=100&background=333333&color=ffffff`;
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -35,6 +36,7 @@ export function Profile() {
         setLoading(true);
         const userResponse = await usersApi.findInfo();
 
+        setUser(userResponse);
         setProfileForm({
           name: userResponse.name.trim(),
           cellPhone: userResponse.cellPhone || '',
@@ -214,17 +216,46 @@ export function Profile() {
     }
   ];
 
+  const handleChangeImageProfile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+
+    if (files && files[0]) {
+      const file = files[0];
+      const newFormData = new FormData();
+
+      newFormData.append('file', file);
+
+      try {
+        setLoading(true);
+        await usersApi.updateProfileImage(newFormData);
+        toastFire('Imagem de perfil atualizada');
+      } catch (err) {
+        return toastFire(err as string, 'error');
+      } finally {
+        setLoading(false);
+      }
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const urlFile = reader.result as string;
+        if (imageRef.current) { imageRef.current.src = urlFile; }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <LayoutContainer title="Perfil">
       <ImageContainer>
         <UserLogo
+          ref={imageRef}
           alt="Foto usuário"
-          src={decodedUser?.profileImage || defaultProfileImage} 
+          src={user?.profileImage || defaultProfileImage} 
           onError={(e) => (e.target as HTMLImageElement).src = defaultProfileImage}
         />
 
         <EditBackgroundFocus>
-          <span>Editar</span>
+          <FileInput text='Editar' handleChange={handleChangeImageProfile} />
         </EditBackgroundFocus>
       </ImageContainer>
 

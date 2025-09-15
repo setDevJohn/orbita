@@ -92,6 +92,15 @@ async function findInfo(): Promise<UserBase> {
   }
 }
 
+async function updateProfileImage(formData: FormData): Promise<void> {
+  try {
+    const { data: response } = await api.put('/users/update-profile-image', formData);
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 export const usersApi = {
   login,
   register,
@@ -102,5 +111,6 @@ export const usersApi = {
   recoverPassword,
   update,
   updatePassword,
-  findInfo
+  findInfo,
+  updateProfileImage,
 };
