@@ -1,5 +1,6 @@
 import { BasicButton } from '@components/Buttons';
 import { SelectInput, TextInputWithLabel } from '@components/Inputs';
+import { Separator } from 'styles/main';
 
 import { ButtonsContainer, FormContainer, FormStyled, FormTitle } from './styles';
 
@@ -24,10 +25,18 @@ interface IForm {
   cancelFunction?: () => void;
   marginBottom?: number;
   confirmText?: string;
+  separator?: boolean
 }
 
-export function Form({ onSubmit, fields, title, cancelFunction, marginBottom, confirmText }: IForm) {
-
+export function Form({ 
+  onSubmit,
+  fields,
+  title,
+  cancelFunction,
+  marginBottom,
+  confirmText,
+  separator
+}: IForm) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit();
@@ -76,6 +85,8 @@ export function Form({ onSubmit, fields, title, cancelFunction, marginBottom, co
             custonStyle={{ width: '70%' }}
           />
         </ButtonsContainer>
+
+        {separator && <Separator />}
       </FormStyled>
     </FormContainer>
   );

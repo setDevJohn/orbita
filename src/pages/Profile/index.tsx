@@ -286,6 +286,7 @@ export function Profile() {
 
       {forms.map((formProps, index) => (
         <Form
+          separator
           key={index}
           {...formProps}
           marginBottom={20}
