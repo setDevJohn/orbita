@@ -101,6 +101,15 @@ async function updateProfileImage(formData: FormData): Promise<void> {
   }
 }
 
+async function deleteAccount(): Promise<void> {
+  try {
+    const { data: response } = await api.delete('/users');
+    return response.resource;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 export const usersApi = {
   login,
   register,
@@ -113,4 +122,5 @@ export const usersApi = {
   updatePassword,
   findInfo,
   updateProfileImage,
+  deleteAccount,
 };

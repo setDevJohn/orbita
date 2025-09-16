@@ -1,13 +1,15 @@
+import { BasicButton } from '@components/Buttons';
 import { FieldsProps, Form } from '@components/Form';
 import { FileInput } from '@components/Inputs/File';
 import { LayoutContainer } from '@components/LayoutContainer';
 import { LoadingPage } from '@components/Loading';
+import { AuthContext } from '@context/Auth';
 import { usersApi } from '@services/users';
 import { UserBase } from '@services/users/interface';
 import { format } from '@utils/format';
 import { mask } from '@utils/mask';
-import { toastFire } from '@utils/sweetAlert';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { questionFire, toastFire } from '@utils/sweetAlert';
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 
 import { EditBackgroundFocus, ImageContainer, UserLogo } from './styles';
 
@@ -27,6 +29,8 @@ export function Profile() {
     confirmNewPassword: ''
   });
   
+  const { logout } = useContext(AuthContext);
+
   const imageRef = useRef<HTMLImageElement>(null);
   const defaultProfileImage = `https://ui-avatars.com/api/?name=${user?.name}&size=100&background=333333&color=ffffff`;
 
@@ -72,7 +76,28 @@ export function Profile() {
     } finally {
       setLoading(false);
     }
-  }; 
+  };
+
+  const handleRemoveAccount = async () => {
+    try {
+      const result = await questionFire({
+        title: 'Deseja excluir sua conta ?',
+        text: 'Ao excluir sua conta não será possível recupera-la',
+        confirmButtonText: 'Excluir minha conta!'
+      });
+
+      if (result.isConfirmed) {
+        setLoading(true);
+
+        await usersApi.deleteAccount();
+        await logout();
+      }     
+    } catch (err) {
+      toastFire((err as Error).message, 'error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmitPassword = async () => {
     try {
@@ -260,12 +285,19 @@ export function Profile() {
       </ImageContainer>
 
       {forms.map((formProps, index) => (
-        <Form 
+        <Form
           key={index}
           {...formProps}
-          marginBottom={30}
+          marginBottom={20}
         />
       ))}
+
+      <BasicButton 
+        type="cancel"
+        text="Excluir conta"
+        action={handleRemoveAccount}
+        custonStyle={{ width: '85%' }}
+      />
 
       {loading && <LoadingPage/>}
     </LayoutContainer>
