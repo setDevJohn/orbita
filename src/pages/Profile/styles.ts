@@ -21,17 +21,18 @@ export const EditBackgroundFocus = styled.div`
 
 export const ImageContainer = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-top: 20px;
   width: 100px;
   height: 100px;
-  border-radius: 50%;
   overflow: hidden;
-  margin-top: 20px;
 
   &:hover > ${EditBackgroundFocus} { opacity: 1; }
 `;
 
 export const UserLogo = styled.img`
   max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
 `;  
