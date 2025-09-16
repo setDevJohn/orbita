@@ -1,6 +1,8 @@
 import { ToggleButton } from '@components/Buttons';
 import { SelectInput } from '@components/Inputs';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { ThemeContext } from '@context/Theme';
+import { useContext } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { BsCurrencyDollar, BsGlobe2 } from 'react-icons/bs';
 import { FaRegCreditCard, FaRegFileAlt } from 'react-icons/fa';
@@ -13,7 +15,6 @@ import { Separator, Title } from 'styles/main';
 import packageJson from '../../../package.json';
 
 import { IconLabelContainer, Item, List, SettingsSection, TitleContainer } from './styles';
-
 interface ISettingsList {
   type: 'select' | 'toggle' | 'clickable',
   name: string,
@@ -21,6 +22,7 @@ interface ISettingsList {
   icon: React.ReactNode,
   options?: { label: string, value: string }[],
   checked?: boolean,
+  handleToggle?: () => void
 }
 
 interface ISettingsSectionsProps {
@@ -29,17 +31,16 @@ interface ISettingsSectionsProps {
 }
 
 export function Settings() {
+  const { theme, handleChangeTheme } = useContext(ThemeContext);
+
   const generalList: ISettingsList[] = [
     {  
-      type: 'select',
+      type: 'toggle',
       name: 'theme',
       label: 'Tema',
       icon: <MdOutlineColorLens size={26}/>,
-      options: [
-        { label: 'Sistema', value: 'system' },
-        { label: 'Escuro', value: 'dark' },
-        { label: 'Claro', value: 'light' },
-      ]
+      checked: theme.type === 'dark',
+      handleToggle: handleChangeTheme
     },
     {  
       type: 'select',
@@ -223,7 +224,7 @@ export function Settings() {
                 {item.type === 'toggle' && (
                   <ToggleButton
                     checked={!!item.checked}
-                    handleClick={() => {}}
+                    handleClick={item?.handleToggle || (() => {})}
                   />
                 )}
 

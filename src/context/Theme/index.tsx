@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 export interface ITheme {
+  type: string
   contrastColor: string
   textColor: string
   secondaryColor: string
@@ -35,6 +36,7 @@ const commonAttr = {
 
 const themeColor = {
   dark : {
+    type: 'dark',
     contrastColor: '#6366F1',
     textColor: '#cecdcd',
     secondaryColor: '#94a3b8',
@@ -46,14 +48,15 @@ const themeColor = {
     ...commonAttr
   },
   light: {
-    contrastColor: '#0073E6',
-    textColor: '#1A1A1A',
-    secondaryColor: '#4B5563',
-    linearGradient: '#E0E0E0',
-    mainBackground: '#CFCFCF',
-    lightBackground: '#CFCFCF',
-    darkBackground: '#535358',
-    borderColor: '#CFCFCF',
+    type: 'light',
+    contrastColor: '#2563EB',
+    textColor: '#1F2937',
+    secondaryColor: '#6B7280',
+    linearGradient: 'linear-gradient(45deg, #3b82f6, #8b5cf6)',
+    mainBackground: '#FFFFFF',
+    lightBackground: '#F9FAFB',
+    darkBackground: '#E5E7EB',
+    borderColor: '#D1D5DB',
     ...commonAttr
   },
 };
@@ -68,15 +71,24 @@ const ThemeContext = createContext<{
 
 type ThemeProviderProps = { children: ReactNode }
 
-// Achar novo nome 
 const ThemeStyleProvider = ({ children } : ThemeProviderProps) => {
-
   const [theme, setTheme] = useState<ITheme>(themeColor.dark);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
+    
+    if (savedTheme) {
+      setTheme(themeColor[savedTheme]);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? themeColor.dark : themeColor.light);
+    }
+  }, []);
+
   const handleChangeTheme = () => {
-    const currentTheme = theme === themeColor.dark
-      ? themeColor.light : themeColor.dark;
-    setTheme(currentTheme);
+    const newTheme = theme === themeColor.dark ? 'light' : 'dark';
+    setTheme(themeColor[newTheme]);
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
@@ -89,15 +101,3 @@ const ThemeStyleProvider = ({ children } : ThemeProviderProps) => {
 };
 
 export { ThemeContext, ThemeStyleProvider };
-
-// Old theme:
-// dark : {
-//   contrastColor: '#1de9b6',
-//   textColor: '#cecdcd',
-//   linearGradient: 'linear-gradient(35deg, #05050d, #165868)',
-//   mainBackground: '#22303c ',
-//   lightBackground: '#394b54',
-//   darkBackground: '#0A212C',
-//   buttonColor: '#0C3A46',
-//   ...commonAttr
-// },
