@@ -1,13 +1,22 @@
 .custom-date-picker {
-  background-color: #1f242c;
-  color: #cecdcd;
   font-size: 16px;
   text-align: center;
   outline: none;
-  border: 1px solid #334155;
   border-radius: 10px;
   padding: 13px 15px;
   width: 100%;
+}
+
+.custom-date-picker.light {
+  background-color: #EAEAEA;
+  color: #1F2937;
+  border: 1px solid #D1D5DB;
+}
+
+.custom-date-picker.dark {
+  background-color: #1F242C;
+  color: #F5F5F5;
+  border: 1px solid #334155;
 }
 
 .custom-date-picker::placeholder {

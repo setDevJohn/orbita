@@ -8,7 +8,7 @@ export const Footer = styled.footer`
   gap: 45px;
   background: ${({ theme }) => theme.lightBackground};
   box-shadow: 0px -10px 10px #0004;
-  padding: 7px 15px;
+  padding: 0 15px;
   width: 100%;
 `;
 

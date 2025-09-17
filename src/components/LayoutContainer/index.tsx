@@ -13,7 +13,7 @@ export const LayoutContainer = forwardRef<HTMLDivElement, ILayoutContainer>(
     return (
       <Container>
         <Header>
-          <Title $margin='0'> {title} </Title>
+          <Title $lightColor $margin='0'> {title} </Title>
         </Header>
         <Overflow ref={ref}>
           <Content> {children} </Content>

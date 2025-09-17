@@ -162,14 +162,14 @@ export function Categories() {
 
             <ButtonsContainer>
               <BasicButton
-                icon={<BiEdit size={20} fill="#fff" />}
+                icon={<BiEdit size={20} fill="#F5F5F5" />}
                 custonStyle={{ minWidth: 'unset' }}
                 action={() => handleEdit({ id, name })}
               />
 
               <BasicButton
                 type='cancel'
-                icon={<IoTrashOutline size={20} fill="#fff" />}
+                icon={<IoTrashOutline size={20} fill="#F5F5F5" />}
                 custonStyle={{ minWidth: 'unset' }}
                 action={() => handleRemove(id)}
               />

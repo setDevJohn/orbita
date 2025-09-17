@@ -27,7 +27,7 @@ export const Circle = styled.div<CircleProps>`
   width: 23px;
   height: 23px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.textColor};
+  background-color: #F5F5F5;
   box-shadow: 0 0 4px #00000091;
   transition: margin ease-in-out 0.4s;
   margin-left: ${({ $checked }) => ($checked ? '21px' : '0')};

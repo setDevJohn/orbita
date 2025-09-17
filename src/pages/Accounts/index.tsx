@@ -184,14 +184,14 @@ export function Accounts() {
       
             <ButtonsContainer>
               <BasicButton
-                icon={<BiEdit size={20} fill="#fff" />}
+                icon={<BiEdit size={20} fill="#F5F5F5" />}
                 custonStyle={{ minWidth: 'unset' }}
                 action={() => handleEdit({ id, name, balance })}
               />
       
               <BasicButton
                 type='cancel'
-                icon={<IoTrashOutline size={20} fill="#fff" />}
+                icon={<IoTrashOutline size={20} fill="#F5F5F5" />}
                 custonStyle={{ minWidth: 'unset' }}
                 action={() => handleRemove(id)}
               />

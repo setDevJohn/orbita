@@ -53,6 +53,7 @@ export const Item = styled.li<{$active?: boolean}>`
   display: flex;
   align-items: center;
   background-color: ${({ $active, theme }) => $active && theme.contrastColor};
+  color: ${({ $active }) => $active && '#F5F5F5'};
   gap: 10px;
   width: 100%;
   font-size: ${({ theme }) => theme.normalText};

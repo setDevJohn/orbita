@@ -1,5 +1,6 @@
 import { LoadingPage } from '@components/Loading';
 import { AuthContext } from '@context/Auth';
+import { ThemeContext } from '@context/Theme';
 import { toastFire } from '@utils/sweetAlert';
 import { useContext, useEffect, useState } from 'react';
 import { BiMenuAltRight } from 'react-icons/bi';
@@ -21,6 +22,7 @@ export function Navigation () {
   const [selected, setSelected] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
+  const { theme } = useContext(ThemeContext);
   const { logout } = useContext(AuthContext);
 
   const location = useLocation();
@@ -52,12 +54,14 @@ export function Navigation () {
     {  path: '/notificacoes', label: 'Notificações', icon: <IoNotifications size={26}/> },
   ];
 
+  console.log(selected);
+
   return (
     <Container>
       <MenuIcon>
         <BiMenuAltRight 
           size={32}
-          fill="#fff"
+          fill={theme.type === 'dark' || selected !== '/inicio' ? '#F5F5F5' : '#1F2937'}
           onClick={() => setSideBar(true)}
         />
       </MenuIcon>
@@ -65,7 +69,7 @@ export function Navigation () {
       <SideBar $open={sideBar}>
         <IconContainer>
           <RiCloseLargeFill 
-            fill="#fff"
+            fill={theme.type === 'dark' ? '#F5F5F5' : '#1F2937'}
             size={24}
             onClick={() => setSideBar(false)}
           />

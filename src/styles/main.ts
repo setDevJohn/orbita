@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1<{$margin?: string; $bigSize?: boolean}>`
+export const Title = styled.h1<{$lightColor?: boolean; $margin?: string; $bigSize?: boolean}>`
+  color: ${({ $lightColor }) => $lightColor && '#F5F5F5'};
   font-size: ${({ theme, $bigSize }) => $bigSize ? theme.bigTitle : theme.subtitle};
   font-weight: 500;
   margin: ${({ $margin }) => $margin ? $margin : '20px'};
@@ -21,7 +22,7 @@ export const Separator = styled.div<{$margin?: number}>`
   width: 100%;
   height: 1px;
   margin: ${({ $margin }) => $margin && `${$margin}px 0`};
-  background-color: #2d333b;
+  background-color: ${({ theme }) => theme.type === 'dark'? '#2D333B' : '#CCCCCC' };
 `;
 
 export const BackgroundFocus = styled.div`

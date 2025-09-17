@@ -15,7 +15,7 @@ export const ButtonStyled = styled.button<IButtonsStyled>`
       ? '#ef4444' : $type === 'confirm' 
         ? '#22c55e' : theme.linearGradient
   )};
-  color: ${({ theme }) => theme.textColor};
+  color: #F5F5F5;
   text-align: center;
   font-size: ${({ theme }) => theme.bigText};
   font-weight: 500;

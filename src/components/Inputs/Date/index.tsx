@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'react-datepicker/dist/react-datepicker.css';
+import { ThemeContext } from '@context/Theme';
 import { mask } from '@utils/mask';
 import { ptBR } from 'date-fns/locale';
-import { FormEvent } from 'react';
+import { FormEvent, useContext } from 'react';
 import DatePicker from 'react-datepicker';
-import './styles.css';
 import { InputLabel } from 'styles/main';
+import './styles.css';
 
 import { DateContainer } from './styles';
 
@@ -32,6 +33,8 @@ export function DateInput({
   label,
   labelInColumn,
 }: IDateInput) {
+  const { theme } = useContext(ThemeContext);
+
   const showPickerProps = {
     showWeekNumbers: mode === 'week',
     showMonthYearPicker: mode === 'month',
@@ -53,7 +56,7 @@ export function DateInput({
 
       <DatePicker
         {...({
-          className: 'custom-date-picker',
+          className: `custom-date-picker ${theme.type === 'dark' ? 'dark' : 'light'}`,
           selected: startDate,
           onChange: handleChange,
           onChangeRaw: (e: FormEvent<HTMLInputElement>) => {

@@ -38,7 +38,7 @@ const themeColor = {
   dark : {
     type: 'dark',
     contrastColor: '#6366F1',
-    textColor: '#cecdcd',
+    textColor: '#F5F5F5',
     secondaryColor: '#94a3b8',
     linearGradient: 'linear-gradient(45deg, #6366f1, #8b5cf6)',
     mainBackground: '#161B22 ',
@@ -49,12 +49,12 @@ const themeColor = {
   },
   light: {
     type: 'light',
-    contrastColor: '#2563EB',
+    contrastColor: '#3b82f6',
     textColor: '#1F2937',
     secondaryColor: '#6B7280',
     linearGradient: 'linear-gradient(45deg, #3b82f6, #8b5cf6)',
-    mainBackground: '#FFFFFF',
-    lightBackground: '#F9FAFB',
+    mainBackground: '#FAFAFA',
+    lightBackground: '#EAEAEA',
     darkBackground: '#E5E7EB',
     borderColor: '#D1D5DB',
     ...commonAttr

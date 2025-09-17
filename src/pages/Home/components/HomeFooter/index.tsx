@@ -1,5 +1,6 @@
 import { BasicButton } from '@components/Buttons';
 import { HomeContext } from '@context/Home';
+import { ThemeContext } from '@context/Theme';
 import { useContext } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
@@ -17,6 +18,8 @@ export function HomeFooter () {
     currentPage,
     setCurrentPage
   } = useContext(HomeContext);
+
+  const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
 
@@ -52,7 +55,14 @@ export function HomeFooter () {
                   setMenuRegister(false);
                 }}
               >
-                <BasicButton text={name} icon={icon} custonStyle={{ background: '#161B22' }} />
+                <BasicButton 
+                  text={name}
+                  icon={icon}
+                  custonStyle={{ 
+                    background: `${theme.type === 'dark' ? '#161B22' : '#FAFAFA'}`,
+                    color: `${theme.type === 'dark' ? '#F5F5F5' : '#1F2937'}`
+                  }}
+                />
               </RegisterItem>
             ))}
           </RegisterList>
@@ -70,8 +80,8 @@ export function HomeFooter () {
       >
         <Icon $open={menuRegister}>
           { currentPage !== 'home' 
-            ? <TiHome size={32} fill="#fff" />
-            : <FiPlus size={32} fill="#fff" />
+            ? <TiHome size={32} fill='#F5F5F5' stroke='#F5F5F5' />
+            : <FiPlus size={32} fill='#F5F5F5' stroke='#F5F5F5' />
           }
         </Icon>
       </MenuIcon>

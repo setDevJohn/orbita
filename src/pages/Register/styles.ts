@@ -38,7 +38,7 @@ export const DateButton = styled.div<{$active: boolean}>`
   flex: 1;
   text-align: center;
   background-color: ${({ theme, $active }) => $active ? theme.contrastColor : theme.darkBackground};
-  color: ${({ theme }) => theme.textColor};
+  color: ${({ theme, $active }) => $active ? '#F5F5F5' : theme.textColor};
   border-radius: 10px;
   padding: 8px;
   cursor: pointer;
