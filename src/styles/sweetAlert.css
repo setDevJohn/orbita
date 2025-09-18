@@ -17,17 +17,20 @@
   gap: 7px !important;
 }
 
-.swal2-popup.question.dark-theme-popup {
-  background-color: #1f232b !important;
-  color: #ffffff !important;
+.swal2-popup.dark-theme-popup {
+  background-color: #1F232B !important;
+  color: #F5F5F5 !important;
   border: 1px solid #334155 !important;
+}
+.swal2-popup.light-theme-popup {
+  background-color: #FAFAFA !important;
+  color: #1F2937 !important;
+  border: 1px solid #D1D5DB !important;
 }
 
-.swal2-popup.toast.dark-theme-popup {
-  background-color: #1f232b !important;
-  color: #ffffff !important;
-  border: 1px solid #334155 !important;
-}
 .swal2-popup.toast.dark-theme-popup .swal2-timer-progress-bar {
   background-color: #6366F1 !important;
+}
+.swal2-popup.toast.light-theme-popup .swal2-timer-progress-bar {
+  background-color: #3B82F6 !important;
 }

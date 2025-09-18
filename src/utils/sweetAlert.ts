@@ -7,6 +7,8 @@ interface QuestionFireProps {
 }
 
 export const questionFire = async ({ title, text, confirmButtonText }: QuestionFireProps = {}) => {
+  const theme = localStorage.getItem('theme');
+
   return Swal.fire({
     title: `${ title || 'Deseja remover?' }`,
     text: `${ text || 'Sua ação não poderá ser desfeita!'}`,
@@ -17,12 +19,14 @@ export const questionFire = async ({ title, text, confirmButtonText }: QuestionF
     cancelButtonText: 'Cancelar',
     confirmButtonText: `${ confirmButtonText || 'Sim, remover!'}`,
     customClass: {
-      popup: 'question dark-theme-popup'
+      popup: `question ${theme === 'dark' ? 'dark-theme-popup' : 'light-theme-popup'}`
     }
   });
 };
 
 export const toastFire = (message: string, type?: 'success' | 'warning' | 'error' | 'info') => {
+  const theme = localStorage.getItem('theme');
+
   return Swal.fire({
     toast: true,
     position: 'top',
@@ -32,7 +36,7 @@ export const toastFire = (message: string, type?: 'success' | 'warning' | 'error
     timer: 3000,
     timerProgressBar: true,
     customClass: {
-      popup: 'toast dark-theme-popup'
+      popup: `toast ${theme === 'dark' ? 'dark-theme-popup' : 'light-theme-popup'}`
     }
   });
 };
