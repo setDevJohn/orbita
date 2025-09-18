@@ -117,7 +117,11 @@ export function Cards() {
 
   const handleRemove = async (id: number) => {
     try {
-      const result = await questionFire();
+      const result = await questionFire({
+        title: 'Deseja excluir o cartão?',
+        text: 'Ao excluí-lo, as transações vinculadas a ele também serão excluídas!',
+        confirmButtonText: 'Excluir cartão!'
+      });
 
       if (result.isConfirmed) {
         setLoading(false);

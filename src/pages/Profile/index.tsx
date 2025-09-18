@@ -81,8 +81,8 @@ export function Profile() {
   const handleRemoveAccount = async () => {
     try {
       const result = await questionFire({
-        title: 'Deseja excluir sua conta ?',
-        text: 'Ao excluir sua conta não será possível recupera-la',
+        title: 'Deseja excluir sua conta?',
+        text: 'Ao excluir sua conta, não será possível recuperá-la!',
         confirmButtonText: 'Excluir minha conta!'
       });
 

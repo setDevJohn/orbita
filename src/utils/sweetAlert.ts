@@ -10,7 +10,7 @@ export const questionFire = async ({ title, text, confirmButtonText }: QuestionF
   const theme = localStorage.getItem('theme');
 
   return Swal.fire({
-    title: `${ title || 'Deseja remover?' }`,
+    title: `${ title || 'Deseja realmente remover?' }`,
     text: `${ text || 'Sua ação não poderá ser desfeita!'}`,
     icon: 'question',
     showCancelButton: true,

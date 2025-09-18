@@ -95,7 +95,11 @@ export function Categories() {
 
   const handleRemove = async (id: number) => {
     try {
-      const result = await questionFire();
+      const result = await questionFire({
+        title: 'Deseja excluir a categoria?',
+        text: 'Ao excluí-la, as transações vinculadas ficarão sem categoria!',
+        confirmButtonText: 'Excluir categoria!'
+      });
 
       if (result.isConfirmed) {
         setLoading(true);
