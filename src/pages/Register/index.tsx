@@ -154,7 +154,7 @@ export function Register() {
       amount: format.currencyToDecimal(form.price),
       transactionDate: form.date?.toJSON(),
       source: form.account ? 'account' : 'card',
-      categoryId: Number(form.category),
+      ...(form.category && { categoryId: Number(form.category) }),
       ...(form.card && { cardId: Number(form.card) }),
       ...(form.account && { accountId: Number(form.account) }),
       ...(form.recurrenceDateRange.every(date => !!date) && { 

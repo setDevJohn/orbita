@@ -37,7 +37,7 @@ export interface TransactionsFormPayload {
   referenceYear?: number;
   currenInstallment?: number | null; // Se for "current", pode ajustar o nome
   totalInstallments?: number | null;
-  categoryId: number | null;
+  categoryId?: number;
   accountId?: number;
   cardId?: number;
   recurrenceDateType?: string;
