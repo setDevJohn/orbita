@@ -21,7 +21,6 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "color-hex-case": "upper",
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
