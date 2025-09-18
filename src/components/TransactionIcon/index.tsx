@@ -13,8 +13,8 @@ export const TransactionIcon = ({ type, size = 'medium' }: TransactionIconProps)
   return (
     <IconContainer $operationType={type} $size={size}>
       {type === 'income' 
-        ? <FaArrowTrendUp size={iconSize} fill="#22c55e" /> 
-        : <FaArrowTrendDown size={iconSize} fill="#ef4444" />
+        ? <FaArrowTrendUp size={iconSize} fill="#22C55E" /> 
+        : <FaArrowTrendDown size={iconSize} fill="#EF4444" />
       }
     </IconContainer>
   );

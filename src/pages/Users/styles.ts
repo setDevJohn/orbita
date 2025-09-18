@@ -16,7 +16,7 @@ export const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.mainBackground};
-  box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -2px #0000001a;
+  box-shadow: 0 10px 15px -3px #0000001A, 0 4px 6px -2px #0000001A;
   border: 1px solid ${({ theme }) => `${theme.borderColor}55`};
   border-radius: 20px;
 `;
@@ -52,7 +52,7 @@ export const FormFooter = styled.footer`
   span {
     width: 100%;
     text-align: center;
-    color: #b3b3b3;
+    color: #B3B3B3;
     padding: 0 10px;
   }
 `;

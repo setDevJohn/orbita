@@ -14,7 +14,7 @@ export const questionFire = async ({ title, text, confirmButtonText }: QuestionF
     text: `${ text || 'Sua ação não poderá ser desfeita!'}`,
     icon: 'question',
     showCancelButton: true,
-    confirmButtonColor: '#ef4444',
+    confirmButtonColor: '#EF4444',
     cancelButtonColor: '#6366F1',
     cancelButtonText: 'Cancelar',
     confirmButtonText: `${ confirmButtonText || 'Sim, remover!'}`,

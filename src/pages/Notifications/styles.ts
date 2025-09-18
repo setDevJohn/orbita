@@ -12,7 +12,7 @@ export const ButtonFilter = styled.div<{ $select?: boolean }>`
   padding: 8px 16px;
   border-radius: 5px;
   outline: ${({ $select }) => $select ? '1px solid #334155' : 'none'};
-  box-shadow: ${({ $select }) => $select ? '0px 10px 20px -5px #6365f146' : 'none'};
+  box-shadow: ${({ $select }) => $select ? '0px 10px 20px -5px #6365F146' : 'none'};
   min-width: 120px;
   text-align: center;
   cursor: pointer;

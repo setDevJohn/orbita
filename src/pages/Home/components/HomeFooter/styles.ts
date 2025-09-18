@@ -71,7 +71,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.linearGradient};
-  box-shadow: 0px 10px 20px -5px #6366f166;
+  box-shadow: 0px 10px 20px -5px #6366F166;
   transform: translateY(-16px);
   border-radius: 50%;
   width: 60px;
@@ -81,7 +81,7 @@ export const MenuIcon = styled.div<{$open: boolean}>`
 
   &:hover {
     transform: translateY(-18px) scale(1.05);
-    box-shadow: 0 12px 25px -6px #6366f199;
+    box-shadow: 0 12px 25px -6px #6366F199;
   }
 `;
 

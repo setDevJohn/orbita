@@ -16,6 +16,6 @@ export const TextInput = styled.input<ITextInput>`
   width: ${({ $width }) => $width && $width};
 
   &::placeholder {
-    color: #a29f9f;
+    color: #A29F9F;
   }
 `;

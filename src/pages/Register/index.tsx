@@ -109,15 +109,15 @@ export function Register() {
   const pageConfig = {
     receita: {
       title: 'Receitas',
-      icon: <FaArrowTrendUp size={30} fill="#0f0"/>
+      icon: <FaArrowTrendUp size={30} fill="#00FF00"/>
     },
     despesa: {
       title: 'Despesas',
-      icon: <FaArrowTrendDown size={30} fill="#f00"/>
+      icon: <FaArrowTrendDown size={30} fill="#F00000"/>
     },
     'despesa-credito': {
       title: 'Despesas Crédito',
-      icon: <BsCreditCard size={30} fill="#f00"/>
+      icon: <BsCreditCard size={30} fill="#FF0000"/>
     }
   }[type];
 

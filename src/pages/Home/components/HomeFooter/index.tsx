@@ -24,9 +24,9 @@ export function HomeFooter () {
   const navigate = useNavigate();
 
   const registerMenuItems = [
-    { name: 'Receitas', path: '/inicio/registro/receita', icon: <FaArrowTrendUp size={23} fill="#0f0" /> },
-    { name: 'Despesas', path: '/inicio/registro/despesa', icon: <FaArrowTrendDown size={23} fill="#f00" /> },
-    { name: 'Despesas no crédito', path: '/inicio/registro/despesa-credito', icon: <BsCreditCard size={23} fill="#f00" /> },
+    { name: 'Receitas', path: '/inicio/registro/receita', icon: <FaArrowTrendUp size={23} fill="#00FF00" /> },
+    { name: 'Despesas', path: '/inicio/registro/despesa', icon: <FaArrowTrendDown size={23} fill="#FF0000" /> },
+    { name: 'Despesas no crédito', path: '/inicio/registro/despesa-credito', icon: <BsCreditCard size={23} fill="#FF0000" /> },
   ];
 
   function handleChangePage(page: 'home' | 'extract' | 'projection') {
