@@ -1,8 +1,11 @@
 import { ToggleButton } from '@components/Buttons';
 import { SelectInput } from '@components/Inputs';
 import { LayoutContainer } from '@components/LayoutContainer';
+import { LoadingPage } from '@components/Loading';
 import { ThemeContext } from '@context/Theme';
-import { useContext } from 'react';
+import { usersApi } from '@services/users';
+import { toastFire } from '@utils/sweetAlert';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import {
   FaRegCreditCard, 
@@ -40,7 +43,26 @@ interface ISettingsSectionsProps {
 }
 
 export function Settings() {
+  const [loading, setLoading] = useState(false);
+
   const { theme, handleChangeTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        setLoading(true);      
+  
+        const response = await usersApi.findSettings();
+        console.log(response);
+      } catch (err) {
+        toastFire((err as Error).message, 'error');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSettings();
+  }, []);
 
   const generalList: ISettingsList[] = [
     {  
@@ -233,6 +255,8 @@ export function Settings() {
           </List>
         </SettingsSection>
       ))}
+
+      {loading && <LoadingPage />}
     </LayoutContainer>
   );
 }

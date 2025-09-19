@@ -30,3 +30,11 @@ export type UpdatePasswordForm = {
   currentPassword: string,
   newPassword: string
 }
+
+export interface UserSettings {
+  currency?: 'BRL',
+  transactionPosting?: 'sameDay' | 'afterClosing'
+  pushNotifications?: boolean,
+  smsNotifications?: boolean,
+  mailNotifications?: boolean,
+}

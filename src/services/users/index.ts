@@ -2,7 +2,7 @@ import { TokenData } from '@context/Home/interface';
 import { api } from '@services/api';
 import { handlerAxiosError } from '@utils/axiosError';
 
-import { UpdatePasswordForm, UpdateUserPayload, UserBase, UserFormLogin, UserFormPayload, UserRegisterResponse } from './interface';
+import { UpdatePasswordForm, UpdateUserPayload, UserBase, UserFormLogin, UserFormPayload, UserRegisterResponse, UserSettings } from './interface';
 
 async function login(data: UserFormLogin): Promise<void> {
   try {
@@ -110,6 +110,15 @@ async function deleteAccount(): Promise<void> {
   }
 }
 
+async function findSettings(): Promise<UserSettings> {
+  try {
+    const { data: response } = await api.get('/users/settings');
+    return response.resource.data;
+  } catch (err) {
+    handlerAxiosError(err);
+  }
+}
+
 export const usersApi = {
   login,
   register,
@@ -123,4 +132,5 @@ export const usersApi = {
   findInfo,
   updateProfileImage,
   deleteAccount,
+  findSettings,
 };
