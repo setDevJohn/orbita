@@ -19,7 +19,7 @@ export const questionFire = async ({ title, text, confirmButtonText }: QuestionF
     cancelButtonText: 'Cancelar',
     confirmButtonText: `${ confirmButtonText || 'Sim, remover!'}`,
     customClass: {
-      popup: `question ${theme === 'dark' ? 'dark-theme-popup' : 'light-theme-popup'}`
+      popup: `question ${theme === 'light' ? 'light-theme-popup' : 'dark-theme-popup'}`
     }
   });
 };
@@ -36,7 +36,7 @@ export const toastFire = (message: string, type?: 'success' | 'warning' | 'error
     timer: 3000,
     timerProgressBar: true,
     customClass: {
-      popup: `toast ${theme === 'dark' ? 'dark-theme-popup' : 'light-theme-popup'}`
+      popup: `toast ${theme === 'light' ? 'light-theme-popup' : 'dark-theme-popup'}`
     }
   });
 };
